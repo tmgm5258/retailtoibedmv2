@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Retail-to-IB EDM Content Hub — Phase 1.0 | TMGM 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #FAFBFC; --white: #FFFFFF; --dark: #111827; --grey-900: #1F2937;
+  --grey-700: #374151; --grey-600: #4B5563; --grey-500: #6B7280;
+  --grey-400: #9CA3AF; --grey-300: #D1D5DB; --grey-200: #E5E7EB;
+  --grey-100: #F3F4F6; --grey-50: #F9FAFB;
+  --blue: #3B82F6; --blue-light: #EFF6FF; --blue-dark: #1E40AF;
+  --purple: #8B5CF6; --purple-light: #F5F3FF;
+  --green: #10B981; --green-light: #ECFDF5;
+  --amber: #F59E0B; --amber-light: #FFFBEB;
+  --red: #EF4444; --red-light: #FEF2F2;
+  --font: 'Inter', -apple-system, system-ui, sans-serif;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+  --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 6px rgba(0,0,0,0.06), 0 2px 4px rgba(0,0,0,0.04);
+  --shadow-lg: 0 10px 15px rgba(0,0,0,0.06), 0 4px 6px rgba(0,0,0,0.04);
+  --radius: 12px; --radius-lg: 16px;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { font-family:var(--font); color:var(--dark); background:var(--bg); line-height:1.6; -webkit-font-smoothing:antialiased; }
+
+/* HEADER */
+.header { background:var(--white); border-bottom:1px solid var(--grey-200); padding:24px 40px; position:sticky; top:0; z-index:100; }
+.header-inner { max-width:1200px; margin:0 auto; }
+.header-left h1 { font-size:18px; font-weight:800; color:var(--dark); letter-spacing:-0.3px; }
+.header-meta-row { display:flex; align-items:center; gap:12px; margin-top:4px; flex-wrap:wrap; }
+.header-left .header-meta { font-size:12px; color:var(--grey-500); }
+.header-badges { display:flex; gap:6px; }
+.header-left .header-phase { font-size:11px; color:var(--grey-600); margin-top:6px; padding:8px 12px; background:var(--green-light); border:1px solid rgba(16,185,129,0.15); border-radius:8px; line-height:1.5; }
+.header-left .header-phase strong { color:var(--green); }
+.header-badge { padding:4px 10px; border-radius:20px; font-size:11px; font-weight:600; }
+.badge-en { background:var(--blue-light); color:var(--blue-dark); }
+.badge-id { background:var(--purple-light); color:var(--purple); }
+.badge-ko { background:var(--amber-light); color:var(--amber); }
+.badge-vn { background:var(--green-light); color:var(--green); }
+.badge-th { background:var(--red-light); color:var(--red); }
+.badge-ar { background:var(--grey-100); color:var(--grey-600); }
+
+/* MAIN */
+.main { max-width:1200px; margin:0 auto; padding:32px 40px 80px; }
+
+/* JOURNEY FLOW */
+.journey { margin-bottom:40px; padding:28px 32px; background:var(--white); border-radius:var(--radius-lg); border:1px solid var(--grey-200); box-shadow:var(--shadow-sm); }
+.journey-title { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--grey-400); margin-bottom:16px; }
+.journey-flow { display:flex; flex-direction:column; gap:14px; position:relative; }
+.journey-row { display:flex; gap:14px; align-items:stretch; position:relative; z-index:1; }
+.journey-row:hover { z-index:10; }
+.journey-row .j-node { flex:1; }
+.j-node { padding:16px 14px; border-radius:10px; text-align:center; cursor:pointer; transition:all 0.25s ease; position:relative; }
+.j-node:hover { transform:translateY(-2px); box-shadow:var(--shadow-md); }
+.j-node .j-num { font-size:10px; font-weight:800; color:var(--white); width:20px; height:20px; border-radius:6px; display:inline-flex; align-items:center; justify-content:center; margin-bottom:6px; }
+.j-node .j-name { font-size:13px; font-weight:700; color:var(--dark); line-height:1.3; }
+.j-node .j-trigger { font-size:11px; color:var(--grey-500); margin-top:3px; }
+.j-node .j-click-hint { font-size:9px; color:var(--grey-400); margin-top:5px; font-style:italic; opacity:0; transition:opacity 0.2s; }
+.j-node:hover .j-click-hint { opacity:1; }
+.j-node.active-detail { transform:translateY(-2px); box-shadow:var(--shadow-lg); }
+.j-node.proposed.active-detail { border-color:var(--green); background:#D1FAE5; }
+.j-node.rest.active-detail { border-color:var(--grey-500); background:var(--grey-100); opacity:1; }
+
+.j-node.proposed { background:var(--green-light); border:1.5px solid rgba(16,185,129,0.25); }
+.j-node.proposed .j-num { background:var(--green); }
+
+.j-node.rest { background:var(--grey-50); border:1.5px dashed var(--grey-300); opacity:0.75; }
+.j-node.rest .j-num { background:var(--grey-400); }
+.j-node.rest .j-name { color:var(--grey-500); }
+.j-node.rest .j-trigger { color:var(--grey-400); }
+.j-node.rest:hover { opacity:1; }
+
+/* Arrows */
+.j-node.has-arrow-right::after {
+  content:'→'; position:absolute; right:-12px; top:50%; transform:translateY(-50%);
+  font-size:14px; color:var(--grey-300); font-weight:700; z-index:2;
+}
+.j-node.proposed.has-arrow-right::after { color:var(--green); opacity:0.5; }
+.j-node.rest.has-arrow-right::after { color:var(--grey-300); opacity:0.4; }
+
+/* Tooltips */
+.j-node .j-tooltip {
+  position:absolute; bottom:calc(100% + 10px); left:50%; transform:translateX(-50%);
+  background:var(--grey-900); color:var(--white); font-size:12px; font-weight:500;
+  line-height:1.5; padding:10px 14px; border-radius:8px; white-space:normal;
+  width:220px; text-align:left; opacity:0; visibility:hidden;
+  transition:opacity 0.2s, visibility 0.2s; pointer-events:none; z-index:50;
+  box-shadow:var(--shadow-lg);
+}
+.j-node .j-tooltip::after {
+  content:''; position:absolute; top:100%; left:50%; transform:translateX(-50%);
+  border:6px solid transparent; border-top-color:var(--grey-900);
+}
+.j-node:hover .j-tooltip { opacity:1; visibility:visible; }
+.j-node .j-tooltip.tip-bottom {
+  bottom:auto; top:calc(100% + 10px);
+}
+.j-node .j-tooltip.tip-bottom::after {
+  top:auto; bottom:100%; border-top-color:transparent; border-bottom-color:var(--grey-900);
+}
+
+/* DETAIL PANEL — shown on click */
+.j-detail-panel { display:none; margin-top:14px; padding:20px 24px; background:var(--white); border:1.5px solid var(--grey-200); border-radius:12px; box-shadow:var(--shadow-md); animation:fadeSlideIn 0.25s ease; }
+.j-detail-panel.active { display:block; }
+@keyframes fadeSlideIn { from { opacity:0; transform:translateY(-8px); } to { opacity:1; transform:translateY(0); } }
+.j-detail-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; padding-bottom:12px; border-bottom:1px solid var(--grey-200); }
+.j-detail-title { font-size:15px; font-weight:700; color:var(--dark); }
+.j-detail-close { width:24px; height:24px; border-radius:6px; background:var(--grey-100); border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; color:var(--grey-500); font-size:14px; font-family:var(--font); transition:all 0.2s; }
+.j-detail-close:hover { background:var(--red-light); color:var(--red); }
+.j-detail-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.j-detail-field { display:flex; flex-direction:column; gap:2px; }
+.j-detail-label { font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:var(--grey-400); }
+.j-detail-value { font-size:13px; color:var(--dark); line-height:1.5; }
+.j-detail-value.highlight { color:var(--green); font-weight:600; }
+.j-detail-full { grid-column:1 / -1; }
+
+/* FLOWCHART CARD */
+.fc-card { background:var(--white); border-radius:var(--radius-lg); border:1px solid var(--grey-200); box-shadow:var(--shadow-sm); margin-bottom:40px; overflow:hidden; }
+.fc-header { padding:20px 28px; display:flex; align-items:center; justify-content:space-between; cursor:pointer; user-select:none; border-bottom:1px solid transparent; transition:border-color 0.2s; }
+.fc-card.expanded .fc-header { border-bottom-color:var(--grey-100); }
+.fc-body { max-height:0; overflow:hidden; transition:max-height 0.5s ease; }
+.fc-card.expanded .fc-body { max-height:15000px; }
+.fc-card.expanded .fc-toggle { background:#CC1042; color:white; }
+.fc-card.expanded .fc-toggle svg { transform:rotate(180deg); }
+.fc-card.expanded .expand-hint { opacity:0; pointer-events:none; }
+.fc-toggle { width:28px; height:28px; border-radius:6px; background:var(--grey-100); display:flex; align-items:center; justify-content:center; color:var(--grey-500); font-size:12px; transition:all 0.3s; flex-shrink:0; }
+.expand-hint { font-size:11px; color:var(--grey-400); margin-left:8px; font-weight:500; font-style:italic; transition:opacity 0.3s; }
+
+/* FLOWCHART LAYOUT — HUBSPOT BRANCHING (COMPACT) */
+.fc-flow { padding:24px 28px; display:flex; flex-direction:column; align-items:center; gap:0; }
+
+.fc-box { padding:10px 20px; border-radius:10px; text-align:center; position:relative; }
+.fc-box-title { font-size:12px; font-weight:700; color:var(--dark); }
+.fc-box-sub { font-size:10px; color:var(--grey-500); margin-top:1px; }
+.fc-entry { background:var(--blue-light); border:1.5px solid rgba(59,130,246,0.25); min-width:320px; }
+.fc-entry .fc-box-title { color:var(--blue-dark); font-size:13px; }
+.fc-email { background:var(--green-light); border:1.5px solid rgba(16,185,129,0.25); min-width:240px; }
+.fc-email .fc-box-title { color:var(--green); }
+.fc-rest { background:var(--grey-50); border:1.5px dashed var(--grey-300); padding:8px 16px; }
+.fc-rest .fc-box-title { color:var(--grey-500); font-weight:600; font-size:11px; }
+.fc-end { background:var(--grey-100); border:1.5px solid var(--grey-300); min-width:320px; }
+.fc-end .fc-box-title { color:var(--grey-600); font-size:12px; }
+.fc-decision { background:var(--amber-light); border:1.5px solid rgba(245,158,11,0.25); padding:8px 20px; border-radius:10px; text-align:center; }
+.fc-decision .fc-box-title { color:var(--amber); font-size:12px; }
+.fc-exit-box { background:var(--green-light); border:1.5px solid rgba(16,185,129,0.25); padding:8px 16px; border-radius:10px; text-align:center; }
+.fc-exit-box .fc-box-title { color:var(--green); font-size:11px; }
+
+.fc-vline { width:2px; height:12px; background:var(--grey-300); }
+
+.fc-label { font-size:9px; font-weight:700; padding:2px 7px; border-radius:4px; margin:2px 0; }
+.fc-label.yes { background:var(--green-light); color:var(--green); }
+.fc-label.no { background:var(--red-light); color:var(--red); }
+
+.fc-branch { display:flex; flex-direction:column; align-items:center; width:100%; max-width:750px; }
+.fc-branch-t { display:flex; flex-direction:column; align-items:center; width:100%; }
+.fc-branch-stem { width:2px; height:8px; background:var(--grey-300); }
+.fc-branch-bar { height:2px; background:var(--grey-300); width:75%; min-width:450px; position:relative; }
+.fc-branch-bar::before { content:''; position:absolute; left:0; top:0; width:2px; height:10px; background:var(--grey-300); }
+.fc-branch-bar::after { content:''; position:absolute; right:0; top:0; width:2px; height:10px; background:var(--grey-300); }
+
+.fc-branch-arms { display:flex; width:75%; min-width:450px; justify-content:space-between; margin-top:10px; }
+.fc-branch-arm { display:flex; flex-direction:column; align-items:center; gap:4px; }
+.fc-branch-arm-no { width:50%; }
+.fc-branch-arm-yes { width:50%; }
+
+/* TRIGGER FLOW CARD */
+.tf-card { background:var(--white); border-radius:var(--radius-lg); border:1px solid var(--grey-200); box-shadow:var(--shadow-sm); margin-bottom:40px; overflow:hidden; }
+.tf-header { padding:20px 28px; display:flex; align-items:center; justify-content:space-between; cursor:pointer; user-select:none; border-bottom:1px solid transparent; transition:border-color 0.2s; }
+.tf-card.expanded .tf-header { border-bottom-color:var(--grey-100); }
+.tf-body { max-height:0; overflow:hidden; transition:max-height 0.4s ease; }
+.tf-card.expanded .tf-body { max-height:10000px; }
+.tf-card.expanded .fc-toggle { background:#CC1042; color:white; }
+.tf-card.expanded .fc-toggle svg { transform:rotate(180deg); }
+.tf-card.expanded .expand-hint { opacity:0; pointer-events:none; }
+
+.tf-section { padding:0 28px 24px; }
+.tf-section:first-child { padding-top:24px; }
+.tf-label { display:flex; align-items:center; gap:10px; margin-bottom:16px; }
+.tf-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+.tf-label-text { font-size:11px; font-weight:700; color:var(--grey-400); text-transform:uppercase; letter-spacing:1px; }
+.tf-line { flex:1; height:1px; background:var(--grey-200); }
+
+.tf-grid { display:grid; gap:12px; }
+.tf-grid-2 { grid-template-columns:1fr 1fr; }
+.tf-grid-3 { grid-template-columns:1fr 1fr 1fr; }
+
+.tf-item { border-radius:12px; padding:0; overflow:hidden; background:var(--white); border:1px solid var(--grey-200); transition:box-shadow 0.2s; }
+.tf-item:hover { box-shadow:0 2px 8px rgba(0,0,0,0.06); }
+.tf-item-top { padding:14px 18px; display:flex; align-items:center; gap:10px; }
+.tf-num { width:28px; height:28px; border-radius:50%; color:white; font-size:12px; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.tf-name { font-size:13px; font-weight:700; color:var(--dark); }
+.tf-props { padding:0 18px 14px; display:flex; flex-direction:column; gap:6px; }
+.tf-prop { display:flex; align-items:flex-start; gap:8px; font-size:11.5px; line-height:1.4; }
+.tf-prop-key { font-weight:700; white-space:nowrap; min-width:52px; }
+.tf-prop-val { color:var(--grey-600); }
+
+.tf-countdown-badge { display:inline-flex; align-items:center; gap:4px; padding:3px 8px; border-radius:4px; font-size:10px; font-weight:700; margin-top:6px; }
+
+.tf-footer { margin:0 28px 24px; padding:16px 20px; border-radius:10px; background:linear-gradient(135deg,#f8f9fb,#f1f3f8); border:1px solid var(--grey-200); }
+.tf-footer-title { font-size:12px; font-weight:700; color:var(--dark); margin-bottom:10px; }
+.tf-footer-list { display:grid; grid-template-columns:1fr 1fr; gap:4px 24px; }
+.tf-footer-item { font-size:11px; color:var(--grey-500); line-height:1.6; padding-left:12px; position:relative; }
+.tf-footer-item::before { content:''; position:absolute; left:0; top:7px; width:4px; height:4px; border-radius:50%; background:var(--grey-400); }
+
+.tf-tbd { padding:10px 14px; border-radius:8px; background:var(--amber-light); border:1px solid rgba(245,158,11,0.15); font-size:11.5px; color:var(--amber); font-weight:600; margin-top:6px; }
+
+/* EMAIL CARD */
+.email-card { background:var(--white); border-radius:var(--radius-lg); border:1px solid var(--grey-200); box-shadow:var(--shadow-sm); margin-bottom:24px; overflow:hidden; transition:box-shadow 0.2s; scroll-margin-top:80px; }
+.email-card:hover { box-shadow:var(--shadow-md); }
+.email-header { padding:20px 28px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid transparent; cursor:pointer; user-select:none; transition:border-color 0.2s; }
+.email-card.expanded .email-header { border-bottom-color:var(--grey-100); }
+.email-header-left { display:flex; align-items:center; gap:12px; }
+.email-toggle { width:28px; height:28px; border-radius:6px; background:var(--grey-100); display:flex; align-items:center; justify-content:center; color:var(--grey-500); font-size:12px; transition:all 0.3s; flex-shrink:0; }
+.email-card.expanded .email-toggle { background:#CC1042; color:var(--white); }
+.email-card.expanded .email-toggle svg { transform:rotate(180deg); }
+.email-card .email-collapsible { max-height:0; overflow:hidden; transition:max-height 0.4s ease; }
+.email-card.expanded .email-collapsible { max-height:8000px; }
+.email-card.expanded .expand-hint { opacity:0; pointer-events:none; }
+
+.email-num { width:32px; height:32px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:800; color:var(--white); background:var(--green); }
+.email-meta h2 { font-size:15px; font-weight:700; color:var(--dark); }
+.email-meta .trigger { font-size:12px; color:var(--grey-500); }
+.type-badge { padding:4px 10px; border-radius:6px; font-size:11px; font-weight:600; background:var(--green-light); color:var(--green); }
+
+/* LANG TABS */
+.lang-tabs { display:flex; gap:0; border-bottom:1px solid var(--grey-200); background:var(--grey-50); }
+.lang-tab { flex:1; padding:10px 20px; font-size:12px; font-weight:600; color:var(--grey-500); cursor:pointer; border-bottom:2px solid transparent; transition:all 0.2s; background:transparent; border-top:none; border-left:none; border-right:none; font-family:var(--font); text-align:center; }
+.lang-tab.active { color:var(--blue); border-bottom-color:var(--blue); background:var(--white); }
+.lang-tab:hover { color:var(--dark); }
+.lang-content { display:none; }
+.lang-content.active { display:block; }
+
+/* EMAIL BODY */
+.email-body { padding:24px 28px; }
+.field { margin-bottom:16px; }
+.field-row { display:flex; align-items:flex-start; gap:12px; }
+.field-label { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:var(--grey-400); min-width:110px; padding-top:4px; flex-shrink:0; }
+.field-value { font-size:14px; color:var(--dark); line-height:1.6; flex:1; word-break:break-word; }
+.field-value.subject { font-weight:700; font-size:15px; }
+
+/* EMAIL PREVIEW */
+.email-preview { background:var(--grey-50); border:1px solid var(--grey-200); border-radius:var(--radius); padding:24px 28px; margin:16px 0; }
+.email-preview .banner { font-size:18px; font-weight:800; color:var(--dark); margin-bottom:16px; padding-bottom:16px; border-bottom:1px solid var(--grey-200); }
+.email-preview .salutation { font-size:14px; color:var(--grey-600); margin-bottom:12px; }
+.email-preview .content-block { font-size:14px; color:var(--grey-700); line-height:1.7; margin-bottom:16px; white-space:pre-line; }
+.email-preview .cta-block { display:inline-block; padding:10px 24px; background:#000B50; color:var(--white); border-radius:8px; font-size:13px; font-weight:700; text-decoration:none; margin:8px 0; }
+.email-preview .disclaimer { font-size:11px; color:var(--grey-400); margin-top:16px; padding-top:12px; border-top:1px solid var(--grey-200); }
+
+/* BLANK LANG PLACEHOLDER */
+.lang-placeholder { padding:40px 28px; text-align:center; }
+.lang-placeholder-text { font-size:13px; color:var(--grey-400); font-style:italic; }
+
+/* RESPONSIVE */
+@media(max-width:768px) {
+  .header { padding:16px 20px; }
+  .header-inner { flex-direction:column; align-items:flex-start; gap:12px; }
+  .main { padding:20px 16px 60px; }
+  .journey { padding:20px 16px; }
+  .journey-flow { gap:8px; }
+  .journey-row { flex-wrap:wrap; gap:8px; }
+  .journey-row .j-node { flex:1 1 45%; min-width:0; }
+  .j-detail-grid { grid-template-columns:1fr; }
+  .j-detail-panel { padding:16px; }
+  .fc-flow { padding:20px 12px; }
+  .fc-branch-bar { min-width:240px; }
+  .fc-branch-arms { min-width:240px; }
+  .fc-box { min-width:200px; }
+  .tf-section { padding:0 16px 20px; }
+  .tf-grid-2, .tf-grid-3 { grid-template-columns:1fr; }
+  .tf-footer { margin:0 16px 20px; }
+  .tf-footer-list { grid-template-columns:1fr; }
+  .email-body { padding:16px 20px; }
+  .email-header { padding:16px 20px; flex-direction:column; align-items:flex-start; gap:8px; }
+  .field-row { flex-direction:column; gap:4px; }
+  .field-label { min-width:auto; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-inner">
+    <div class="header-left">
+      <h1>Retail-to-IB EDM Content Hub — Phase 1.0</h1>
+      <div class="header-meta-row">
+        <div class="header-meta">5 Emails · 7 Days · 3 Rest Days</div>
+        <div class="header-badges">
+          <span class="header-badge badge-en">EN</span>
+          <span class="header-badge badge-id">ID</span>
+          <span class="header-badge badge-ko">KO</span>
+          <span class="header-badge badge-vn">VN</span>
+          <span class="header-badge badge-th">TH</span>
+          <span class="header-badge badge-ar">AR</span>
+        </div>
+      </div>
+      <div class="header-phase"><strong>Phase 1.0</strong> — Mass blast to all retail clients (excl. existing IBs, ASIC, unsubscribed). No segmentation. Objective: launch the revamped journey, collect baseline data, and establish conversion benchmarks for Phase 2.0 optimisation.</div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- JOURNEY FLOW -->
+<div class="journey">
+  <div class="journey-title">Drip Journey Flow — Retail to IB (Phase 1.0)</div>
+  <div class="journey-flow">
+    <div class="journey-row">
+      <div class="j-node proposed has-arrow-right" onclick="showDetail('e1')">
+        <div class="j-tooltip tip-bottom">Sent to all retail clients entering the journey. Hooks them with earning potential ($8–$11/lot, paid daily) to spark interest in becoming an IB.<br><br><strong>Timing:</strong> Day 0 — immediate<br>Click for full details</div>
+        <div class="j-num">E1</div>
+        <div class="j-name">The Money Hook</div>
+        <div class="j-trigger">Day 0 · Curiosity</div>
+        <div class="j-click-hint">Click for details</div>
+      </div>
+      <div class="j-node rest has-arrow-right" onclick="showDetail('d1')">
+        <div class="j-tooltip tip-bottom">No email sent. Intentional rest day to let the money hook from E1 sink in. Reader processes the earning potential without feeling pressured.<br><br>Click for full details</div>
+        <div class="j-num">D1</div>
+        <div class="j-name">Rest Day</div>
+        <div class="j-trigger">Let it sink in</div>
+        <div class="j-click-hint">Click for details</div>
+      </div>
+      <div class="j-node proposed has-arrow-right" onclick="showDetail('e2')">
+        <div class="j-tooltip tip-bottom">Sent to retail clients who haven't converted after E1. Shows real earning scenarios and TMGM's IB advantages (daily payouts, PAMM/MAM) to build trust.<br><br><strong>Timing:</strong> Day 2 — entry + 2 days<br>Click for full details</div>
+        <div class="j-num">E2</div>
+        <div class="j-name">Social Proof</div>
+        <div class="j-trigger">Day 2 · Trust</div>
+        <div class="j-click-hint">Click for details</div>
+      </div>
+      <div class="j-node rest" onclick="showDetail('d3')">
+        <div class="j-tooltip tip-bottom">No email sent. Rest day to let social proof from E2 build anticipation. Reader's doubts form naturally — so E3's objection handling lands perfectly.<br><br>Click for full details</div>
+        <div class="j-num">D3</div>
+        <div class="j-name">Rest Day</div>
+        <div class="j-trigger">Build anticipation</div>
+        <div class="j-click-hint">Click for details</div>
+      </div>
+    </div>
+    <div class="journey-row">
+      <div class="j-node proposed has-arrow-right" onclick="showDetail('e3')">
+        <div class="j-tooltip">Sent to retail clients still not converted. Addresses the top 3 barriers — time, network size, and promotion skills — to remove hesitation and make signing up feel easy.<br><br><strong>Timing:</strong> Day 4 — entry + 4 days<br>Click for full details</div>
+        <div class="j-num">E3</div>
+        <div class="j-name">Objection Handling</div>
+        <div class="j-trigger">Day 4 · Confidence</div>
+        <div class="j-click-hint">Click for details</div>
+      </div>
+      <div class="j-node rest has-arrow-right" onclick="showDetail('d5')">
+        <div class="j-tooltip">No email sent. Final rest day before the urgency one-two punch (E4 Day 6 + E5 Day 7 back-to-back). Silence makes the closing emails hit harder.<br><br>Click for full details</div>
+        <div class="j-num">D5</div>
+        <div class="j-name">Rest Day</div>
+        <div class="j-trigger">Calm before close</div>
+        <div class="j-click-hint">Click for details</div>
+      </div>
+      <div class="j-node proposed has-arrow-right" onclick="showDetail('e4')">
+        <div class="j-tooltip">Sent to retail clients still not converted. Creates urgency through a limited-time enhanced rate offer or opportunity cost framing — gives them a reason to act NOW, not later.<br><br><strong>Timing:</strong> Day 6 — entry + 6 days<br>Click for full details</div>
+        <div class="j-num">E4</div>
+        <div class="j-name">Urgency</div>
+        <div class="j-trigger">Day 6 · Scarcity</div>
+        <div class="j-click-hint">Click for details</div>
+      </div>
+      <div class="j-node proposed" onclick="showDetail('e5')">
+        <div class="j-tooltip">Sent as the final email in this cycle. Short, direct close — 3–4 sentences only. Sets expectation that we'll check back next month. If not converted, 30-day cool-down then journey re-enters.<br><br><strong>Timing:</strong> Day 7 — back-to-back with E4<br>Click for full details</div>
+        <div class="j-num">E5</div>
+        <div class="j-name">Final Close</div>
+        <div class="j-trigger">Day 7 · Decision</div>
+        <div class="j-click-hint">Click for details</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DETAIL PANELS -->
+  <div id="detail-e1" class="j-detail-panel">
+    <div class="j-detail-header"><div class="j-detail-title">E1 — The Money Hook</div><button class="j-detail-close" onclick="closeDetail()">✕</button></div>
+    <div class="j-detail-grid">
+      <div class="j-detail-field"><div class="j-detail-label">Sent To</div><div class="j-detail-value">All retail clients entering the journey — hooks them with earning potential to spark interest in becoming an IB</div></div>
+      <div class="j-detail-field"><div class="j-detail-label">Timing</div><div class="j-detail-value">Day 0 — sent immediately on entry</div></div>
+      <div class="j-detail-field"><div class="j-detail-label">Trigger</div><div class="j-detail-value">Retail client enters journey</div></div>
+      <div class="j-detail-field"><div class="j-detail-label">Subject Line</div><div class="j-detail-value highlight">What would an extra $500/month look like?</div></div>
+      <div class="j-detail-field"><div class="j-detail-label">CTA</div><div class="j-detail-value highlight">See How Much You Could Earn</div></div>
+      <div class="j-detail-field j-detail-full"><div class="j-detail-label">Content Strategy</div><div class="j-detail-value">Lead with specific earning scenario: "Refer 5 friends who trade 20 lots/month → earn $800–$1,100/month." State commission clearly: $8–$11 per lot, paid daily. Quick 3-step visual. One-line Finfluencer mention at bottom.</div></div>
+      <div class="j-detail-field"><div class="j-detail-label">Psychology</div><div class="j-detail-value">Curiosity — hook with numbers before education</div></div>
+      <div class="j-detail-field"><div class="j-detail-label">Exit Condition</div><div class="j-detail-value">Client converts to IB → exits journey</div></div>
+    </div>
+  </div>
+
+  <div id="detail-d1" class="j-detail-panel">
+    <div class="j-detail-header"><div class="j-detail-title">Day 1 — Rest Day</div><button class="j-detail-close" onclick="closeDetail()">✕</button></div>
+    <div class="j-detail-grid">
+      <div class="j-detail-field"><div class="j-detail-label">Timing</div><div class="j-detail-value">Day 1 — 1 day after E1</div></div>
+      <div class="j-detail-field"><div class="j-detail-label">Type</div><div class="j-detail-value">No email — intentional rest day</div></div>
+      <div class="j-detail-field j-detail-full"><div class="j-detail-label">Strategic Purpose</div><div class="j-detail-value">Let E1's money hook sit with the reader. The earning scenario ($800–$1,100/month) needs time to process. Sending another email immediately would feel pushy and dilute the impact of the numbers.</div></div>
+    </div>
+  </div>
+
+  <div id="detail-e2" class="j-detail-panel">
+    <div class="j-detail-header"><div class="j-detail-title">E2 — Social Proof</div><button class="j-detail-close" onclick="closeDetail()">✕</button></div>
+    <div class="j-detail-grid">
+      <div class="j-detail-field"><div class="j-detail-label">Sent To</div><div class="j-detail-value">Retail clients who haven't converted after E1 — shows real earning scenarios and TMGM advantages to build trust</div></div>
+      <div class="j-detail-field"><div class="j-detail-label">Timing</div><div class="j-detail-value">Day 2 — entry + 2 days</div></div>
+      <div class="j-detail-field"><div class="j-detail-label">Trigger</div><div class="j-detail-value">Not converted after E1 + rest day</div></div>
+      <div class="j-detail-field"><div class="j-detail-label">Subject Line</div><div class="j-detail-value highlight">They started just like you — now they earn daily</div></div>
+      <div class="j-detail-field"><div class="j-detail-label">CTA</div><div class="j-detail-value highlight">Start Your IB Application</div></div>
+      <div class="j-detail-field j-detail-full"><div class="j-detail-label">Content Strategy</div><div class="j-detail-value">2–3 earning scenarios (Trader A/B/C with different referral sizes). Highlight TMGM differentiators: daily payouts (not weekly like XM), PAMM/MAM support, Sub-IB structure, dedicated account manager. Reinforce: "You're already trading with us."</div></div>
+      <div class="j-detail-field"><div class="j-detail-label">Psychology</div><div class="j-detail-value">Trust — prove it works for real people</div></div>
+      <div class="j-detail-field"><div class="j-detail-label">Exit Condition</div><div class="j-detail-value">Client converts to IB → exits journey</div></div>
+    </div>
+  </div>
+
+  <div id="detail-d3" class="j-detail-panel">
+    <div class="j-detail-header"><div class="j-detail-title">Day 3 — Rest Day</div><button class="j-detail-close" onclick="closeDetail()">✕</button></div>
+    <div class="j-detail-grid">
+      <div class="j-detail-field"><div class="j-detail-label">Timing</div><div class="j-detail-value">Day 3 — 1 day after E2</div></div>
+      <div class="j-detail-field"><div class="j-detail-label">Type</div><div class="j-detail-value">No email — intentional rest day</div></div>
+      <div class="j-detail-field j-detail-full"><div class="j-detail-label">Strategic Purpose</div><div class="j-detail-value">The reader has seen the money (E1) and the proof (E2). Give them space to consider and let doubts form naturally — so E3's objection handling lands perfectly when those doubts are top of mind.</div></div>
+    </div>
+  </div>
+
+  <div id="detail-e3" class="j-detail-panel">
+    <div class="j-detail-header"><div class="j-detail-title">E3 — Objection Handling</div><button class="j-detail-close" onclick="closeDetail()">✕</button></div>
+    <div class="j-detail-grid">
+      <div class="j-detail-field"><div class="j-detail-label">Sent To</div><div class="j-detail-value">Retail clients still not converted — addresses their hesitations and makes signing up feel easy</div></div>
+      <div class="j-detail-field"><div class="j-detail-label">Timing</div><div class="j-detail-value">Day 4 — entry + 4 days</div></div>
+      <div class="j-detail-field"><div class="j-detail-label">Trigger</div><div class="j-detail-value">Not converted after E2 + rest day</div></div>
+      <div class="j-detail-field"><div class="j-detail-label">Subject Line</div><div class="j-detail-value highlight">Think it's complicated? Here's what it actually takes</div></div>
+      <div class="j-detail-field"><div class="j-detail-label">CTA</div><div class="j-detail-value highlight">Apply in 2 Minutes</div></div>
+      <div class="j-detail-field j-detail-full"><div class="j-detail-label">Content Strategy</div><div class="j-detail-value">Address top 3 objections: (1) "I don't have time" → passive income, automatic. (2) "I don't know enough people" → only need 3–5 active traders. (3) "I don't know how to promote" → TMGM provides IB Portal, banners, tracking link, dedicated AM.</div></div>
+      <div class="j-detail-field"><div class="j-detail-label">Psychology</div><div class="j-detail-value">Confidence — "it's easier than you think"</div></div>
+      <div class="j-detail-field"><div class="j-detail-label">Exit Condition</div><div class="j-detail-value">Client converts to IB → exits journey</div></div>
+    </div>
+  </div>
+
+  <div id="detail-d5" class="j-detail-panel">
+    <div class="j-detail-header"><div class="j-detail-title">Day 5 — Rest Day</div><button class="j-detail-close" onclick="closeDetail()">✕</button></div>
+    <div class="j-detail-grid">
+      <div class="j-detail-field"><div class="j-detail-label">Timing</div><div class="j-detail-value">Day 5 — 1 day after E3</div></div>
+      <div class="j-detail-field"><div class="j-detail-label">Type</div><div class="j-detail-value">No email — intentional rest day</div></div>
+      <div class="j-detail-field j-detail-full"><div class="j-detail-label">Strategic Purpose</div><div class="j-detail-value">Last breather before the urgency one-two punch (E4 Day 6 + E5 Day 7 back-to-back). Creates contrast — the silence makes the urgency emails hit harder.</div></div>
+    </div>
+  </div>
+
+  <div id="detail-e4" class="j-detail-panel">
+    <div class="j-detail-header"><div class="j-detail-title">E4 — Urgency</div><button class="j-detail-close" onclick="closeDetail()">✕</button></div>
+    <div class="j-detail-grid">
+      <div class="j-detail-field"><div class="j-detail-label">Sent To</div><div class="j-detail-value">Retail clients still not converted — creates urgency and gives them a reason to act now, not later</div></div>
+      <div class="j-detail-field"><div class="j-detail-label">Timing</div><div class="j-detail-value">Day 6 — entry + 6 days</div></div>
+      <div class="j-detail-field"><div class="j-detail-label">Trigger</div><div class="j-detail-value">Not converted after E3 + rest day</div></div>
+      <div class="j-detail-field"><div class="j-detail-label">Subject Line (A)</div><div class="j-detail-value highlight">Your enhanced rate expires in 5 days</div></div>
+      <div class="j-detail-field"><div class="j-detail-label">Subject Line (B)</div><div class="j-detail-value highlight">%%First_Name%%, your spot is still open</div></div>
+      <div class="j-detail-field"><div class="j-detail-label">CTA (A)</div><div class="j-detail-value highlight">Lock In Your Rate</div></div>
+      <div class="j-detail-field"><div class="j-detail-label">CTA (B)</div><div class="j-detail-value highlight">Start Earning Today</div></div>
+      <div class="j-detail-field j-detail-full"><div class="j-detail-label">Content Strategy</div><div class="j-detail-value">Option A: Enhanced commission ($12/lot for first 90 days), first 50 new IBs, real deadline. Option B: Recap E1–E3 highlights, frame as opportunity cost — "every day you wait is a day your network trades without earning you commissions."</div></div>
+      <div class="j-detail-field"><div class="j-detail-label">Psychology</div><div class="j-detail-value">Scarcity — create a reason to act NOW</div></div>
+      <div class="j-detail-field"><div class="j-detail-label">Next</div><div class="j-detail-value">E5 follows immediately (Day 7) — no rest day. Back-to-back closing punch.</div></div>
+    </div>
+  </div>
+
+  <div id="detail-e5" class="j-detail-panel">
+    <div class="j-detail-header"><div class="j-detail-title">E5 — Final Close</div><button class="j-detail-close" onclick="closeDetail()">✕</button></div>
+    <div class="j-detail-grid">
+      <div class="j-detail-field"><div class="j-detail-label">Sent To</div><div class="j-detail-value">Final email in this cycle to retail clients who haven't converted — short, respectful close. Sets expectation we'll check back next month.</div></div>
+      <div class="j-detail-field"><div class="j-detail-label">Timing</div><div class="j-detail-value">Day 7 — back-to-back with E4 (no rest day)</div></div>
+      <div class="j-detail-field"><div class="j-detail-label">Trigger</div><div class="j-detail-value">Not converted after E4 — final email in cycle</div></div>
+      <div class="j-detail-field"><div class="j-detail-label">Subject Line</div><div class="j-detail-value highlight">%%First_Name%%, final reminder for now</div></div>
+      <div class="j-detail-field"><div class="j-detail-label">CTA</div><div class="j-detail-value highlight">Apply Now</div></div>
+      <div class="j-detail-field j-detail-full"><div class="j-detail-label">Content Strategy</div><div class="j-detail-value">Intentionally short — 3–4 sentences max. Recap single strongest stat ($8–$11/lot, paid daily). Close with: "We'll give you some space and check back in with you next month." Sets honest expectation of re-blast without being pushy.</div></div>
+      <div class="j-detail-field"><div class="j-detail-label">Psychology</div><div class="j-detail-value">Decision — respectful close, transparent about next contact</div></div>
+      <div class="j-detail-field"><div class="j-detail-label">Post-Email</div><div class="j-detail-value">If not converted → 30-day cool-down → E1–E5 cycle restarts. Phase 2.0 will introduce segmented, personalised re-entry instead of same content repeat.</div></div>
+    </div>
+  </div>
+
+</div>
+
+  <!-- Next sections will go here -->
+
+<!-- JOURNEY DECISION FLOWCHART -->
+<div class="fc-card">
+  <div class="fc-header" onclick="this.closest('.fc-card').classList.toggle('expanded')">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <div style="width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#0a1628,#1e3a5f);display:flex;align-items:center;justify-content:center;font-size:16px;">🔀</div>
+      <div>
+        <h2 style="font-size:16px;font-weight:700;color:var(--dark);margin:0;">Journey Decision Flowchart</h2>
+        <div style="font-size:12px;color:var(--grey-500);margin-top:2px;">Visual logic flow — entry, emails, conversion checks, and exit points</div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <span class="expand-hint">Click to expand</span>
+      <div class="fc-toggle"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="transition:transform 0.3s"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+    </div>
+  </div>
+  <div class="fc-body">
+    <div class="fc-flow">
+
+      <!-- ENTRY -->
+      <div class="fc-box fc-entry">
+        <div class="fc-box-title">📥 Retail Client Enters Journey</div>
+        <div class="fc-box-sub">All retail clients (excl. existing IBs, ASIC, unsubscribed)</div>
+      </div>
+      <div class="fc-vline"></div>
+
+      <!-- E1 -->
+      <div class="fc-box fc-email">
+        <div class="fc-box-title">E1 — The Money Hook</div>
+        <div class="fc-box-sub">Day 0 · "$8–$11/lot, paid daily"</div>
+      </div>
+      <div class="fc-vline"></div>
+
+      <!-- DECISION 1 -->
+      <div class="fc-branch">
+        <div class="fc-decision"><div class="fc-box-title">Converted to IB?</div></div>
+        <div class="fc-branch-t"><div class="fc-branch-stem"></div><div class="fc-branch-bar"></div></div>
+        <div class="fc-branch-arms">
+          <div class="fc-branch-arm fc-branch-arm-no"><span class="fc-label no">NO</span><div class="fc-vline"></div><div class="fc-box fc-rest"><div class="fc-box-title">💤 Rest — Day 1</div></div></div>
+          <div class="fc-branch-arm fc-branch-arm-yes"><span class="fc-label yes">YES</span><div class="fc-vline"></div><div class="fc-exit-box"><div class="fc-box-title">✅ IB Welcome Email</div><div class="fc-box-sub" style="font-size:9px;color:var(--green);margin-top:1px;">Separate journey</div></div></div>
+        </div>
+      </div>
+      <div class="fc-vline"></div>
+
+      <!-- E2 -->
+      <div class="fc-box fc-email">
+        <div class="fc-box-title">E2 — Social Proof</div>
+        <div class="fc-box-sub">Day 2 · Earning scenarios</div>
+      </div>
+      <div class="fc-vline"></div>
+
+      <!-- DECISION 2 -->
+      <div class="fc-branch">
+        <div class="fc-decision"><div class="fc-box-title">Converted to IB?</div></div>
+        <div class="fc-branch-t"><div class="fc-branch-stem"></div><div class="fc-branch-bar"></div></div>
+        <div class="fc-branch-arms">
+          <div class="fc-branch-arm fc-branch-arm-no"><span class="fc-label no">NO</span><div class="fc-vline"></div><div class="fc-box fc-rest"><div class="fc-box-title">💤 Rest — Day 3</div></div></div>
+          <div class="fc-branch-arm fc-branch-arm-yes"><span class="fc-label yes">YES</span><div class="fc-vline"></div><div class="fc-exit-box"><div class="fc-box-title">✅ IB Welcome Email</div><div class="fc-box-sub" style="font-size:9px;color:var(--green);margin-top:1px;">Separate journey</div></div></div>
+        </div>
+      </div>
+      <div class="fc-vline"></div>
+
+      <!-- E3 -->
+      <div class="fc-box fc-email">
+        <div class="fc-box-title">E3 — Objection Handling</div>
+        <div class="fc-box-sub">Day 4 · Remove barriers</div>
+      </div>
+      <div class="fc-vline"></div>
+
+      <!-- DECISION 3 -->
+      <div class="fc-branch">
+        <div class="fc-decision"><div class="fc-box-title">Converted to IB?</div></div>
+        <div class="fc-branch-t"><div class="fc-branch-stem"></div><div class="fc-branch-bar"></div></div>
+        <div class="fc-branch-arms">
+          <div class="fc-branch-arm fc-branch-arm-no"><span class="fc-label no">NO</span><div class="fc-vline"></div><div class="fc-box fc-rest"><div class="fc-box-title">💤 Rest — Day 5</div></div></div>
+          <div class="fc-branch-arm fc-branch-arm-yes"><span class="fc-label yes">YES</span><div class="fc-vline"></div><div class="fc-exit-box"><div class="fc-box-title">✅ IB Welcome Email</div><div class="fc-box-sub" style="font-size:9px;color:var(--green);margin-top:1px;">Separate journey</div></div></div>
+        </div>
+      </div>
+      <div class="fc-vline"></div>
+
+      <!-- E4 -->
+      <div class="fc-box fc-email" style="border-color:rgba(232,131,58,0.3);">
+        <div class="fc-box-title" style="color:#e8833a;">E4 — Urgency</div>
+        <div class="fc-box-sub">Day 6 · Scarcity push</div>
+      </div>
+      <div class="fc-vline"></div>
+
+      <!-- DECISION 4 -->
+      <div class="fc-branch">
+        <div class="fc-decision"><div class="fc-box-title">Converted to IB?</div></div>
+        <div class="fc-branch-t"><div class="fc-branch-stem"></div><div class="fc-branch-bar"></div></div>
+        <div class="fc-branch-arms">
+          <div class="fc-branch-arm fc-branch-arm-no"><span class="fc-label no">NO</span><div class="fc-vline"></div><div class="fc-box fc-email" style="padding:8px 16px;min-width:auto;border-color:rgba(211,47,47,0.3);"><div class="fc-box-title" style="color:#d32f2f;font-size:11px;">E5 — Final Close</div><div class="fc-box-sub">Day 7 · No rest</div></div></div>
+          <div class="fc-branch-arm fc-branch-arm-yes"><span class="fc-label yes">YES</span><div class="fc-vline"></div><div class="fc-exit-box"><div class="fc-box-title">✅ IB Welcome Email</div><div class="fc-box-sub" style="font-size:9px;color:var(--green);margin-top:1px;">Separate journey</div></div></div>
+        </div>
+      </div>
+      <div class="fc-vline"></div>
+
+      <!-- DECISION 5 -->
+      <div class="fc-branch">
+        <div class="fc-decision"><div class="fc-box-title">Converted to IB?</div></div>
+        <div class="fc-branch-t"><div class="fc-branch-stem"></div><div class="fc-branch-bar"></div></div>
+        <div class="fc-branch-arms">
+          <div class="fc-branch-arm fc-branch-arm-no"><span class="fc-label no">NO</span><div class="fc-vline"></div><div class="fc-box fc-end" style="padding:8px 16px;min-width:auto;background:var(--amber-light);border-color:rgba(245,158,11,0.25);"><div class="fc-box-title" style="font-size:11px;color:var(--amber);">30-Day Cool-down</div><div class="fc-box-sub">Then re-enter E1</div></div></div>
+          <div class="fc-branch-arm fc-branch-arm-yes"><span class="fc-label yes">YES</span><div class="fc-vline"></div><div class="fc-exit-box"><div class="fc-box-title">✅ IB Welcome Email</div><div class="fc-box-sub" style="font-size:9px;color:var(--green);margin-top:1px;">Separate journey</div></div></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- TRIGGER FLOW & PROPERTIES -->
+<div class="tf-card">
+  <div class="tf-header" onclick="this.closest('.tf-card').classList.toggle('expanded')">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <div style="width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#0a1628,#1e3a5f);display:flex;align-items:center;justify-content:center;font-size:16px;">⚙️</div>
+      <div>
+        <h2 style="font-size:16px;font-weight:700;color:var(--dark);margin:0;">Trigger Flow & Properties</h2>
+        <div style="font-size:12px;color:var(--grey-500);margin-top:2px;">Platform setup reference — trigger conditions for all 5 emails</div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <span class="expand-hint">Click to expand</span>
+      <div class="fc-toggle"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="transition:transform 0.3s"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+    </div>
+  </div>
+  <div class="tf-body">
+
+    <!-- ENTRY CRITERIA -->
+    <div class="tf-section" style="padding-top:24px;">
+      <div class="tf-label">
+        <div class="tf-dot" style="background:var(--blue);"></div>
+        <span class="tf-label-text">Entry Criteria</span>
+        <div class="tf-line"></div>
+      </div>
+      <div class="tf-grid" style="max-width:49%;">
+        <div class="tf-item" style="border-top:3px solid var(--blue);">
+          <div class="tf-item-top">
+            <div class="tf-num" style="background:var(--blue);">📥</div>
+            <div class="tf-name">Retail Client Enters Journey</div>
+          </div>
+          <div class="tf-props">
+            <div class="tf-prop"><span class="tf-prop-key" style="color:var(--blue);">Audience</span><span class="tf-prop-val">All retail clients (Phase 1.0 — mass blast, no segmentation)</span></div>
+            <div class="tf-prop"><span class="tf-prop-key" style="color:var(--blue);">Exclude</span><span class="tf-prop-val">Existing IBs, ASIC clients, unsubscribed users</span></div>
+            <div class="tf-prop"><span class="tf-prop-key" style="color:var(--blue);">Trigger</span><span class="tf-prop-val">Entry scenario / condition</span></div>
+            <div class="tf-tbd">⏳ TBD — Pending confirmation from Sichen Zhang on entry trigger and available filters in SFMC</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EMAIL TRIGGERS -->
+    <div class="tf-section">
+      <div class="tf-label">
+        <div class="tf-dot" style="background:var(--green);"></div>
+        <span class="tf-label-text">Email Triggers — 5 Emails</span>
+        <div class="tf-line"></div>
+      </div>
+
+      <!-- Row 1: E1 + E2 + E3 -->
+      <div class="tf-grid tf-grid-3" style="margin-bottom:12px;">
+        <div class="tf-item" style="border-top:3px solid var(--green);">
+          <div class="tf-item-top">
+            <div class="tf-num" style="background:var(--green);">E1</div>
+            <div class="tf-name">The Money Hook</div>
+          </div>
+          <div class="tf-props">
+            <div class="tf-prop"><span class="tf-prop-key" style="color:var(--green);">Timing</span><span class="tf-prop-val">Day 0 — immediately on entry</span></div>
+            <div class="tf-prop"><span class="tf-prop-key" style="color:var(--green);">Trigger</span><span class="tf-prop-val">Client enters journey</span></div>
+            <div class="tf-prop"><span class="tf-prop-key" style="color:var(--green);">Exit If</span><span class="tf-prop-val">Client converts to IB at any point</span></div>
+          </div>
+        </div>
+        <div class="tf-item" style="border-top:3px solid var(--green);">
+          <div class="tf-item-top">
+            <div class="tf-num" style="background:var(--green);">E2</div>
+            <div class="tf-name">Social Proof</div>
+          </div>
+          <div class="tf-props">
+            <div class="tf-prop"><span class="tf-prop-key" style="color:var(--green);">Timing</span><span class="tf-prop-val">Day 2 — entry + 2 days</span></div>
+            <div class="tf-prop"><span class="tf-prop-key" style="color:var(--green);">Trigger</span><span class="tf-prop-val">Not converted after E1 + rest day</span></div>
+            <div class="tf-prop"><span class="tf-prop-key" style="color:var(--green);">Rest</span><span class="tf-prop-val">Day 1 — no email (intentional)</span></div>
+          </div>
+        </div>
+        <div class="tf-item" style="border-top:3px solid var(--green);">
+          <div class="tf-item-top">
+            <div class="tf-num" style="background:var(--green);">E3</div>
+            <div class="tf-name">Objection Handling</div>
+          </div>
+          <div class="tf-props">
+            <div class="tf-prop"><span class="tf-prop-key" style="color:var(--green);">Timing</span><span class="tf-prop-val">Day 4 — entry + 4 days</span></div>
+            <div class="tf-prop"><span class="tf-prop-key" style="color:var(--green);">Trigger</span><span class="tf-prop-val">Not converted after E2 + rest day</span></div>
+            <div class="tf-prop"><span class="tf-prop-key" style="color:var(--green);">Rest</span><span class="tf-prop-val">Day 3 — no email (intentional)</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 2: E4 + E5 -->
+      <div class="tf-grid tf-grid-2" style="max-width:66%;">
+        <div class="tf-item" style="border-top:3px solid #e8833a;">
+          <div class="tf-item-top">
+            <div class="tf-num" style="background:#e8833a;">E4</div>
+            <div class="tf-name">Urgency</div>
+          </div>
+          <div class="tf-props">
+            <div class="tf-prop"><span class="tf-prop-key" style="color:#e8833a;">Timing</span><span class="tf-prop-val">Day 6 — entry + 6 days</span></div>
+            <div class="tf-prop"><span class="tf-prop-key" style="color:#e8833a;">Trigger</span><span class="tf-prop-val">Not converted after E3 + rest day</span></div>
+            <div class="tf-prop"><span class="tf-prop-key" style="color:#e8833a;">Rest</span><span class="tf-prop-val">Day 5 — no email (calm before close)</span></div>
+            <div class="tf-countdown-badge" style="background:#fef3c7;color:#92400e;">Urgency push begins</div>
+          </div>
+        </div>
+        <div class="tf-item" style="border-top:3px solid #d32f2f;">
+          <div class="tf-item-top">
+            <div class="tf-num" style="background:#d32f2f;">E5</div>
+            <div class="tf-name">Final Close</div>
+          </div>
+          <div class="tf-props">
+            <div class="tf-prop"><span class="tf-prop-key" style="color:#d32f2f;">Timing</span><span class="tf-prop-val">Day 7 — entry + 7 days (back-to-back with E4)</span></div>
+            <div class="tf-prop"><span class="tf-prop-key" style="color:#d32f2f;">Trigger</span><span class="tf-prop-val">Not converted after E4 — no rest day</span></div>
+            <div class="tf-prop"><span class="tf-prop-key" style="color:#d32f2f;">Post</span><span class="tf-prop-val">30-day cool-down → E1–E5 cycle restarts</span></div>
+            <div class="tf-countdown-badge" style="background:#fee2e2;color:#991b1b;">⚠ Final email — last chance</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROPERTIES SUMMARY -->
+    <div class="tf-footer">
+      <div class="tf-footer-title">📋 Key Properties for Platform Setup</div>
+      <div class="tf-footer-list">
+        <div class="tf-footer-item">Entry criteria — TBD from Sichen (SFMC filters)</div>
+        <div class="tf-footer-item">Conversion check — has client registered as IB? (exit trigger)</div>
+        <div class="tf-footer-item">Timing — Day 0, +2, +4, +6, +7 (every-other-day + back-to-back close)</div>
+        <div class="tf-footer-item">Rest days — Day 1, 3, 5 (intentional, no emails)</div>
+        <div class="tf-footer-item">Exclusions — existing IBs, ASIC clients, unsubscribed</div>
+        <div class="tf-footer-item">Post-journey — 30-day cool-down, then E1–E5 cycle restarts (monthly re-blast for Phase 1.0)</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- EMAIL E1: THE MONEY HOOK -->
+<div id="email-e1" class="email-card">
+  <div class="email-header" onclick="toggleCard(this)">
+    <div class="email-header-left">
+      <div class="email-num">E1</div>
+      <div class="email-meta">
+        <h2>E1 — The Money Hook</h2>
+        <div class="trigger">Day 0 · Curiosity · First email in the journey</div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <span class="type-badge">Phase 1.0</span>
+      <span class="expand-hint">Click to expand</span>
+      <div class="email-toggle"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="transition:transform 0.3s"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+    </div>
+  </div>
+  <div class="email-collapsible">
+    <div class="lang-tabs">
+      <button class="lang-tab active" onclick="switchLang(this,'e1','en')">EN</button>
+      <button class="lang-tab" onclick="switchLang(this,'e1','id')">ID</button>
+      <button class="lang-tab" onclick="switchLang(this,'e1','ko')">KO</button>
+      <button class="lang-tab" onclick="switchLang(this,'e1','vn')">VN</button>
+      <button class="lang-tab" onclick="switchLang(this,'e1','th')">TH</button>
+      <button class="lang-tab" onclick="switchLang(this,'e1','ar')">AR</button>
+    </div>
+    <!-- EN -->
+    <div id="e1-en" class="lang-content active">
+      <div class="email-body">
+        <div class="field"><div class="field-row"><span class="field-label">Email Subject</span><span class="field-value subject">What would an extra $500/month look like?</span></div></div>
+        <div class="field"><div class="field-row"><span class="field-label">Preview Text</span><span class="field-value">You're already trading — now earn from your network too</span></div></div>
+        <div class="field"><div class="field-row"><span class="field-label">Day</span><span class="field-value">Day 0 — Sent immediately upon entering the journey</span></div></div>
+        <div class="field"><div class="field-row"><span class="field-label">Objective</span><span class="field-value">Hook the reader with specific earning potential — lead with money, not education</span></div></div>
+        <div class="field"><div class="field-row"><span class="field-label">CTA</span><span class="field-value">See How Much You Could Earn</span></div></div>
+        <div class="email-preview">
+          <div class="banner">What Would an Extra $500/Month Look Like?</div>
+          <div class="salutation">Dear [Name],</div>
+          <div class="content-block">You're already trading with TMGM. But did you know you could earn extra income just by sharing your experience with others?
+
+Here's how it works:
+
+Refer 5 friends who each trade 20 lots/month → you earn $800–$1,100/month in commissions.
+
+That's $8–$11 per lot, paid daily — directly to your account. No caps on how many friends you can refer.</div>
+          <div class="content-block" style="font-weight:700; font-size:16px; color:var(--dark);">3 Steps. That's It.</div>
+          <div class="content-block">1. Sign up as a TMGM Introducing Broker
+2. Share your personal referral link with friends, trading groups, or your community
+3. Earn commissions every time your referrals trade — paid daily</div>
+          <div class="content-block">You already know the platform. You already trust the execution. Now turn that experience into daily income.</div>
+          <a class="cta-block">See How Much You Could Earn →</a>
+          <div class="content-block" style="margin-top:16px; font-size:12px; color:var(--grey-500);">Not the IB type? Ask us about our Finfluencer program →</div>
+          <div class="disclaimer">Investing in CFDs carries significant risks and is not suitable for all investors. VFSC 40356</div>
+        </div>
+      </div>
+    </div>
+    <!-- ID -->
+    <div id="e1-id" class="lang-content">
+      <div class="lang-placeholder"><div class="lang-placeholder-text">🇮🇩 Indonesian translation — pending</div></div>
+    </div>
+    <!-- KO -->
+    <div id="e1-ko" class="lang-content">
+      <div class="lang-placeholder"><div class="lang-placeholder-text">🇰🇷 Korean translation — pending</div></div>
+    </div>
+    <!-- VN -->
+    <div id="e1-vn" class="lang-content">
+      <div class="lang-placeholder"><div class="lang-placeholder-text">🇻🇳 Vietnamese translation — pending</div></div>
+    </div>
+    <!-- TH -->
+    <div id="e1-th" class="lang-content">
+      <div class="lang-placeholder"><div class="lang-placeholder-text">🇹🇭 Thai translation — pending</div></div>
+    </div>
+    <!-- AR -->
+    <div id="e1-ar" class="lang-content">
+      <div class="lang-placeholder"><div class="lang-placeholder-text">🇸🇦 Arabic translation — pending</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- EMAIL E2: SOCIAL PROOF -->
+<div id="email-e2" class="email-card">
+  <div class="email-header" onclick="toggleCard(this)">
+    <div class="email-header-left">
+      <div class="email-num">E2</div>
+      <div class="email-meta">
+        <h2>E2 — Social Proof</h2>
+        <div class="trigger">Day 2 · Trust · After 1 rest day</div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <span class="type-badge">Phase 1.0</span>
+      <span class="expand-hint">Click to expand</span>
+      <div class="email-toggle"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="transition:transform 0.3s"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+    </div>
+  </div>
+  <div class="email-collapsible">
+    <div class="lang-tabs">
+      <button class="lang-tab active" onclick="switchLang(this,'e2','en')">EN</button>
+      <button class="lang-tab" onclick="switchLang(this,'e2','id')">ID</button>
+      <button class="lang-tab" onclick="switchLang(this,'e2','ko')">KO</button>
+      <button class="lang-tab" onclick="switchLang(this,'e2','vn')">VN</button>
+      <button class="lang-tab" onclick="switchLang(this,'e2','th')">TH</button>
+      <button class="lang-tab" onclick="switchLang(this,'e2','ar')">AR</button>
+    </div>
+    <!-- EN -->
+    <div id="e2-en" class="lang-content active">
+      <div class="email-body">
+        <div class="field"><div class="field-row"><span class="field-label">Email Subject</span><span class="field-value subject">They started just like you — now they earn daily</span></div></div>
+        <div class="field"><div class="field-row"><span class="field-label">Preview Text</span><span class="field-value">Real traders, real commissions — see how they're earning with TMGM</span></div></div>
+        <div class="field"><div class="field-row"><span class="field-label">Day</span><span class="field-value">Day 2 — Sent 2 days after E1 (Day 1 is a rest day)</span></div></div>
+        <div class="field"><div class="field-row"><span class="field-label">Objective</span><span class="field-value">Build trust through earning scenarios and TMGM-specific differentiators — show it works for real people</span></div></div>
+        <div class="field"><div class="field-row"><span class="field-label">CTA</span><span class="field-value">Start Your IB Application</span></div></div>
+        <div class="email-preview">
+          <div class="banner">They Started Just Like You.</div>
+          <div class="salutation">Dear [Name],</div>
+          <div class="content-block">Two days ago, we showed you the numbers. Today, let us show you the people behind them.
+
+Traders just like you are already earning daily commissions as TMGM Introducing Brokers. Here's what that looks like:</div>
+          <div class="content-block" style="font-weight:700; font-size:16px; color:var(--dark);">Real Earning Scenarios</div>
+          <div class="content-block">📊 Trader A — referred 5 friends, each trading 15 lots/month
+→ Earns $600–$825/month in commissions
+
+📊 Trader B — referred 8 friends, each trading 20 lots/month
+→ Earns $1,280–$1,760/month in commissions
+
+📊 Trader C — referred 3 friends, each trading 10 lots/month
+→ Earns $240–$330/month — a solid start with room to grow</div>
+          <div class="content-block" style="font-weight:700; font-size:16px; color:var(--dark);">Why TMGM — Not Just Any Broker</div>
+          <div class="content-block">✅ Paid daily — not weekly like some competitors. Your commissions hit your account every single day.
+✅ $8–$11 per lot — competitive rates that reward your effort.
+✅ PAMM & MAM support — if you manage funds, you can earn even more.
+✅ Sub-IB structure — build your own team of referrers underneath you.
+✅ Dedicated account manager — personal support to help you grow.</div>
+          <div class="content-block">You're already trading with us. Your friends probably are too — or want to be. Why not earn from what you're already doing?</div>
+          <a class="cta-block">Start Your IB Application →</a>
+          <div class="disclaimer">Investing in CFDs carries significant risks and is not suitable for all investors. VFSC 40356</div>
+        </div>
+      </div>
+    </div>
+    <!-- ID -->
+    <div id="e2-id" class="lang-content">
+      <div class="lang-placeholder"><div class="lang-placeholder-text">🇮🇩 Indonesian translation — pending</div></div>
+    </div>
+    <!-- KO -->
+    <div id="e2-ko" class="lang-content">
+      <div class="lang-placeholder"><div class="lang-placeholder-text">🇰🇷 Korean translation — pending</div></div>
+    </div>
+    <!-- VN -->
+    <div id="e2-vn" class="lang-content">
+      <div class="lang-placeholder"><div class="lang-placeholder-text">🇻🇳 Vietnamese translation — pending</div></div>
+    </div>
+    <!-- TH -->
+    <div id="e2-th" class="lang-content">
+      <div class="lang-placeholder"><div class="lang-placeholder-text">🇹🇭 Thai translation — pending</div></div>
+    </div>
+    <!-- AR -->
+    <div id="e2-ar" class="lang-content">
+      <div class="lang-placeholder"><div class="lang-placeholder-text">🇸🇦 Arabic translation — pending</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- EMAIL E3: OBJECTION HANDLING -->
+<div id="email-e3" class="email-card">
+  <div class="email-header" onclick="toggleCard(this)">
+    <div class="email-header-left">
+      <div class="email-num">E3</div>
+      <div class="email-meta">
+        <h2>E3 — Objection Handling</h2>
+        <div class="trigger">Day 4 · Confidence · After 1 rest day</div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <span class="type-badge">Phase 1.0</span>
+      <span class="expand-hint">Click to expand</span>
+      <div class="email-toggle"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="transition:transform 0.3s"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+    </div>
+  </div>
+  <div class="email-collapsible">
+    <div class="lang-tabs">
+      <button class="lang-tab active" onclick="switchLang(this,'e3','en')">EN</button>
+      <button class="lang-tab" onclick="switchLang(this,'e3','id')">ID</button>
+      <button class="lang-tab" onclick="switchLang(this,'e3','ko')">KO</button>
+      <button class="lang-tab" onclick="switchLang(this,'e3','vn')">VN</button>
+      <button class="lang-tab" onclick="switchLang(this,'e3','th')">TH</button>
+      <button class="lang-tab" onclick="switchLang(this,'e3','ar')">AR</button>
+    </div>
+    <!-- EN -->
+    <div id="e3-en" class="lang-content active">
+      <div class="email-body">
+        <div class="field"><div class="field-row"><span class="field-label">Email Subject</span><span class="field-value subject">Think it's complicated? Here's what it actually takes</span></div></div>
+        <div class="field"><div class="field-row"><span class="field-label">Preview Text</span><span class="field-value">3 common concerns — and why none of them should stop you</span></div></div>
+        <div class="field"><div class="field-row"><span class="field-label">Day</span><span class="field-value">Day 4 — Sent 2 days after E2 (Day 3 is a rest day)</span></div></div>
+        <div class="field"><div class="field-row"><span class="field-label">Objective</span><span class="field-value">Remove the top 3 barriers to signing up — reframe resources as answers to doubts, not features</span></div></div>
+        <div class="field"><div class="field-row"><span class="field-label">CTA</span><span class="field-value">Apply in 2 Minutes</span></div></div>
+        <div class="email-preview">
+          <div class="banner">Think It's Complicated? Let's Clear That Up.</div>
+          <div class="salutation">Dear [Name],</div>
+          <div class="content-block">You've seen the earning potential. You've seen the proof. But maybe something is still holding you back.
+
+Let us address the three most common concerns we hear:</div>
+          <div class="content-block" style="font-weight:700; font-size:15px; color:var(--dark);">❝ I don't have time for this ❞</div>
+          <div class="content-block">It's passive income. Once your referrals start trading, you earn automatically — every day, without lifting a finger. There's no daily task, no content to create, no clients to manage. You refer once, and earn continuously.</div>
+          <div class="content-block" style="font-weight:700; font-size:15px; color:var(--dark);">❝ I don't know enough people ❞</div>
+          <div class="content-block">You don't need hundreds. Just 3–5 active traders can generate meaningful monthly income. Think about your trading groups, your WhatsApp chats, your colleagues who've asked you about trading. That's your network — and it's enough.</div>
+          <div class="content-block" style="font-weight:700; font-size:15px; color:var(--dark);">❝ I don't know how to promote ❞</div>
+          <div class="content-block">You don't have to. TMGM gives you everything you need:
+
+📊 IB Portal — track your referrals and commissions in real time
+🎨 Ready-made banners & creative materials — just share, no design needed
+🔗 Personal tracking link — unique to you, works everywhere
+👤 Dedicated account manager — someone in your corner to help you grow</div>
+          <div class="content-block">The sign-up takes 2 minutes. The earning starts as soon as your first referral trades.</div>
+          <a class="cta-block">Apply in 2 Minutes →</a>
+          <div class="disclaimer">Investing in CFDs carries significant risks and is not suitable for all investors. VFSC 40356</div>
+        </div>
+      </div>
+    </div>
+    <!-- ID -->
+    <div id="e3-id" class="lang-content">
+      <div class="lang-placeholder"><div class="lang-placeholder-text">🇮🇩 Indonesian translation — pending</div></div>
+    </div>
+    <!-- KO -->
+    <div id="e3-ko" class="lang-content">
+      <div class="lang-placeholder"><div class="lang-placeholder-text">🇰🇷 Korean translation — pending</div></div>
+    </div>
+    <!-- VN -->
+    <div id="e3-vn" class="lang-content">
+      <div class="lang-placeholder"><div class="lang-placeholder-text">🇻🇳 Vietnamese translation — pending</div></div>
+    </div>
+    <!-- TH -->
+    <div id="e3-th" class="lang-content">
+      <div class="lang-placeholder"><div class="lang-placeholder-text">🇹🇭 Thai translation — pending</div></div>
+    </div>
+    <!-- AR -->
+    <div id="e3-ar" class="lang-content">
+      <div class="lang-placeholder"><div class="lang-placeholder-text">🇸🇦 Arabic translation — pending</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- EMAIL E4: URGENCY -->
+<div id="email-e4" class="email-card">
+  <div class="email-header" onclick="toggleCard(this)">
+    <div class="email-header-left">
+      <div class="email-num" style="background:#e8833a;">E4</div>
+      <div class="email-meta">
+        <h2>E4 — Urgency</h2>
+        <div class="trigger">Day 6 · Scarcity · After 1 rest day · Urgency push begins</div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <span class="type-badge">Phase 1.0</span>
+      <span class="expand-hint">Click to expand</span>
+      <div class="email-toggle"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="transition:transform 0.3s"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+    </div>
+  </div>
+  <div class="email-collapsible">
+    <div class="lang-tabs">
+      <button class="lang-tab active" onclick="switchLang(this,'e4','en')">EN</button>
+      <button class="lang-tab" onclick="switchLang(this,'e4','id')">ID</button>
+      <button class="lang-tab" onclick="switchLang(this,'e4','ko')">KO</button>
+      <button class="lang-tab" onclick="switchLang(this,'e4','vn')">VN</button>
+      <button class="lang-tab" onclick="switchLang(this,'e4','th')">TH</button>
+      <button class="lang-tab" onclick="switchLang(this,'e4','ar')">AR</button>
+    </div>
+    <!-- EN -->
+    <div id="e4-en" class="lang-content active">
+      <div class="email-body">
+        <div class="field"><div class="field-row"><span class="field-label">Email Subject</span><span class="field-value subject">Option A: "Your enhanced rate expires in 5 days" · Option B: "%%First_Name%%, your spot is still open"</span></div></div>
+        <div class="field"><div class="field-row"><span class="field-label">Preview Text</span><span class="field-value">Option A: Lock in $12/lot before the window closes · Option B: Every day you wait is a day you're not earning</span></div></div>
+        <div class="field"><div class="field-row"><span class="field-label">Day</span><span class="field-value">Day 6 — Sent 2 days after E3 (Day 5 is a rest day) · Back-to-back with E5 tomorrow</span></div></div>
+        <div class="field"><div class="field-row"><span class="field-label">Objective</span><span class="field-value">Create a reason to act NOW — either through a time-limited incentive (A) or opportunity cost framing (B)</span></div></div>
+        <div class="field"><div class="field-row"><span class="field-label">CTA</span><span class="field-value">Option A: "Lock In Your Rate" · Option B: "Start Earning Today"</span></div></div>
+        <div class="field"><div class="field-row"><span class="field-label">Note</span><span class="field-value" style="color:var(--amber); font-weight:600;">⚠ Choose Option A or B based on whether business can support an onboarding incentive. Confirm with Ryan.</span></div></div>
+
+        <!-- OPTION A -->
+        <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:var(--green); margin:20px 0 8px; padding:6px 12px; background:var(--green-light); border-radius:6px; display:inline-block;">Option A — With Onboarding Incentive</div>
+        <div class="email-preview">
+          <div class="banner">Your Enhanced Rate Expires in 5 Days</div>
+          <div class="salutation">Dear [Name],</div>
+          <div class="content-block">We've been showing you how TMGM's IB program works — the earning potential, the proof, the tools. Now here's something we haven't mentioned yet:
+
+For a limited time, new IBs who sign up this month get an enhanced commission rate.</div>
+          <div class="content-block" style="font-weight:700; font-size:16px; color:var(--dark);">🔥 $12/lot for your first 90 days</div>
+          <div class="content-block">That's higher than our standard $8–$11/lot rate — and it's only available to the first 50 new IBs who apply this month.
+
+After 90 days, you'll move to the standard rate. But every lot your referrals trade in those first 3 months earns you more.
+
+This offer expires in 5 days. Once it's gone, it's gone.</div>
+          <a class="cta-block">Lock In Your Rate →</a>
+          <div class="disclaimer">Investing in CFDs carries significant risks and is not suitable for all investors. VFSC 40356</div>
+        </div>
+
+        <!-- OPTION B -->
+        <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:var(--blue); margin:20px 0 8px; padding:6px 12px; background:var(--blue-light); border-radius:6px; display:inline-block;">Option B — Without Incentive (Opportunity Cost)</div>
+        <div class="email-preview">
+          <div class="banner">[Name], Your Spot Is Still Open</div>
+          <div class="salutation">Dear [Name],</div>
+          <div class="content-block">Over the past week, we've shown you:
+
+✅ The numbers — $8–$11 per lot, paid daily
+✅ The proof — traders like you earning $600–$1,700/month
+✅ The tools — IB Portal, creative materials, dedicated support
+
+You've seen everything. The only thing left is to start.</div>
+          <div class="content-block" style="font-weight:700; font-size:15px; color:var(--dark);">Here's the thing most people don't think about:</div>
+          <div class="content-block">Every day you wait is a day your network is trading — without earning you a single dollar in commissions.
+
+Your friends are already placing trades. Your colleagues are already active. That volume is happening right now, and you're not earning from it.
+
+The sign-up takes 2 minutes. The commissions start the same day your referrals trade.</div>
+          <a class="cta-block">Start Earning Today →</a>
+          <div class="disclaimer">Investing in CFDs carries significant risks and is not suitable for all investors. VFSC 40356</div>
+        </div>
+      </div>
+    </div>
+    <!-- ID -->
+    <div id="e4-id" class="lang-content">
+      <div class="lang-placeholder"><div class="lang-placeholder-text">🇮🇩 Indonesian translation — pending</div></div>
+    </div>
+    <!-- KO -->
+    <div id="e4-ko" class="lang-content">
+      <div class="lang-placeholder"><div class="lang-placeholder-text">🇰🇷 Korean translation — pending</div></div>
+    </div>
+    <!-- VN -->
+    <div id="e4-vn" class="lang-content">
+      <div class="lang-placeholder"><div class="lang-placeholder-text">🇻🇳 Vietnamese translation — pending</div></div>
+    </div>
+    <!-- TH -->
+    <div id="e4-th" class="lang-content">
+      <div class="lang-placeholder"><div class="lang-placeholder-text">🇹🇭 Thai translation — pending</div></div>
+    </div>
+    <!-- AR -->
+    <div id="e4-ar" class="lang-content">
+      <div class="lang-placeholder"><div class="lang-placeholder-text">🇸🇦 Arabic translation — pending</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- EMAIL E5: FINAL CLOSE -->
+<div id="email-e5" class="email-card">
+  <div class="email-header" onclick="toggleCard(this)">
+    <div class="email-header-left">
+      <div class="email-num" style="background:#d32f2f;">E5</div>
+      <div class="email-meta">
+        <h2>E5 — Final Close</h2>
+        <div class="trigger">Day 7 · Decision · Back-to-back with E4 · Last email in the journey</div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <span class="type-badge">Phase 1.0</span>
+      <span class="expand-hint">Click to expand</span>
+      <div class="email-toggle"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="transition:transform 0.3s"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+    </div>
+  </div>
+  <div class="email-collapsible">
+    <div class="lang-tabs">
+      <button class="lang-tab active" onclick="switchLang(this,'e5','en')">EN</button>
+      <button class="lang-tab" onclick="switchLang(this,'e5','id')">ID</button>
+      <button class="lang-tab" onclick="switchLang(this,'e5','ko')">KO</button>
+      <button class="lang-tab" onclick="switchLang(this,'e5','vn')">VN</button>
+      <button class="lang-tab" onclick="switchLang(this,'e5','th')">TH</button>
+      <button class="lang-tab" onclick="switchLang(this,'e5','ar')">AR</button>
+    </div>
+    <!-- EN -->
+    <div id="e5-en" class="lang-content active">
+      <div class="email-body">
+        <div class="field"><div class="field-row"><span class="field-label">Email Subject</span><span class="field-value subject">%%First_Name%%, final reminder for now</span></div></div>
+        <div class="field"><div class="field-row"><span class="field-label">Preview Text</span><span class="field-value">The door is open whenever you're ready</span></div></div>
+        <div class="field"><div class="field-row"><span class="field-label">Day</span><span class="field-value">Day 7 — Sent 1 day after E4 (no rest day — back-to-back closing punch)</span></div></div>
+        <div class="field"><div class="field-row"><span class="field-label">Objective</span><span class="field-value">Short, direct, respectful close. No more education. Ask for the decision. Set expectation of next contact.</span></div></div>
+        <div class="field"><div class="field-row"><span class="field-label">CTA</span><span class="field-value">Apply Now</span></div></div>
+        <div class="email-preview">
+          <div class="banner">[Name], Final Reminder For Now.</div>
+          <div class="salutation">Dear [Name],</div>
+          <div class="content-block">Over the past week, we've shown you the numbers, the proof, and the tools.
+
+$8–$11 per lot. Paid daily. No cap on referrals.
+
+We've addressed the concerns. We've shown you what other traders are earning. We've given you everything you need to decide.
+
+Now it's your call.</div>
+          <a class="cta-block">Apply Now →</a>
+          <div class="content-block" style="margin-top:20px;">We'll give you some space and check back in with you next month. The door is open whenever you're ready.
+
+Either way, thank you for trading with TMGM.</div>
+          <div class="disclaimer">Investing in CFDs carries significant risks and is not suitable for all investors. VFSC 40356</div>
+        </div>
+      </div>
+    </div>
+    <!-- ID -->
+    <div id="e5-id" class="lang-content">
+      <div class="lang-placeholder"><div class="lang-placeholder-text">🇮🇩 Indonesian translation — pending</div></div>
+    </div>
+    <!-- KO -->
+    <div id="e5-ko" class="lang-content">
+      <div class="lang-placeholder"><div class="lang-placeholder-text">🇰🇷 Korean translation — pending</div></div>
+    </div>
+    <!-- VN -->
+    <div id="e5-vn" class="lang-content">
+      <div class="lang-placeholder"><div class="lang-placeholder-text">🇻🇳 Vietnamese translation — pending</div></div>
+    </div>
+    <!-- TH -->
+    <div id="e5-th" class="lang-content">
+      <div class="lang-placeholder"><div class="lang-placeholder-text">🇹🇭 Thai translation — pending</div></div>
+    </div>
+    <!-- AR -->
+    <div id="e5-ar" class="lang-content">
+      <div class="lang-placeholder"><div class="lang-placeholder-text">🇸🇦 Arabic translation — pending</div></div>
+    </div>
+  </div>
+</div>
+
+</div><!-- end main -->
+
+<script>
+function toggleCard(header) {
+  const card = header.closest('.email-card');
+  const wasExpanded = card.classList.contains('expanded');
+  document.querySelectorAll('.email-card.expanded').forEach(c => c.classList.remove('expanded'));
+  if (!wasExpanded) card.classList.add('expanded');
+}
+
+function switchLang(btn, emailId, lang) {
+  const card = btn.closest('.email-card');
+  card.querySelectorAll('.lang-tab').forEach(t => t.classList.remove('active'));
+  card.querySelectorAll('.lang-content').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(emailId + '-' + lang).classList.add('active');
+}
+
+function showDetail(id) {
+  const panel = document.getElementById('detail-' + id);
+  const allPanels = document.querySelectorAll('.j-detail-panel');
+  const allNodes = document.querySelectorAll('.j-node');
+  const wasActive = panel.classList.contains('active');
+
+  // Close all panels and reset nodes
+  allPanels.forEach(p => p.classList.remove('active'));
+  allNodes.forEach(n => n.classList.remove('active-detail'));
+
+  // Toggle - if it was already open, just close
+  if (!wasActive) {
+    panel.classList.add('active');
+    // Highlight the clicked node
+    event.currentTarget.classList.add('active-detail');
+    // Smooth scroll to panel
+    setTimeout(() => panel.scrollIntoView({ behavior:'smooth', block:'nearest' }), 100);
+  }
+}
+
+function closeDetail() {
+  document.querySelectorAll('.j-detail-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.j-node').forEach(n => n.classList.remove('active-detail'));
+}
+</script>
+
+</body>
+</html>
