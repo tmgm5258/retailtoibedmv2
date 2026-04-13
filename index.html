@@ -167,6 +167,16 @@ body { font-family:var(--font); color:var(--dark); background:var(--bg); line-he
 .fc-branch-arm-no { width:50%; }
 .fc-branch-arm-yes { width:50%; }
 
+/* Rest day → next email arrow */
+.fc-rest-arrow { display:flex; flex-direction:column; align-items:center; gap:2px; margin-top:6px; }
+.fc-rest-arrow .fc-rest-line { width:2px; height:8px; background:var(--grey-300); }
+.fc-rest-arrow .fc-rest-label { font-size:9px; color:var(--grey-400); font-style:italic; }
+
+/* IB Welcome Email → separate journey arrow */
+.fc-ib-arrow { display:flex; flex-direction:column; align-items:center; gap:2px; margin-top:6px; }
+.fc-ib-arrow .fc-ib-line { width:2px; height:8px; background:var(--green); opacity:0.4; }
+.fc-ib-arrow .fc-ib-label { font-size:9px; color:var(--green); font-style:italic; font-weight:600; }
+
 /* TRIGGER FLOW CARD */
 .tf-card { background:var(--white); border-radius:var(--radius-lg); border:1px solid var(--grey-200); box-shadow:var(--shadow-sm); margin-bottom:40px; overflow:hidden; }
 .tf-header { padding:20px 28px; display:flex; align-items:center; justify-content:space-between; cursor:pointer; user-select:none; border-bottom:1px solid transparent; transition:border-color 0.2s; }
@@ -529,8 +539,8 @@ body { font-family:var(--font); color:var(--dark); background:var(--bg); line-he
         <div class="fc-decision"><div class="fc-box-title">Converted to IB?</div></div>
         <div class="fc-branch-t"><div class="fc-branch-stem"></div><div class="fc-branch-bar"></div></div>
         <div class="fc-branch-arms">
-          <div class="fc-branch-arm fc-branch-arm-no"><span class="fc-label no">NO</span><div class="fc-vline"></div><div class="fc-box fc-rest"><div class="fc-box-title">💤 Rest — Day 1</div></div></div>
-          <div class="fc-branch-arm fc-branch-arm-yes"><span class="fc-label yes">YES</span><div class="fc-vline"></div><div class="fc-exit-box"><div class="fc-box-title">✅ IB Welcome Email</div><div class="fc-box-sub" style="font-size:9px;color:var(--green);margin-top:1px;">Separate journey</div></div></div>
+          <div class="fc-branch-arm fc-branch-arm-no"><span class="fc-label no">NO</span><div class="fc-vline"></div><div class="fc-box fc-rest"><div class="fc-box-title">💤 Rest — Day 1</div></div><div class="fc-rest-arrow"><div class="fc-rest-line"></div>↓<div class="fc-rest-label">to E2</div></div></div>
+          <div class="fc-branch-arm fc-branch-arm-yes"><span class="fc-label yes">YES</span><div class="fc-vline"></div><div class="fc-exit-box"><div class="fc-box-title">✅ IB Welcome Email</div><div class="fc-box-sub" style="font-size:9px;color:var(--green);margin-top:1px;">Separate journey</div></div><div class="fc-ib-arrow"><div class="fc-ib-line"></div>↓<div class="fc-ib-label">IB onboarding</div></div></div>
         </div>
       </div>
       <div class="fc-vline"></div>
@@ -547,8 +557,8 @@ body { font-family:var(--font); color:var(--dark); background:var(--bg); line-he
         <div class="fc-decision"><div class="fc-box-title">Converted to IB?</div></div>
         <div class="fc-branch-t"><div class="fc-branch-stem"></div><div class="fc-branch-bar"></div></div>
         <div class="fc-branch-arms">
-          <div class="fc-branch-arm fc-branch-arm-no"><span class="fc-label no">NO</span><div class="fc-vline"></div><div class="fc-box fc-rest"><div class="fc-box-title">💤 Rest — Day 3</div></div></div>
-          <div class="fc-branch-arm fc-branch-arm-yes"><span class="fc-label yes">YES</span><div class="fc-vline"></div><div class="fc-exit-box"><div class="fc-box-title">✅ IB Welcome Email</div><div class="fc-box-sub" style="font-size:9px;color:var(--green);margin-top:1px;">Separate journey</div></div></div>
+          <div class="fc-branch-arm fc-branch-arm-no"><span class="fc-label no">NO</span><div class="fc-vline"></div><div class="fc-box fc-rest"><div class="fc-box-title">💤 Rest — Day 3</div></div><div class="fc-rest-arrow"><div class="fc-rest-line"></div>↓<div class="fc-rest-label">to E3</div></div></div>
+          <div class="fc-branch-arm fc-branch-arm-yes"><span class="fc-label yes">YES</span><div class="fc-vline"></div><div class="fc-exit-box"><div class="fc-box-title">✅ IB Welcome Email</div><div class="fc-box-sub" style="font-size:9px;color:var(--green);margin-top:1px;">Separate journey</div></div><div class="fc-ib-arrow"><div class="fc-ib-line"></div>↓<div class="fc-ib-label">IB onboarding</div></div></div>
         </div>
       </div>
       <div class="fc-vline"></div>
@@ -565,8 +575,8 @@ body { font-family:var(--font); color:var(--dark); background:var(--bg); line-he
         <div class="fc-decision"><div class="fc-box-title">Converted to IB?</div></div>
         <div class="fc-branch-t"><div class="fc-branch-stem"></div><div class="fc-branch-bar"></div></div>
         <div class="fc-branch-arms">
-          <div class="fc-branch-arm fc-branch-arm-no"><span class="fc-label no">NO</span><div class="fc-vline"></div><div class="fc-box fc-rest"><div class="fc-box-title">💤 Rest — Day 5</div></div></div>
-          <div class="fc-branch-arm fc-branch-arm-yes"><span class="fc-label yes">YES</span><div class="fc-vline"></div><div class="fc-exit-box"><div class="fc-box-title">✅ IB Welcome Email</div><div class="fc-box-sub" style="font-size:9px;color:var(--green);margin-top:1px;">Separate journey</div></div></div>
+          <div class="fc-branch-arm fc-branch-arm-no"><span class="fc-label no">NO</span><div class="fc-vline"></div><div class="fc-box fc-rest"><div class="fc-box-title">💤 Rest — Day 5</div></div><div class="fc-rest-arrow"><div class="fc-rest-line"></div>↓<div class="fc-rest-label">to E4</div></div></div>
+          <div class="fc-branch-arm fc-branch-arm-yes"><span class="fc-label yes">YES</span><div class="fc-vline"></div><div class="fc-exit-box"><div class="fc-box-title">✅ IB Welcome Email</div><div class="fc-box-sub" style="font-size:9px;color:var(--green);margin-top:1px;">Separate journey</div></div><div class="fc-ib-arrow"><div class="fc-ib-line"></div>↓<div class="fc-ib-label">IB onboarding</div></div></div>
         </div>
       </div>
       <div class="fc-vline"></div>
@@ -584,7 +594,7 @@ body { font-family:var(--font); color:var(--dark); background:var(--bg); line-he
         <div class="fc-branch-t"><div class="fc-branch-stem"></div><div class="fc-branch-bar"></div></div>
         <div class="fc-branch-arms">
           <div class="fc-branch-arm fc-branch-arm-no"><span class="fc-label no">NO</span><div class="fc-vline"></div><div class="fc-box fc-email" style="padding:8px 16px;min-width:auto;border-color:rgba(211,47,47,0.3);"><div class="fc-box-title" style="color:#d32f2f;font-size:11px;">E5 — Final Close</div><div class="fc-box-sub">Day 7 · No rest</div></div></div>
-          <div class="fc-branch-arm fc-branch-arm-yes"><span class="fc-label yes">YES</span><div class="fc-vline"></div><div class="fc-exit-box"><div class="fc-box-title">✅ IB Welcome Email</div><div class="fc-box-sub" style="font-size:9px;color:var(--green);margin-top:1px;">Separate journey</div></div></div>
+          <div class="fc-branch-arm fc-branch-arm-yes"><span class="fc-label yes">YES</span><div class="fc-vline"></div><div class="fc-exit-box"><div class="fc-box-title">✅ IB Welcome Email</div><div class="fc-box-sub" style="font-size:9px;color:var(--green);margin-top:1px;">Separate journey</div></div><div class="fc-ib-arrow"><div class="fc-ib-line"></div>↓<div class="fc-ib-label">IB onboarding</div></div></div>
         </div>
       </div>
       <div class="fc-vline"></div>
@@ -595,7 +605,7 @@ body { font-family:var(--font); color:var(--dark); background:var(--bg); line-he
         <div class="fc-branch-t"><div class="fc-branch-stem"></div><div class="fc-branch-bar"></div></div>
         <div class="fc-branch-arms">
           <div class="fc-branch-arm fc-branch-arm-no"><span class="fc-label no">NO</span><div class="fc-vline"></div><div class="fc-box fc-end" style="padding:8px 16px;min-width:auto;background:var(--amber-light);border-color:rgba(245,158,11,0.25);"><div class="fc-box-title" style="font-size:11px;color:var(--amber);">30-Day Cool-down</div><div class="fc-box-sub">Then re-enter E1</div></div></div>
-          <div class="fc-branch-arm fc-branch-arm-yes"><span class="fc-label yes">YES</span><div class="fc-vline"></div><div class="fc-exit-box"><div class="fc-box-title">✅ IB Welcome Email</div><div class="fc-box-sub" style="font-size:9px;color:var(--green);margin-top:1px;">Separate journey</div></div></div>
+          <div class="fc-branch-arm fc-branch-arm-yes"><span class="fc-label yes">YES</span><div class="fc-vline"></div><div class="fc-exit-box"><div class="fc-box-title">✅ IB Welcome Email</div><div class="fc-box-sub" style="font-size:9px;color:var(--green);margin-top:1px;">Separate journey</div></div><div class="fc-ib-arrow"><div class="fc-ib-line"></div>↓<div class="fc-ib-label">IB onboarding</div></div></div>
         </div>
       </div>
 
