@@ -208,6 +208,24 @@ body { font-family:var(--font); color:var(--dark); background:var(--bg); line-he
 
 .tf-tbd { padding:10px 14px; border-radius:8px; background:var(--amber-light); border:1px solid rgba(245,158,11,0.15); font-size:11.5px; color:var(--amber); font-weight:600; margin-top:6px; }
 
+/* TRIGGER V2 — SQUARE CARDS 2 PER ROW */
+.tf2-grid { display:grid; grid-template-columns:1fr 1fr; gap:24px 14px; }
+.tf2-card { border-radius:14px; padding:0; overflow:hidden; background:var(--white); border:1px solid var(--grey-200); transition:box-shadow 0.2s, transform 0.2s; display:flex; flex-direction:column; }
+.tf2-card:hover { box-shadow:0 4px 12px rgba(0,0,0,0.08); transform:translateY(-2px); }
+.tf2-card-header { padding:14px 18px; display:flex; align-items:center; gap:10px; border-bottom:1px solid var(--grey-100); }
+.tf2-badge { width:34px; height:34px; border-radius:8px; color:white; font-size:13px; font-weight:800; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.tf2-title-block { flex:1; }
+.tf2-title { font-size:14px; font-weight:700; color:var(--dark); line-height:1.2; }
+.tf2-stage { font-size:10px; font-weight:600; color:var(--grey-400); text-transform:uppercase; letter-spacing:0.5px; margin-top:2px; }
+.tf2-tag { font-size:10px; font-weight:700; padding:4px 10px; border-radius:20px; }
+.tf2-body { padding:16px 18px; flex:1; display:flex; flex-direction:column; gap:10px; }
+.tf2-field { display:flex; flex-direction:column; gap:3px; }
+.tf2-label { font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:var(--grey-400); }
+.tf2-value { font-size:12.5px; color:var(--grey-700); line-height:1.5; }
+.tf2-value.subject-line { color:var(--dark); font-weight:600; font-style:italic; padding:6px 10px; background:var(--grey-50); border-left:3px solid; border-radius:4px; }
+.tf2-divider { height:1px; background:var(--grey-100); margin:4px 0; }
+.tf2-footer-note { padding:8px 12px; border-radius:6px; font-size:11px; font-weight:600; margin-top:4px; text-align:center; }
+
 /* EMAIL CARD */
 .email-card { background:var(--white); border-radius:var(--radius-lg); border:1px solid var(--grey-200); box-shadow:var(--shadow-sm); margin-bottom:24px; overflow:hidden; transition:box-shadow 0.2s; scroll-margin-top:80px; }
 .email-card:hover { box-shadow:var(--shadow-md); }
@@ -273,6 +291,7 @@ body { font-family:var(--font); color:var(--dark); background:var(--bg); line-he
   .tf-grid-2, .tf-grid-3 { grid-template-columns:1fr; }
   .tf-footer { margin:0 16px 20px; }
   .tf-footer-list { grid-template-columns:1fr; }
+  .tf2-grid { grid-template-columns:1fr; }
   .email-body { padding:16px 20px; }
   .email-header { padding:16px 20px; flex-direction:column; align-items:flex-start; gap:8px; }
   .field-row { flex-direction:column; gap:4px; }
@@ -325,7 +344,7 @@ body { font-family:var(--font); color:var(--dark); background:var(--bg); line-he
         <div class="j-click-hint">Click for details</div>
       </div>
       <div class="j-node proposed has-arrow-right" onclick="showDetail('e2')">
-        <div class="j-tooltip tip-bottom">Sent to retail clients who haven't converted after E1. Shows real earning scenarios and TMGM's IB advantages (daily payouts, PAMM/MAM) to build trust.<br><br><strong>Timing:</strong> Day 2 — entry + 2 days<br>Click for full details</div>
+        <div class="j-tooltip tip-bottom">Sent to retail clients who haven't converted after E1. Shows real earning scenarios and TMGM's IB advantages (daily payouts, PAMM/MAM) to build trust.<br><br><strong>Timing:</strong> Day 2 — 2 days after entry<br>Click for full details</div>
         <div class="j-num">E2</div>
         <div class="j-name">Social Proof</div>
         <div class="j-trigger">Day 2 · Trust</div>
@@ -341,7 +360,7 @@ body { font-family:var(--font); color:var(--dark); background:var(--bg); line-he
     </div>
     <div class="journey-row">
       <div class="j-node proposed has-arrow-right" onclick="showDetail('e3')">
-        <div class="j-tooltip">Sent to retail clients still not converted. Addresses the top 3 barriers — time, network size, and promotion skills — to remove hesitation and make signing up feel easy.<br><br><strong>Timing:</strong> Day 4 — entry + 4 days<br>Click for full details</div>
+        <div class="j-tooltip">Sent to retail clients still not converted. Addresses the top 3 barriers — time, network size, and promotion skills — to remove hesitation and make signing up feel easy.<br><br><strong>Timing:</strong> Day 4 — 4 days after entry<br>Click for full details</div>
         <div class="j-num">E3</div>
         <div class="j-name">Objection Handling</div>
         <div class="j-trigger">Day 4 · Confidence</div>
@@ -355,7 +374,7 @@ body { font-family:var(--font); color:var(--dark); background:var(--bg); line-he
         <div class="j-click-hint">Click for details</div>
       </div>
       <div class="j-node proposed has-arrow-right" onclick="showDetail('e4')">
-        <div class="j-tooltip">Sent to retail clients still not converted. Creates urgency through a limited-time enhanced rate offer or opportunity cost framing — gives them a reason to act NOW, not later.<br><br><strong>Timing:</strong> Day 6 — entry + 6 days<br>Click for full details</div>
+        <div class="j-tooltip">Sent to retail clients still not converted. Uses opportunity cost framing — every day they wait is a day their network trades without earning them commissions. Creates a reason to act NOW, not later.<br><br><strong>Timing:</strong> Day 6 — 6 days after entry<br>Click for full details</div>
         <div class="j-num">E4</div>
         <div class="j-name">Urgency</div>
         <div class="j-trigger">Day 6 · Scarcity</div>
@@ -399,7 +418,7 @@ body { font-family:var(--font); color:var(--dark); background:var(--bg); line-he
     <div class="j-detail-header"><div class="j-detail-title">E2 — Social Proof</div><button class="j-detail-close" onclick="closeDetail()">✕</button></div>
     <div class="j-detail-grid">
       <div class="j-detail-field"><div class="j-detail-label">Sent To</div><div class="j-detail-value">Retail clients who haven't converted after E1 — shows real earning scenarios and TMGM advantages to build trust</div></div>
-      <div class="j-detail-field"><div class="j-detail-label">Timing</div><div class="j-detail-value">Day 2 — entry + 2 days</div></div>
+      <div class="j-detail-field"><div class="j-detail-label">Timing</div><div class="j-detail-value">Day 2 — 2 days after entry</div></div>
       <div class="j-detail-field"><div class="j-detail-label">Trigger</div><div class="j-detail-value">Not converted after E1 + rest day</div></div>
       <div class="j-detail-field"><div class="j-detail-label">Subject Line</div><div class="j-detail-value highlight">They started just like you — now they earn daily</div></div>
       <div class="j-detail-field"><div class="j-detail-label">CTA</div><div class="j-detail-value highlight">Start Your IB Application</div></div>
@@ -422,7 +441,7 @@ body { font-family:var(--font); color:var(--dark); background:var(--bg); line-he
     <div class="j-detail-header"><div class="j-detail-title">E3 — Objection Handling</div><button class="j-detail-close" onclick="closeDetail()">✕</button></div>
     <div class="j-detail-grid">
       <div class="j-detail-field"><div class="j-detail-label">Sent To</div><div class="j-detail-value">Retail clients still not converted — addresses their hesitations and makes signing up feel easy</div></div>
-      <div class="j-detail-field"><div class="j-detail-label">Timing</div><div class="j-detail-value">Day 4 — entry + 4 days</div></div>
+      <div class="j-detail-field"><div class="j-detail-label">Timing</div><div class="j-detail-value">Day 4 — 4 days after entry</div></div>
       <div class="j-detail-field"><div class="j-detail-label">Trigger</div><div class="j-detail-value">Not converted after E2 + rest day</div></div>
       <div class="j-detail-field"><div class="j-detail-label">Subject Line</div><div class="j-detail-value highlight">Think it's complicated? Here's what it actually takes</div></div>
       <div class="j-detail-field"><div class="j-detail-label">CTA</div><div class="j-detail-value highlight">Apply in 2 Minutes</div></div>
@@ -444,15 +463,13 @@ body { font-family:var(--font); color:var(--dark); background:var(--bg); line-he
   <div id="detail-e4" class="j-detail-panel">
     <div class="j-detail-header"><div class="j-detail-title">E4 — Urgency</div><button class="j-detail-close" onclick="closeDetail()">✕</button></div>
     <div class="j-detail-grid">
-      <div class="j-detail-field"><div class="j-detail-label">Sent To</div><div class="j-detail-value">Retail clients still not converted — creates urgency and gives them a reason to act now, not later</div></div>
-      <div class="j-detail-field"><div class="j-detail-label">Timing</div><div class="j-detail-value">Day 6 — entry + 6 days</div></div>
-      <div class="j-detail-field"><div class="j-detail-label">Trigger</div><div class="j-detail-value">Not converted after E3 + rest day</div></div>
-      <div class="j-detail-field"><div class="j-detail-label">Subject Line (A)</div><div class="j-detail-value highlight">Your enhanced rate expires in 5 days</div></div>
-      <div class="j-detail-field"><div class="j-detail-label">Subject Line (B)</div><div class="j-detail-value highlight">%%First_Name%%, your spot is still open</div></div>
-      <div class="j-detail-field"><div class="j-detail-label">CTA (A)</div><div class="j-detail-value highlight">Lock In Your Rate</div></div>
-      <div class="j-detail-field"><div class="j-detail-label">CTA (B)</div><div class="j-detail-value highlight">Start Earning Today</div></div>
-      <div class="j-detail-field j-detail-full"><div class="j-detail-label">Content Strategy</div><div class="j-detail-value">Option A: Enhanced commission ($12/lot for first 90 days), first 50 new IBs, real deadline. Option B: Recap E1–E3 highlights, frame as opportunity cost — "every day you wait is a day your network trades without earning you commissions."</div></div>
-      <div class="j-detail-field"><div class="j-detail-label">Psychology</div><div class="j-detail-value">Scarcity — create a reason to act NOW</div></div>
+      <div class="j-detail-field"><div class="j-detail-label">Sent To</div><div class="j-detail-value">Retail clients still not converted — creates urgency through opportunity cost framing, giving them a reason to act now</div></div>
+      <div class="j-detail-field"><div class="j-detail-label">Timing</div><div class="j-detail-value">Day 6 — sent 6 days after client enters journey</div></div>
+      <div class="j-detail-field"><div class="j-detail-label">Trigger</div><div class="j-detail-value">Client has not registered as IB after E3 (1-day rest gap)</div></div>
+      <div class="j-detail-field"><div class="j-detail-label">Subject Line</div><div class="j-detail-value highlight">%%First_Name%%, your spot is still open</div></div>
+      <div class="j-detail-field"><div class="j-detail-label">CTA</div><div class="j-detail-value highlight">Start Earning Today</div></div>
+      <div class="j-detail-field j-detail-full"><div class="j-detail-label">Content Strategy</div><div class="j-detail-value">Recap E1–E3 highlights (numbers, proof, tools). Frame inaction as opportunity cost — "every day you wait is a day your network trades without earning you commissions." Patient but persistent tone, no artificial deadlines.</div></div>
+      <div class="j-detail-field"><div class="j-detail-label">Psychology</div><div class="j-detail-value">Scarcity — loss aversion, not fake deadlines</div></div>
       <div class="j-detail-field"><div class="j-detail-label">Next</div><div class="j-detail-value">E5 follows immediately (Day 7) — no rest day. Back-to-back closing punch.</div></div>
     </div>
   </div>
@@ -634,69 +651,167 @@ body { font-family:var(--font); color:var(--dark); background:var(--bg); line-he
         <div class="tf-line"></div>
       </div>
 
-      <!-- Row 1: E1 + E2 + E3 -->
-      <div class="tf-grid tf-grid-3" style="margin-bottom:12px;">
-        <div class="tf-item" style="border-top:3px solid var(--green);">
-          <div class="tf-item-top">
-            <div class="tf-num" style="background:var(--green);">E1</div>
-            <div class="tf-name">The Money Hook</div>
-          </div>
-          <div class="tf-props">
-            <div class="tf-prop"><span class="tf-prop-key" style="color:var(--green);">Timing</span><span class="tf-prop-val">Day 0 — immediately on entry</span></div>
-            <div class="tf-prop"><span class="tf-prop-key" style="color:var(--green);">Trigger</span><span class="tf-prop-val">Client enters journey</span></div>
-            <div class="tf-prop"><span class="tf-prop-key" style="color:var(--green);">Exit If</span><span class="tf-prop-val">Client converts to IB at any point</span></div>
-          </div>
-        </div>
-        <div class="tf-item" style="border-top:3px solid var(--green);">
-          <div class="tf-item-top">
-            <div class="tf-num" style="background:var(--green);">E2</div>
-            <div class="tf-name">Social Proof</div>
-          </div>
-          <div class="tf-props">
-            <div class="tf-prop"><span class="tf-prop-key" style="color:var(--green);">Timing</span><span class="tf-prop-val">Day 2 — entry + 2 days</span></div>
-            <div class="tf-prop"><span class="tf-prop-key" style="color:var(--green);">Trigger</span><span class="tf-prop-val">Not converted after E1 + rest day</span></div>
-            <div class="tf-prop"><span class="tf-prop-key" style="color:var(--green);">Rest</span><span class="tf-prop-val">Day 1 — no email (intentional)</span></div>
-          </div>
-        </div>
-        <div class="tf-item" style="border-top:3px solid var(--green);">
-          <div class="tf-item-top">
-            <div class="tf-num" style="background:var(--green);">E3</div>
-            <div class="tf-name">Objection Handling</div>
-          </div>
-          <div class="tf-props">
-            <div class="tf-prop"><span class="tf-prop-key" style="color:var(--green);">Timing</span><span class="tf-prop-val">Day 4 — entry + 4 days</span></div>
-            <div class="tf-prop"><span class="tf-prop-key" style="color:var(--green);">Trigger</span><span class="tf-prop-val">Not converted after E2 + rest day</span></div>
-            <div class="tf-prop"><span class="tf-prop-key" style="color:var(--green);">Rest</span><span class="tf-prop-val">Day 3 — no email (intentional)</span></div>
-          </div>
-        </div>
-      </div>
+      <div class="tf2-grid">
 
-      <!-- Row 2: E4 + E5 -->
-      <div class="tf-grid tf-grid-2" style="max-width:66%;">
-        <div class="tf-item" style="border-top:3px solid #e8833a;">
-          <div class="tf-item-top">
-            <div class="tf-num" style="background:#e8833a;">E4</div>
-            <div class="tf-name">Urgency</div>
+        <!-- E1 -->
+        <div class="tf2-card">
+          <div class="tf2-card-header" style="background:linear-gradient(135deg,#ECFDF5,#FFFFFF);">
+            <div class="tf2-badge" style="background:var(--green);">E1</div>
+            <div class="tf2-title-block">
+              <div class="tf2-title">The Money Hook</div>
+              <div class="tf2-stage">Stage 1 · Awareness</div>
+            </div>
+            <div class="tf2-tag" style="background:var(--green-light);color:var(--green);">Day 0</div>
           </div>
-          <div class="tf-props">
-            <div class="tf-prop"><span class="tf-prop-key" style="color:#e8833a;">Timing</span><span class="tf-prop-val">Day 6 — entry + 6 days</span></div>
-            <div class="tf-prop"><span class="tf-prop-key" style="color:#e8833a;">Trigger</span><span class="tf-prop-val">Not converted after E3 + rest day</span></div>
-            <div class="tf-prop"><span class="tf-prop-key" style="color:#e8833a;">Rest</span><span class="tf-prop-val">Day 5 — no email (calm before close)</span></div>
-            <div class="tf-countdown-badge" style="background:#fef3c7;color:#92400e;">Urgency push begins</div>
+          <div class="tf2-body">
+            <div class="tf2-field">
+              <div class="tf2-label">📧 Subject Line</div>
+              <div class="tf2-value subject-line" style="border-left-color:var(--green);">"What would an extra $500/month look like?"</div>
+            </div>
+            <div class="tf2-field">
+              <div class="tf2-label">⏱ Send Timing</div>
+              <div class="tf2-value">Sent immediately when client enters the journey (Day 0)</div>
+            </div>
+            <div class="tf2-field">
+              <div class="tf2-label">🎯 Trigger Condition</div>
+              <div class="tf2-value">Retail client enters the journey (first email in the sequence)</div>
+            </div>
+            <div class="tf2-field">
+              <div class="tf2-label">🚪 Exit Rule</div>
+              <div class="tf2-value">Remove client from journey immediately if they register as an IB at any point</div>
+            </div>
+            <div class="tf2-footer-note" style="background:var(--green-light);color:var(--green);">✨ First touchpoint — hook with numbers</div>
           </div>
         </div>
-        <div class="tf-item" style="border-top:3px solid #d32f2f;">
-          <div class="tf-item-top">
-            <div class="tf-num" style="background:#d32f2f;">E5</div>
-            <div class="tf-name">Final Close</div>
+
+        <!-- E2 -->
+        <div class="tf2-card">
+          <div class="tf2-card-header" style="background:linear-gradient(135deg,#ECFDF5,#FFFFFF);">
+            <div class="tf2-badge" style="background:var(--green);">E2</div>
+            <div class="tf2-title-block">
+              <div class="tf2-title">Social Proof</div>
+              <div class="tf2-stage">Stage 2 · Consideration</div>
+            </div>
+            <div class="tf2-tag" style="background:var(--green-light);color:var(--green);">Day 2</div>
           </div>
-          <div class="tf-props">
-            <div class="tf-prop"><span class="tf-prop-key" style="color:#d32f2f;">Timing</span><span class="tf-prop-val">Day 7 — entry + 7 days (back-to-back with E4)</span></div>
-            <div class="tf-prop"><span class="tf-prop-key" style="color:#d32f2f;">Trigger</span><span class="tf-prop-val">Not converted after E4 — no rest day</span></div>
-            <div class="tf-prop"><span class="tf-prop-key" style="color:#d32f2f;">Post</span><span class="tf-prop-val">30-day cool-down → E1–E5 cycle restarts</span></div>
-            <div class="tf-countdown-badge" style="background:#fee2e2;color:#991b1b;">⚠ Final email — last chance</div>
+          <div class="tf2-body">
+            <div class="tf2-field">
+              <div class="tf2-label">📧 Subject Line</div>
+              <div class="tf2-value subject-line" style="border-left-color:var(--green);">"They started just like you — now they earn daily"</div>
+            </div>
+            <div class="tf2-field">
+              <div class="tf2-label">⏱ Send Timing</div>
+              <div class="tf2-value">Sent 2 days after client entered the journey — 1-day rest gap after E1 (Day 1 = no email)</div>
+            </div>
+            <div class="tf2-field">
+              <div class="tf2-label">🎯 Trigger Condition</div>
+              <div class="tf2-value">Client has not registered as IB after E1 + waited through 1-day rest</div>
+            </div>
+            <div class="tf2-field">
+              <div class="tf2-label">🚪 Exit Rule</div>
+              <div class="tf2-value">Remove client from journey immediately if they register as an IB at any point</div>
+            </div>
+            <div class="tf2-footer-note" style="background:var(--grey-50);color:var(--grey-500);">💤 1-day rest before this email</div>
           </div>
         </div>
+
+        <!-- E3 -->
+        <div class="tf2-card">
+          <div class="tf2-card-header" style="background:linear-gradient(135deg,#ECFDF5,#FFFFFF);">
+            <div class="tf2-badge" style="background:var(--green);">E3</div>
+            <div class="tf2-title-block">
+              <div class="tf2-title">Objection Handling</div>
+              <div class="tf2-stage">Stage 3 · Confidence</div>
+            </div>
+            <div class="tf2-tag" style="background:var(--green-light);color:var(--green);">Day 4</div>
+          </div>
+          <div class="tf2-body">
+            <div class="tf2-field">
+              <div class="tf2-label">📧 Subject Line</div>
+              <div class="tf2-value subject-line" style="border-left-color:var(--green);">"Think it's complicated? Here's what it actually takes"</div>
+            </div>
+            <div class="tf2-field">
+              <div class="tf2-label">⏱ Send Timing</div>
+              <div class="tf2-value">Sent 4 days after client entered the journey — 1-day rest gap after E2 (Day 3 = no email)</div>
+            </div>
+            <div class="tf2-field">
+              <div class="tf2-label">🎯 Trigger Condition</div>
+              <div class="tf2-value">Client has not registered as IB after E2 + waited through 1-day rest</div>
+            </div>
+            <div class="tf2-field">
+              <div class="tf2-label">🚪 Exit Rule</div>
+              <div class="tf2-value">Remove client from journey immediately if they register as an IB at any point</div>
+            </div>
+            <div class="tf2-footer-note" style="background:var(--grey-50);color:var(--grey-500);">💤 1-day rest before this email</div>
+          </div>
+        </div>
+
+        <!-- E4 -->
+        <div class="tf2-card">
+          <div class="tf2-card-header" style="background:linear-gradient(135deg,#FFF7ED,#FFFFFF);">
+            <div class="tf2-badge" style="background:#e8833a;">E4</div>
+            <div class="tf2-title-block">
+              <div class="tf2-title">Urgency</div>
+              <div class="tf2-stage">Stage 4 · Scarcity</div>
+            </div>
+            <div class="tf2-tag" style="background:#fef3c7;color:#92400e;">Day 6</div>
+          </div>
+          <div class="tf2-body">
+            <div class="tf2-field">
+              <div class="tf2-label">📧 Subject Line</div>
+              <div class="tf2-value subject-line" style="border-left-color:#e8833a;">"%%First_Name%%, your spot is still open"</div>
+            </div>
+            <div class="tf2-field">
+              <div class="tf2-label">⏱ Send Timing</div>
+              <div class="tf2-value">Sent 6 days after client entered the journey — 1-day rest gap after E3 (Day 5 = no email)</div>
+            </div>
+            <div class="tf2-field">
+              <div class="tf2-label">🎯 Trigger Condition</div>
+              <div class="tf2-value">Client has not registered as IB after E3 + waited through 1-day rest</div>
+            </div>
+            <div class="tf2-field">
+              <div class="tf2-label">🚪 Exit Rule</div>
+              <div class="tf2-value">Remove client from journey immediately if they register as an IB at any point</div>
+            </div>
+            <div class="tf2-footer-note" style="background:#fef3c7;color:#92400e;">⚡ Urgency push — E5 follows tomorrow</div>
+          </div>
+        </div>
+
+        <!-- E5 — full width -->
+        <div class="tf2-card" style="grid-column:1 / -1;">
+          <div class="tf2-card-header" style="background:linear-gradient(135deg,#FEF2F2,#FFFFFF);">
+            <div class="tf2-badge" style="background:#d32f2f;">E5</div>
+            <div class="tf2-title-block">
+              <div class="tf2-title">Final Close</div>
+              <div class="tf2-stage">Stage 5 · Decision · Final Email</div>
+            </div>
+            <div class="tf2-tag" style="background:#fee2e2;color:#991b1b;">Day 7 · Final</div>
+          </div>
+          <div class="tf2-body" style="display:grid;grid-template-columns:1fr 1fr;gap:14px 24px;">
+            <div class="tf2-field">
+              <div class="tf2-label">📧 Subject Line</div>
+              <div class="tf2-value subject-line" style="border-left-color:#d32f2f;">"%%First_Name%%, final reminder for now"</div>
+            </div>
+            <div class="tf2-field">
+              <div class="tf2-label">⏱ Send Timing</div>
+              <div class="tf2-value">Sent 7 days after client entered the journey — <strong>back-to-back with E4, no rest day</strong> (intentional closing punch)</div>
+            </div>
+            <div class="tf2-field">
+              <div class="tf2-label">🎯 Trigger Condition</div>
+              <div class="tf2-value">Client has not registered as IB after E4 — sent immediately next day (no rest gap)</div>
+            </div>
+            <div class="tf2-field">
+              <div class="tf2-label">🚪 Exit Rule</div>
+              <div class="tf2-value">Remove client from journey immediately if they register as an IB at any point</div>
+            </div>
+            <div class="tf2-field" style="grid-column:1 / -1;">
+              <div class="tf2-label">🔄 Post-Email Logic</div>
+              <div class="tf2-value">If client still not converted after E5 → enter <strong>30-day cool-down</strong> → E1–E5 cycle automatically restarts (monthly re-blast for Phase 1.0). Phase 2.0 will introduce segmented, personalised re-entry.</div>
+            </div>
+            <div class="tf2-footer-note" style="background:#fee2e2;color:#991b1b;grid-column:1 / -1;">⚠ Final email in the cycle — then 30-day cool-down before re-blast</div>
+          </div>
+        </div>
+
       </div>
     </div>
 
@@ -983,33 +1098,12 @@ Let us address the three most common concerns we hear:</div>
     <!-- EN -->
     <div id="e4-en" class="lang-content active">
       <div class="email-body">
-        <div class="field"><div class="field-row"><span class="field-label">Email Subject</span><span class="field-value subject">Option A: "Your enhanced rate expires in 5 days" · Option B: "%%First_Name%%, your spot is still open"</span></div></div>
-        <div class="field"><div class="field-row"><span class="field-label">Preview Text</span><span class="field-value">Option A: Lock in $12/lot before the window closes · Option B: Every day you wait is a day you're not earning</span></div></div>
+        <div class="field"><div class="field-row"><span class="field-label">Email Subject</span><span class="field-value subject">%%First_Name%%, your spot is still open</span></div></div>
+        <div class="field"><div class="field-row"><span class="field-label">Preview Text</span><span class="field-value">Every day you wait is a day you're not earning</span></div></div>
         <div class="field"><div class="field-row"><span class="field-label">Day</span><span class="field-value">Day 6 — Sent 2 days after E3 (Day 5 is a rest day) · Back-to-back with E5 tomorrow</span></div></div>
-        <div class="field"><div class="field-row"><span class="field-label">Objective</span><span class="field-value">Create a reason to act NOW — either through a time-limited incentive (A) or opportunity cost framing (B)</span></div></div>
-        <div class="field"><div class="field-row"><span class="field-label">CTA</span><span class="field-value">Option A: "Lock In Your Rate" · Option B: "Start Earning Today"</span></div></div>
-        <div class="field"><div class="field-row"><span class="field-label">Note</span><span class="field-value" style="color:var(--amber); font-weight:600;">⚠ Choose Option A or B based on whether business can support an onboarding incentive. Confirm with Ryan.</span></div></div>
+        <div class="field"><div class="field-row"><span class="field-label">Objective</span><span class="field-value">Create urgency through opportunity cost framing — loss aversion without fake deadlines</span></div></div>
+        <div class="field"><div class="field-row"><span class="field-label">CTA</span><span class="field-value">Start Earning Today</span></div></div>
 
-        <!-- OPTION A -->
-        <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:var(--green); margin:20px 0 8px; padding:6px 12px; background:var(--green-light); border-radius:6px; display:inline-block;">Option A — With Onboarding Incentive</div>
-        <div class="email-preview">
-          <div class="banner">Your Enhanced Rate Expires in 5 Days</div>
-          <div class="salutation">Dear [Name],</div>
-          <div class="content-block">We've been showing you how TMGM's IB program works — the earning potential, the proof, the tools. Now here's something we haven't mentioned yet:
-
-For a limited time, new IBs who sign up this month get an enhanced commission rate.</div>
-          <div class="content-block" style="font-weight:700; font-size:16px; color:var(--dark);">🔥 $12/lot for your first 90 days</div>
-          <div class="content-block">That's higher than our standard $8–$11/lot rate — and it's only available to the first 50 new IBs who apply this month.
-
-After 90 days, you'll move to the standard rate. But every lot your referrals trade in those first 3 months earns you more.
-
-This offer expires in 5 days. Once it's gone, it's gone.</div>
-          <a class="cta-block">Lock In Your Rate →</a>
-          <div class="disclaimer">Investing in CFDs carries significant risks and is not suitable for all investors. VFSC 40356</div>
-        </div>
-
-        <!-- OPTION B -->
-        <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:var(--blue); margin:20px 0 8px; padding:6px 12px; background:var(--blue-light); border-radius:6px; display:inline-block;">Option B — Without Incentive (Opportunity Cost)</div>
         <div class="email-preview">
           <div class="banner">[Name], Your Spot Is Still Open</div>
           <div class="salutation">Dear [Name],</div>
