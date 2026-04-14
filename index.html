@@ -118,6 +118,30 @@ body { font-family:var(--font); color:var(--dark); background:var(--bg); line-he
 .j-detail-value.highlight { color:var(--green); font-weight:600; }
 .j-detail-full { grid-column:1 / -1; }
 
+/* 5W1H Enhanced Detail Panel Sections */
+.j-detail-stage-row { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+.j-detail-stage-badge { font-size:10px; font-weight:700; padding:4px 10px; border-radius:20px; background:var(--blue-light); color:var(--blue-dark); text-transform:uppercase; letter-spacing:0.5px; }
+.j-detail-goal-box { grid-column:1 / -1; padding:14px 18px; background:linear-gradient(135deg,#FEF3C7,#FFFBEB); border:1px solid rgba(245,158,11,0.25); border-radius:10px; margin-bottom:4px; }
+.j-detail-goal-label { font-size:9px; font-weight:800; text-transform:uppercase; letter-spacing:0.8px; color:var(--amber); margin-bottom:4px; display:flex; align-items:center; gap:6px; }
+.j-detail-goal-text { font-size:14px; font-weight:600; color:var(--dark); line-height:1.5; }
+
+/* 5W1H section labels */
+.j-5w1h-label { font-size:9px; font-weight:800; text-transform:uppercase; letter-spacing:0.8px; color:var(--grey-400); display:flex; align-items:center; gap:5px; margin-bottom:2px; }
+.j-5w1h-label .j-5w1h-icon { font-size:11px; }
+
+/* Technical Setup section (for Sichen & Nick) */
+.j-tech-section { grid-column:1 / -1; margin-top:10px; padding:14px 18px; background:linear-gradient(135deg,#F5F3FF,#FAFBFC); border:1px solid rgba(139,92,246,0.2); border-radius:10px; }
+.j-tech-header { display:flex; align-items:center; gap:8px; margin-bottom:10px; padding-bottom:8px; border-bottom:1px dashed rgba(139,92,246,0.25); }
+.j-tech-title { font-size:10px; font-weight:800; text-transform:uppercase; letter-spacing:0.8px; color:var(--purple); }
+.j-tech-subtitle { font-size:10px; color:var(--grey-500); font-style:italic; }
+.j-tech-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px 16px; }
+.j-tech-field { display:flex; flex-direction:column; gap:2px; }
+.j-tech-field.full { grid-column:1 / -1; }
+.j-tech-label { font-size:9px; font-weight:700; color:var(--purple); text-transform:uppercase; letter-spacing:0.5px; }
+.j-tech-value { font-size:12px; color:var(--grey-700); line-height:1.5; font-family:'SF Mono', Monaco, Consolas, monospace; }
+.j-tech-value.plain { font-family:var(--font); }
+.j-tech-value code { background:rgba(139,92,246,0.1); padding:1px 6px; border-radius:3px; color:var(--purple); font-size:11px; }
+
 /* FLOWCHART CARD */
 .fc-card { background:var(--white); border-radius:var(--radius-lg); border:1px solid var(--grey-200); box-shadow:var(--shadow-sm); margin-bottom:40px; overflow:hidden; }
 .fc-header { padding:20px 28px; display:flex; align-items:center; justify-content:space-between; cursor:pointer; user-select:none; border-bottom:1px solid transparent; transition:border-color 0.2s; }
@@ -131,13 +155,49 @@ body { font-family:var(--font); color:var(--dark); background:var(--bg); line-he
 .expand-hint { font-size:11px; color:var(--grey-400); margin-left:8px; font-weight:500; font-style:italic; transition:opacity 0.3s; }
 
 /* FLOWCHART LAYOUT — HUBSPOT BRANCHING (COMPACT) */
-.fc-flow { padding:24px 28px; display:flex; flex-direction:column; align-items:center; gap:0; }
+.fc-flow { padding:24px 28px 80px; display:flex; flex-direction:column; align-items:center; gap:0; }
 
 .fc-box { padding:10px 20px; border-radius:10px; text-align:center; position:relative; }
 .fc-box-title { font-size:12px; font-weight:700; color:var(--dark); }
 .fc-box-sub { font-size:10px; color:var(--grey-500); margin-top:1px; }
 .fc-entry { background:var(--blue-light); border:1.5px solid rgba(59,130,246,0.25); min-width:320px; }
 .fc-entry .fc-box-title { color:var(--blue-dark); font-size:13px; }
+
+/* UPSTREAM BOXES (pre-journey pipeline) */
+.fc-upstream { background:linear-gradient(135deg,#EFF6FF,#F5F3FF); border:1.5px dashed rgba(59,130,246,0.35); min-width:320px; padding:10px 20px; }
+.fc-upstream .fc-box-title { color:var(--blue); font-size:12px; font-weight:700; }
+.fc-upstream .fc-box-sub { color:var(--grey-500); }
+.fc-upstream-owner { font-size:9px; color:var(--purple); font-weight:600; margin-top:3px; font-style:italic; }
+.fc-upstream-label { font-size:10px; font-weight:800; color:var(--blue); text-transform:uppercase; letter-spacing:1px; padding:4px 12px; background:var(--blue-light); border-radius:20px; margin-bottom:8px; display:inline-block; }
+.fc-upstream-divider { width:80%; max-width:400px; height:1px; background:linear-gradient(90deg,transparent,var(--grey-300),transparent); margin:14px auto 6px; position:relative; }
+.fc-upstream-divider::after { content:'↓ matches filter → enters journey'; position:absolute; top:-6px; left:50%; transform:translateX(-50%); background:var(--white); padding:0 10px; font-size:9px; color:var(--grey-500); font-style:italic; white-space:nowrap; }
+
+/* FLOWCHART BOX TOOLTIPS */
+.fc-box { position:relative; }
+.fc-box.fc-clickable { cursor:pointer; transition:transform 0.2s, box-shadow 0.2s; }
+.fc-box.fc-clickable:hover { transform:translateY(-2px); box-shadow:0 4px 12px rgba(0,0,0,0.08); z-index:200; }
+.fc-box:hover, .fc-decision:hover, .fc-exit-box:hover { z-index:200; }
+.fc-decision { position:relative; cursor:default; }
+.fc-exit-box { position:relative; cursor:default; }
+.fc-branch, .fc-branch-arm, .fc-flow { position:relative; }
+
+.fc-tooltip {
+  position:absolute; bottom:calc(100% + 8px); left:50%; transform:translateX(-50%);
+  background:var(--grey-900); color:var(--white); font-size:11.5px; font-weight:500;
+  line-height:1.5; padding:10px 14px; border-radius:8px; white-space:normal;
+  width:260px; text-align:left; opacity:0; visibility:hidden;
+  transition:opacity 0.2s, visibility 0.2s; pointer-events:none; z-index:9999;
+  box-shadow:0 10px 15px rgba(0,0,0,0.15), 0 4px 6px rgba(0,0,0,0.08);
+}
+.fc-tooltip::after {
+  content:''; position:absolute; top:100%; left:50%; transform:translateX(-50%);
+  border:6px solid transparent; border-top-color:var(--grey-900);
+}
+.fc-tooltip.tip-below { bottom:auto; top:calc(100% + 8px); }
+.fc-tooltip.tip-below::after { top:auto; bottom:100%; border-top-color:transparent; border-bottom-color:var(--grey-900); }
+.fc-box:hover .fc-tooltip, .fc-decision:hover .fc-tooltip, .fc-exit-box:hover .fc-tooltip { opacity:1; visibility:visible; }
+.fc-tooltip strong { color:#FCD34D; }
+.fc-tooltip .fc-tip-hint { display:block; margin-top:6px; padding-top:6px; border-top:1px solid rgba(255,255,255,0.15); font-size:10px; font-style:italic; color:#9CA3AF; }
 .fc-email { background:var(--green-light); border:1.5px solid rgba(16,185,129,0.25); min-width:240px; }
 .fc-email .fc-box-title { color:var(--green); }
 .fc-rest { background:var(--grey-50); border:1.5px dashed var(--grey-300); padding:8px 16px; }
@@ -218,6 +278,48 @@ body { font-family:var(--font); color:var(--dark); background:var(--bg); line-he
 
 .tf-tbd { padding:10px 14px; border-radius:8px; background:var(--amber-light); border:1px solid rgba(245,158,11,0.15); font-size:11.5px; color:var(--amber); font-weight:600; margin-top:6px; }
 
+/* ENTRY CRITERIA CARD V2 — CONFIRMED */
+.ec-card { border-radius:14px; overflow:hidden; background:var(--white); border:1.5px solid rgba(59,130,246,0.25); box-shadow:0 2px 8px rgba(0,0,0,0.04); }
+.ec-header { padding:16px 20px; background:linear-gradient(135deg,#EFF6FF,#FFFFFF); border-bottom:1px solid var(--grey-100); display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+.ec-header-left { display:flex; align-items:center; gap:12px; }
+.ec-header-icon { width:40px; height:40px; border-radius:10px; background:var(--blue); color:white; display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0; }
+.ec-header-title { font-size:15px; font-weight:800; color:var(--dark); }
+.ec-header-sub { font-size:11px; color:var(--grey-500); margin-top:2px; }
+.ec-status-badge { font-size:10px; font-weight:700; padding:5px 12px; border-radius:20px; background:var(--green-light); color:var(--green); text-transform:uppercase; letter-spacing:0.5px; white-space:nowrap; }
+.ec-body { padding:20px 24px; display:flex; flex-direction:column; gap:18px; }
+.ec-row { display:grid; grid-template-columns:180px 1fr; gap:16px; align-items:start; }
+.ec-row-label { font-size:10px; font-weight:800; color:var(--blue); text-transform:uppercase; letter-spacing:0.8px; padding-top:3px; display:flex; align-items:center; gap:6px; }
+.ec-row-value { font-size:13px; color:var(--grey-700); line-height:1.6; }
+.ec-row-value strong { color:var(--dark); }
+.ec-divider { height:1px; background:var(--grey-100); margin:4px 0; }
+
+.ec-filter-list { display:flex; flex-direction:column; gap:10px; margin-top:4px; }
+.ec-filter-row { display:grid; grid-template-columns:auto 1fr; gap:12px; align-items:start; padding:10px 12px; background:var(--grey-50); border-radius:8px; border-left:3px solid var(--blue); }
+.ec-filter-syntax { font-family:'SF Mono', Monaco, Consolas, monospace; font-size:11.5px; color:var(--purple); background:rgba(139,92,246,0.08); padding:3px 8px; border-radius:4px; white-space:nowrap; font-weight:600; }
+.ec-filter-explain { font-size:12px; color:var(--grey-600); line-height:1.5; }
+
+.ec-region-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:4px; }
+.ec-region-box { padding:10px 12px; background:var(--grey-50); border-radius:8px; border-top:3px solid; }
+.ec-region-box.sea { border-top-color:var(--green); }
+.ec-region-box.en { border-top-color:var(--blue); }
+.ec-region-box.mena { border-top-color:var(--amber); }
+.ec-region-label { font-size:9px; font-weight:800; text-transform:uppercase; letter-spacing:0.8px; margin-bottom:4px; }
+.ec-region-box.sea .ec-region-label { color:var(--green); }
+.ec-region-box.en .ec-region-label { color:var(--blue); }
+.ec-region-box.mena .ec-region-label { color:var(--amber); }
+.ec-region-countries { font-size:11px; color:var(--grey-700); line-height:1.6; }
+
+.ec-exclusions { display:flex; flex-wrap:wrap; gap:6px; margin-top:4px; }
+.ec-exclusion-tag { font-size:11px; font-weight:600; padding:4px 10px; border-radius:20px; background:var(--red-light); color:var(--red); }
+
+.ec-footer { padding:12px 20px; background:linear-gradient(135deg,#F5F3FF,#FAFBFC); border-top:1px solid var(--grey-100); display:flex; align-items:center; gap:10px; font-size:11px; color:var(--grey-600); }
+.ec-footer strong { color:var(--purple); }
+
+@media(max-width:768px) {
+  .ec-row { grid-template-columns:1fr; gap:6px; }
+  .ec-region-grid { grid-template-columns:1fr; }
+}
+
 /* TRIGGER V2 — SQUARE CARDS 2 PER ROW */
 .tf2-grid { display:grid; grid-template-columns:1fr 1fr; gap:24px 14px; }
 .tf2-card { border-radius:14px; padding:0; overflow:hidden; background:var(--white); border:1px solid var(--grey-200); transition:box-shadow 0.2s, transform 0.2s; display:flex; flex-direction:column; }
@@ -282,6 +384,82 @@ body { font-family:var(--font); color:var(--dark); background:var(--bg); line-he
 .lang-placeholder { padding:40px 28px; text-align:center; }
 .lang-placeholder-text { font-size:13px; color:var(--grey-400); font-style:italic; }
 
+/* OPEN ITEMS / NEXT STEPS CARD */
+.oi-card { background:var(--white); border-radius:var(--radius-lg); border:1px solid var(--grey-200); box-shadow:var(--shadow-sm); margin-bottom:40px; overflow:hidden; }
+.oi-header { padding:20px 28px; display:flex; align-items:center; justify-content:space-between; cursor:pointer; user-select:none; border-bottom:1px solid transparent; transition:border-color 0.2s; background:linear-gradient(135deg,#FFFBEB,#FFFFFF); }
+.oi-card.expanded .oi-header { border-bottom-color:var(--grey-100); }
+.oi-card.expanded .oi-toggle { background:#CC1042; color:white; }
+.oi-card.expanded .oi-toggle svg { transform:rotate(180deg); }
+.oi-card.expanded .expand-hint { opacity:0; pointer-events:none; }
+.oi-toggle { width:28px; height:28px; border-radius:6px; background:var(--grey-100); display:flex; align-items:center; justify-content:center; color:var(--grey-500); font-size:12px; transition:all 0.3s; flex-shrink:0; }
+.oi-body { max-height:0; overflow:hidden; transition:max-height 0.5s ease; }
+.oi-card.expanded .oi-body { max-height:5000px; }
+.oi-content { padding:24px 28px; }
+
+.oi-summary { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-bottom:28px; }
+.oi-stat { padding:14px 16px; border-radius:10px; text-align:center; }
+.oi-stat.done { background:var(--green-light); border:1px solid rgba(16,185,129,0.2); }
+.oi-stat.pending { background:var(--amber-light); border:1px solid rgba(245,158,11,0.2); }
+.oi-stat.blocked { background:var(--red-light); border:1px solid rgba(239,68,68,0.2); }
+.oi-stat.internal { background:var(--blue-light); border:1px solid rgba(59,130,246,0.2); }
+.oi-stat-num { font-size:24px; font-weight:800; line-height:1; }
+.oi-stat.done .oi-stat-num { color:var(--green); }
+.oi-stat.pending .oi-stat-num { color:var(--amber); }
+.oi-stat.blocked .oi-stat-num { color:var(--red); }
+.oi-stat.internal .oi-stat-num { color:var(--blue); }
+.oi-stat-label { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; margin-top:4px; }
+.oi-stat.done .oi-stat-label { color:var(--green); }
+.oi-stat.pending .oi-stat-label { color:var(--amber); }
+.oi-stat.blocked .oi-stat-label { color:var(--red); }
+.oi-stat.internal .oi-stat-label { color:var(--blue); }
+
+.oi-section { margin-bottom:28px; }
+.oi-section:last-child { margin-bottom:0; }
+.oi-section-label { display:flex; align-items:center; gap:10px; margin-bottom:14px; }
+.oi-section-dot { width:10px; height:10px; border-radius:50%; flex-shrink:0; }
+.oi-section-title { font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:1px; color:var(--grey-500); }
+.oi-section-line { flex:1; height:1px; background:var(--grey-200); }
+
+/* SQUARE CARD GRID — 3 PER ROW */
+.oi-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+.oi-sq-card { border-radius:12px; padding:0; overflow:hidden; background:var(--white); border:1px solid var(--grey-200); transition:box-shadow 0.2s, transform 0.2s; display:flex; flex-direction:column; min-height:180px; }
+.oi-sq-card:hover { box-shadow:0 4px 12px rgba(0,0,0,0.08); transform:translateY(-2px); }
+.oi-sq-card.done { border-top:3px solid var(--green); }
+.oi-sq-card.pending { border-top:3px solid var(--amber); }
+.oi-sq-card.blocked { border-top:3px solid var(--red); }
+
+.oi-sq-header { padding:12px 16px; display:flex; align-items:center; justify-content:space-between; gap:8px; border-bottom:1px solid var(--grey-100); }
+.oi-sq-card.done .oi-sq-header { background:linear-gradient(135deg,#ECFDF5,#FFFFFF); }
+.oi-sq-card.pending .oi-sq-header { background:linear-gradient(135deg,#FFFBEB,#FFFFFF); }
+.oi-sq-card.blocked .oi-sq-header { background:linear-gradient(135deg,#FEF2F2,#FFFFFF); }
+
+.oi-sq-status { font-size:10px; font-weight:800; padding:4px 10px; border-radius:20px; text-transform:uppercase; letter-spacing:0.5px; }
+.oi-sq-card.done .oi-sq-status { background:var(--green); color:white; }
+.oi-sq-card.pending .oi-sq-status { background:var(--amber); color:white; }
+.oi-sq-card.blocked .oi-sq-status { background:var(--red); color:white; }
+
+.oi-sq-body { padding:14px 16px; flex:1; display:flex; flex-direction:column; gap:8px; }
+.oi-sq-title { font-size:13px; font-weight:700; color:var(--dark); line-height:1.35; }
+.oi-sq-desc { font-size:11.5px; color:var(--grey-600); line-height:1.55; flex:1; }
+.oi-sq-desc code { font-family:'SF Mono', Monaco, Consolas, monospace; font-size:10px; background:rgba(0,0,0,0.05); padding:1px 5px; border-radius:3px; color:var(--purple); }
+
+.oi-item-owner { font-size:10px; font-weight:700; padding:4px 10px; border-radius:20px; white-space:nowrap; }
+.oi-owner-lucas { background:var(--blue-light); color:var(--blue-dark); }
+.oi-owner-ryan { background:var(--purple-light); color:var(--purple); }
+.oi-owner-sichen { background:var(--green-light); color:var(--green); }
+.oi-owner-nick { background:#FEE2E2; color:#991b1b; }
+.oi-owner-data { background:#FEF3C7; color:#92400e; }
+.oi-owner-compliance { background:var(--grey-100); color:var(--grey-600); }
+.oi-owner-design { background:#FCE7F3; color:#9D174D; }
+
+@media(max-width:1024px) {
+  .oi-grid { grid-template-columns:repeat(2,1fr); }
+}
+@media(max-width:768px) {
+  .oi-summary { grid-template-columns:repeat(2,1fr); }
+  .oi-grid { grid-template-columns:1fr; }
+}
+
 /* RESPONSIVE */
 @media(max-width:768px) {
   .header { padding:16px 20px; }
@@ -327,7 +505,7 @@ body { font-family:var(--font); color:var(--dark); background:var(--bg); line-he
           <span class="header-badge badge-ar">AR</span>
         </div>
       </div>
-      <div class="header-phase"><strong>Phase 1.0</strong> — Mass blast to all retail clients (excl. existing IBs, ASIC, unsubscribed). No segmentation. Objective: launch the revamped journey, collect baseline data, and establish conversion benchmarks for Phase 2.0 optimisation.</div>
+      <div class="header-phase"><strong>Phase 1.0</strong> — Automated mass-blast journey (powered by SFMC, migrating to HubSpot).<br>🌏 <strong>Target:</strong> Retail clients across SEA, MENA, and EN markets (6 languages: EN, ID, KO, VN, TH, AR).<br>🚫 <strong>Hygiene exclusions only:</strong> existing IBs, unsubscribed users, closed accounts, hard bounces.<br>🎯 <strong>Objective:</strong> launch the revamped journey, collect baseline data, and establish conversion benchmarks for Phase 2.0 optimisation.</div>
     </div>
   </div>
 </div>
@@ -402,99 +580,284 @@ body { font-family:var(--font); color:var(--dark); background:var(--bg); line-he
 
   <!-- DETAIL PANELS -->
   <div id="detail-e1" class="j-detail-panel">
-    <div class="j-detail-header"><div class="j-detail-title">E1 — The Money Hook</div><button class="j-detail-close" onclick="closeDetail()">✕</button></div>
+    <div class="j-detail-header">
+      <div class="j-detail-stage-row">
+        <div class="j-detail-title">E1 — The Money Hook</div>
+        <span class="j-detail-stage-badge">Stage 1 · Awareness</span>
+      </div>
+      <button class="j-detail-close" onclick="closeDetail()">✕</button>
+    </div>
     <div class="j-detail-grid">
-      <div class="j-detail-field"><div class="j-detail-label">Sent To</div><div class="j-detail-value">All retail clients entering the journey — hooks them with earning potential to spark interest in becoming an IB</div></div>
-      <div class="j-detail-field"><div class="j-detail-label">Timing</div><div class="j-detail-value">Day 0 — sent immediately on entry</div></div>
-      <div class="j-detail-field"><div class="j-detail-label">Trigger</div><div class="j-detail-value">Retail client enters journey</div></div>
-      <div class="j-detail-field"><div class="j-detail-label">Subject Line</div><div class="j-detail-value highlight">What would an extra $500/month look like?</div></div>
-      <div class="j-detail-field"><div class="j-detail-label">CTA</div><div class="j-detail-value highlight">See How Much You Could Earn</div></div>
-      <div class="j-detail-field j-detail-full"><div class="j-detail-label">Content Strategy</div><div class="j-detail-value">Lead with specific earning scenario: "Refer 5 friends who trade 20 lots/month → earn $800–$1,100/month." State commission clearly: $8–$11 per lot, paid daily. Quick 3-step visual. One-line Finfluencer mention at bottom.</div></div>
-      <div class="j-detail-field"><div class="j-detail-label">Psychology</div><div class="j-detail-value">Curiosity — hook with numbers before education</div></div>
-      <div class="j-detail-field"><div class="j-detail-label">Exit Condition</div><div class="j-detail-value">Client converts to IB → exits journey</div></div>
+      <div class="j-detail-goal-box">
+        <div class="j-detail-goal-label">📌 Goal</div>
+        <div class="j-detail-goal-text">Plant the number in their head. Conversion isn't expected at E1 — curiosity is.</div>
+      </div>
+      <div class="j-detail-field"><div class="j-5w1h-label"><span class="j-5w1h-icon">👥</span> WHO · Sent To</div><div class="j-detail-value">All retail clients entering the journey — hooks them with earning potential to spark interest in becoming an IB</div></div>
+      <div class="j-detail-field"><div class="j-5w1h-label"><span class="j-5w1h-icon">⏰</span> WHEN · Send Timing</div><div class="j-detail-value">Day 0 — sent immediately when client matches the journey filter</div></div>
+      <div class="j-detail-field"><div class="j-5w1h-label"><span class="j-5w1h-icon">❓</span> WHY · Objective</div><div class="j-detail-value">Hook the reader with earning potential — lead with money, not education</div></div>
+      <div class="j-detail-field"><div class="j-5w1h-label"><span class="j-5w1h-icon">🧠</span> Psychology</div><div class="j-detail-value">Curiosity — hook with numbers before education</div></div>
+      <div class="j-detail-field"><div class="j-5w1h-label"><span class="j-5w1h-icon">📧</span> WHAT · Subject Line</div><div class="j-detail-value highlight">What would an extra $500/month look like?</div></div>
+      <div class="j-detail-field"><div class="j-5w1h-label"><span class="j-5w1h-icon">📨</span> Preview Text</div><div class="j-detail-value">You're already trading — now earn from your network too</div></div>
+      <div class="j-detail-field"><div class="j-5w1h-label"><span class="j-5w1h-icon">🎯</span> CTA</div><div class="j-detail-value highlight">See How Much You Could Earn</div></div>
+      <div class="j-detail-field"><div class="j-5w1h-label"><span class="j-5w1h-icon">🚪</span> Exit Condition</div><div class="j-detail-value">Client converts to IB → exits journey immediately</div></div>
+      <div class="j-detail-field j-detail-full"><div class="j-5w1h-label"><span class="j-5w1h-icon">📝</span> Content Strategy</div><div class="j-detail-value">Lead with specific earning scenario: "Refer 5 friends who trade 20 lots/month → earn $800–$1,100/month." State commission clearly: $8–$11 per lot, paid daily. Quick 3-step visual. One-line Finfluencer mention at bottom.</div></div>
+      <div class="j-tech-section">
+        <div class="j-tech-header">
+          <div class="j-tech-title">⚙️ HOW · Technical Setup</div>
+          <div class="j-tech-subtitle">— for Sichen & Nick (SFMC, migrating to HubSpot)</div>
+        </div>
+        <div class="j-tech-grid">
+          <div class="j-tech-field"><div class="j-tech-label">📊 Data Source</div><div class="j-tech-value plain">MasterDataExtension (SFMC)</div></div>
+          <div class="j-tech-field"><div class="j-tech-label">🔄 Trigger Source</div><div class="j-tech-value plain">Automated filter — client matches Phase 1.0 entry criteria</div></div>
+          <div class="j-tech-field"><div class="j-tech-label">⏱ Wait Time</div><div class="j-tech-value plain">None — sends immediately on filter match</div></div>
+          <div class="j-tech-field"><div class="j-tech-label">✓ Pre-Send Check</div><div class="j-tech-value plain">N/A (first email in sequence)</div></div>
+          <div class="j-tech-field full"><div class="j-tech-label">🗂 Data Fields Checked</div><div class="j-tech-value"><code>Registration_Time</code> <code>ID_Verified</code> <code>Is_IB</code> <code>Member_Lead_Source</code> <code>MailingCountry</code></div></div>
+          <div class="j-tech-field full"><div class="j-tech-label">🚪 Exit Trigger (monitored throughout journey)</div><div class="j-tech-value"><code>Is_IB</code> changes from <code>false</code> → <code>true</code> (client registers as IB)</div></div>
+        </div>
+      </div>
     </div>
   </div>
 
   <div id="detail-d1" class="j-detail-panel">
-    <div class="j-detail-header"><div class="j-detail-title">Day 1 — Rest Day</div><button class="j-detail-close" onclick="closeDetail()">✕</button></div>
+    <div class="j-detail-header">
+      <div class="j-detail-stage-row">
+        <div class="j-detail-title">Day 1 — Rest Day</div>
+        <span class="j-detail-stage-badge" style="background:var(--grey-100);color:var(--grey-500);">Intentional Pause</span>
+      </div>
+      <button class="j-detail-close" onclick="closeDetail()">✕</button>
+    </div>
     <div class="j-detail-grid">
-      <div class="j-detail-field"><div class="j-detail-label">Timing</div><div class="j-detail-value">Day 1 — 1 day after E1</div></div>
-      <div class="j-detail-field"><div class="j-detail-label">Type</div><div class="j-detail-value">No email — intentional rest day</div></div>
-      <div class="j-detail-field j-detail-full"><div class="j-detail-label">Strategic Purpose</div><div class="j-detail-value">Let E1's money hook sit with the reader. The earning scenario ($800–$1,100/month) needs time to process. Sending another email immediately would feel pushy and dilute the impact of the numbers.</div></div>
+      <div class="j-detail-goal-box" style="background:linear-gradient(135deg,#F3F4F6,#FAFBFC);border-color:var(--grey-300);">
+        <div class="j-detail-goal-label" style="color:var(--grey-500);">📌 Purpose</div>
+        <div class="j-detail-goal-text">Let E1's money hook sink in. The number needs time to become a "what if?" in the reader's head.</div>
+      </div>
+      <div class="j-detail-field"><div class="j-5w1h-label"><span class="j-5w1h-icon">⏰</span> WHEN</div><div class="j-detail-value">Day 1 — 1 day after E1 sent</div></div>
+      <div class="j-detail-field"><div class="j-5w1h-label"><span class="j-5w1h-icon">📭</span> Type</div><div class="j-detail-value">No email — intentional rest day</div></div>
+      <div class="j-detail-field j-detail-full"><div class="j-5w1h-label"><span class="j-5w1h-icon">🧠</span> Reader's State of Mind</div><div class="j-detail-value">The earning scenario ($800–$1,100/month) is still fresh. Reader is thinking "could this actually work for me?" Sending another email immediately would feel pushy and dilute the impact of the numbers.</div></div>
+      <div class="j-tech-section">
+        <div class="j-tech-header">
+          <div class="j-tech-title">⚙️ HOW · Technical Setup</div>
+          <div class="j-tech-subtitle">— for Sichen & Nick</div>
+        </div>
+        <div class="j-tech-grid">
+          <div class="j-tech-field"><div class="j-tech-label">🔄 Journey Step</div><div class="j-tech-value plain">Wait / Timer step (no email activity)</div></div>
+          <div class="j-tech-field"><div class="j-tech-label">⏱ Duration</div><div class="j-tech-value plain">24 hours</div></div>
+          <div class="j-tech-field full"><div class="j-tech-label">🚪 Exit Check During Wait</div><div class="j-tech-value"><code>Is_IB</code> = <code>true</code>? → exit journey immediately (don't wait for E2)</div></div>
+        </div>
+      </div>
     </div>
   </div>
 
   <div id="detail-e2" class="j-detail-panel">
-    <div class="j-detail-header"><div class="j-detail-title">E2 — Social Proof</div><button class="j-detail-close" onclick="closeDetail()">✕</button></div>
+    <div class="j-detail-header">
+      <div class="j-detail-stage-row">
+        <div class="j-detail-title">E2 — Social Proof</div>
+        <span class="j-detail-stage-badge">Stage 2 · Consideration</span>
+      </div>
+      <button class="j-detail-close" onclick="closeDetail()">✕</button>
+    </div>
     <div class="j-detail-grid">
-      <div class="j-detail-field"><div class="j-detail-label">Sent To</div><div class="j-detail-value">Retail clients who haven't converted after E1 — shows real earning scenarios and TMGM advantages to build trust</div></div>
-      <div class="j-detail-field"><div class="j-detail-label">Timing</div><div class="j-detail-value">Day 2 — 2 days after entry</div></div>
-      <div class="j-detail-field"><div class="j-detail-label">Trigger</div><div class="j-detail-value">Not converted after E1 + rest day</div></div>
-      <div class="j-detail-field"><div class="j-detail-label">Subject Line</div><div class="j-detail-value highlight">They started just like you — now they earn daily</div></div>
-      <div class="j-detail-field"><div class="j-detail-label">CTA</div><div class="j-detail-value highlight">Start Your IB Application</div></div>
-      <div class="j-detail-field j-detail-full"><div class="j-detail-label">Content Strategy</div><div class="j-detail-value">2–3 earning scenarios (Trader A/B/C with different referral sizes). Highlight TMGM differentiators: daily payouts (not weekly like XM), PAMM/MAM support, Sub-IB structure, dedicated account manager. Reinforce: "You're already trading with us."</div></div>
-      <div class="j-detail-field"><div class="j-detail-label">Psychology</div><div class="j-detail-value">Trust — prove it works for real people</div></div>
-      <div class="j-detail-field"><div class="j-detail-label">Exit Condition</div><div class="j-detail-value">Client converts to IB → exits journey</div></div>
+      <div class="j-detail-goal-box">
+        <div class="j-detail-goal-label">📌 Goal</div>
+        <div class="j-detail-goal-text">Build belief — "this could actually work for me." Prove the money hook from E1 is real with real earning scenarios.</div>
+      </div>
+      <div class="j-detail-field"><div class="j-5w1h-label"><span class="j-5w1h-icon">👥</span> WHO · Sent To</div><div class="j-detail-value">Retail clients who haven't converted after E1 — shows real earning scenarios and TMGM advantages to build trust</div></div>
+      <div class="j-detail-field"><div class="j-5w1h-label"><span class="j-5w1h-icon">⏰</span> WHEN · Send Timing</div><div class="j-detail-value">Day 2 — 2 days after client entered the journey (1-day rest gap after E1)</div></div>
+      <div class="j-detail-field"><div class="j-5w1h-label"><span class="j-5w1h-icon">❓</span> WHY · Objective</div><div class="j-detail-value">Build trust through earning scenarios and TMGM-specific differentiators — show it works for real people</div></div>
+      <div class="j-detail-field"><div class="j-5w1h-label"><span class="j-5w1h-icon">🧠</span> Psychology</div><div class="j-detail-value">Trust — prove it works for real people</div></div>
+      <div class="j-detail-field"><div class="j-5w1h-label"><span class="j-5w1h-icon">📧</span> WHAT · Subject Line</div><div class="j-detail-value highlight">They started just like you — now they earn daily</div></div>
+      <div class="j-detail-field"><div class="j-5w1h-label"><span class="j-5w1h-icon">📨</span> Preview Text</div><div class="j-detail-value">Real traders, real commissions — see how they're earning with TMGM</div></div>
+      <div class="j-detail-field"><div class="j-5w1h-label"><span class="j-5w1h-icon">🎯</span> CTA</div><div class="j-detail-value highlight">Start Your IB Application</div></div>
+      <div class="j-detail-field"><div class="j-5w1h-label"><span class="j-5w1h-icon">🚪</span> Exit Condition</div><div class="j-detail-value">Client converts to IB → exits journey immediately</div></div>
+      <div class="j-detail-field j-detail-full"><div class="j-5w1h-label"><span class="j-5w1h-icon">📝</span> Content Strategy</div><div class="j-detail-value">2–3 earning scenarios (Trader A/B/C with different referral sizes). Highlight TMGM differentiators: daily payouts (not weekly like XM), PAMM/MAM support, Sub-IB structure, dedicated account manager. Reinforce: "You're already trading with us."</div></div>
+      <div class="j-tech-section">
+        <div class="j-tech-header">
+          <div class="j-tech-title">⚙️ HOW · Technical Setup</div>
+          <div class="j-tech-subtitle">— for Sichen & Nick</div>
+        </div>
+        <div class="j-tech-grid">
+          <div class="j-tech-field"><div class="j-tech-label">🔄 Trigger Source</div><div class="j-tech-value plain">Journey step — follows E1 + 1-day wait</div></div>
+          <div class="j-tech-field"><div class="j-tech-label">⏱ Wait Time</div><div class="j-tech-value plain">48 hours from E1 send (2 days)</div></div>
+          <div class="j-tech-field"><div class="j-tech-label">✓ Pre-Send Check</div><div class="j-tech-value"><code>Is_IB</code> = <code>false</code>? If <code>true</code>, exit journey</div></div>
+          <div class="j-tech-field"><div class="j-tech-label">📊 Data Source</div><div class="j-tech-value plain">MasterDataExtension (SFMC)</div></div>
+          <div class="j-tech-field full"><div class="j-tech-label">🗂 Data Field Monitored</div><div class="j-tech-value"><code>Is_IB</code> — checked continuously for exit trigger</div></div>
+        </div>
+      </div>
     </div>
   </div>
 
   <div id="detail-d3" class="j-detail-panel">
-    <div class="j-detail-header"><div class="j-detail-title">Day 3 — Rest Day</div><button class="j-detail-close" onclick="closeDetail()">✕</button></div>
+    <div class="j-detail-header">
+      <div class="j-detail-stage-row">
+        <div class="j-detail-title">Day 3 — Rest Day</div>
+        <span class="j-detail-stage-badge" style="background:var(--grey-100);color:var(--grey-500);">Intentional Pause</span>
+      </div>
+      <button class="j-detail-close" onclick="closeDetail()">✕</button>
+    </div>
     <div class="j-detail-grid">
-      <div class="j-detail-field"><div class="j-detail-label">Timing</div><div class="j-detail-value">Day 3 — 1 day after E2</div></div>
-      <div class="j-detail-field"><div class="j-detail-label">Type</div><div class="j-detail-value">No email — intentional rest day</div></div>
-      <div class="j-detail-field j-detail-full"><div class="j-detail-label">Strategic Purpose</div><div class="j-detail-value">The reader has seen the money (E1) and the proof (E2). Give them space to consider and let doubts form naturally — so E3's objection handling lands perfectly when those doubts are top of mind.</div></div>
+      <div class="j-detail-goal-box" style="background:linear-gradient(135deg,#F3F4F6,#FAFBFC);border-color:var(--grey-300);">
+        <div class="j-detail-goal-label" style="color:var(--grey-500);">📌 Purpose</div>
+        <div class="j-detail-goal-text">Let social proof from E2 build anticipation. Reader's doubts form naturally — so E3's objection handling lands perfectly when those doubts are top of mind.</div>
+      </div>
+      <div class="j-detail-field"><div class="j-5w1h-label"><span class="j-5w1h-icon">⏰</span> WHEN</div><div class="j-detail-value">Day 3 — 1 day after E2 sent</div></div>
+      <div class="j-detail-field"><div class="j-5w1h-label"><span class="j-5w1h-icon">📭</span> Type</div><div class="j-detail-value">No email — intentional rest day</div></div>
+      <div class="j-detail-field j-detail-full"><div class="j-5w1h-label"><span class="j-5w1h-icon">🧠</span> Reader's State of Mind</div><div class="j-detail-value">The reader has seen the money (E1) and the proof (E2). Give them space to consider. Natural doubts start forming: "Do I have time?" "Do I know enough people?" "Can I actually promote this?" These doubts become the setup for E3.</div></div>
+      <div class="j-tech-section">
+        <div class="j-tech-header">
+          <div class="j-tech-title">⚙️ HOW · Technical Setup</div>
+          <div class="j-tech-subtitle">— for Sichen & Nick</div>
+        </div>
+        <div class="j-tech-grid">
+          <div class="j-tech-field"><div class="j-tech-label">🔄 Journey Step</div><div class="j-tech-value plain">Wait / Timer step (no email activity)</div></div>
+          <div class="j-tech-field"><div class="j-tech-label">⏱ Duration</div><div class="j-tech-value plain">24 hours</div></div>
+          <div class="j-tech-field full"><div class="j-tech-label">🚪 Exit Check During Wait</div><div class="j-tech-value"><code>Is_IB</code> = <code>true</code>? → exit journey immediately (don't wait for E3)</div></div>
+        </div>
+      </div>
     </div>
   </div>
 
   <div id="detail-e3" class="j-detail-panel">
-    <div class="j-detail-header"><div class="j-detail-title">E3 — Objection Handling</div><button class="j-detail-close" onclick="closeDetail()">✕</button></div>
+    <div class="j-detail-header">
+      <div class="j-detail-stage-row">
+        <div class="j-detail-title">E3 — Objection Handling</div>
+        <span class="j-detail-stage-badge">Stage 3 · Confidence</span>
+      </div>
+      <button class="j-detail-close" onclick="closeDetail()">✕</button>
+    </div>
     <div class="j-detail-grid">
-      <div class="j-detail-field"><div class="j-detail-label">Sent To</div><div class="j-detail-value">Retail clients still not converted — addresses their hesitations and makes signing up feel easy</div></div>
-      <div class="j-detail-field"><div class="j-detail-label">Timing</div><div class="j-detail-value">Day 4 — 4 days after entry</div></div>
-      <div class="j-detail-field"><div class="j-detail-label">Trigger</div><div class="j-detail-value">Not converted after E2 + rest day</div></div>
-      <div class="j-detail-field"><div class="j-detail-label">Subject Line</div><div class="j-detail-value highlight">Think it's complicated? Here's what it actually takes</div></div>
-      <div class="j-detail-field"><div class="j-detail-label">CTA</div><div class="j-detail-value highlight">Apply in 2 Minutes</div></div>
-      <div class="j-detail-field j-detail-full"><div class="j-detail-label">Content Strategy</div><div class="j-detail-value">Address top 3 objections: (1) "I don't have time" → passive income, automatic. (2) "I don't know enough people" → only need 3–5 active traders. (3) "I don't know how to promote" → TMGM provides IB Portal, banners, tracking link, dedicated AM.</div></div>
-      <div class="j-detail-field"><div class="j-detail-label">Psychology</div><div class="j-detail-value">Confidence — "it's easier than you think"</div></div>
-      <div class="j-detail-field"><div class="j-detail-label">Exit Condition</div><div class="j-detail-value">Client converts to IB → exits journey</div></div>
+      <div class="j-detail-goal-box">
+        <div class="j-detail-goal-label">📌 Goal</div>
+        <div class="j-detail-goal-text">Kill the "but…" before it kills the conversion. Remove the top 3 barriers so signing up feels easy.</div>
+      </div>
+      <div class="j-detail-field"><div class="j-5w1h-label"><span class="j-5w1h-icon">👥</span> WHO · Sent To</div><div class="j-detail-value">Retail clients still not converted — addresses their hesitations and makes signing up feel easy</div></div>
+      <div class="j-detail-field"><div class="j-5w1h-label"><span class="j-5w1h-icon">⏰</span> WHEN · Send Timing</div><div class="j-detail-value">Day 4 — 4 days after entry (1-day rest gap after E2)</div></div>
+      <div class="j-detail-field"><div class="j-5w1h-label"><span class="j-5w1h-icon">❓</span> WHY · Objective</div><div class="j-detail-value">Remove the top 3 barriers to signing up — reframe resources as answers to doubts, not features</div></div>
+      <div class="j-detail-field"><div class="j-5w1h-label"><span class="j-5w1h-icon">🧠</span> Psychology</div><div class="j-detail-value">Confidence — "it's easier than you think"</div></div>
+      <div class="j-detail-field"><div class="j-5w1h-label"><span class="j-5w1h-icon">📧</span> WHAT · Subject Line</div><div class="j-detail-value highlight">Think it's complicated? Here's what it actually takes</div></div>
+      <div class="j-detail-field"><div class="j-5w1h-label"><span class="j-5w1h-icon">📨</span> Preview Text</div><div class="j-detail-value">3 common concerns — and why none of them should stop you</div></div>
+      <div class="j-detail-field"><div class="j-5w1h-label"><span class="j-5w1h-icon">🎯</span> CTA</div><div class="j-detail-value highlight">Apply in 2 Minutes</div></div>
+      <div class="j-detail-field"><div class="j-5w1h-label"><span class="j-5w1h-icon">🚪</span> Exit Condition</div><div class="j-detail-value">Client converts to IB → exits journey immediately</div></div>
+      <div class="j-detail-field j-detail-full"><div class="j-5w1h-label"><span class="j-5w1h-icon">📝</span> Content Strategy</div><div class="j-detail-value">Address top 3 objections: (1) "I don't have time" → passive income, automatic. (2) "I don't know enough people" → only need 3–5 active traders. (3) "I don't know how to promote" → TMGM provides IB Portal, banners, tracking link, dedicated AM.</div></div>
+      <div class="j-tech-section">
+        <div class="j-tech-header">
+          <div class="j-tech-title">⚙️ HOW · Technical Setup</div>
+          <div class="j-tech-subtitle">— for Sichen & Nick</div>
+        </div>
+        <div class="j-tech-grid">
+          <div class="j-tech-field"><div class="j-tech-label">🔄 Trigger Source</div><div class="j-tech-value plain">Journey step — follows E2 + 1-day wait</div></div>
+          <div class="j-tech-field"><div class="j-tech-label">⏱ Wait Time</div><div class="j-tech-value plain">48 hours from E2 send (2 days)</div></div>
+          <div class="j-tech-field"><div class="j-tech-label">✓ Pre-Send Check</div><div class="j-tech-value"><code>Is_IB</code> = <code>false</code>? If <code>true</code>, exit journey</div></div>
+          <div class="j-tech-field"><div class="j-tech-label">📊 Data Source</div><div class="j-tech-value plain">MasterDataExtension (SFMC)</div></div>
+          <div class="j-tech-field full"><div class="j-tech-label">🗂 Data Field Monitored</div><div class="j-tech-value"><code>Is_IB</code> — checked continuously for exit trigger</div></div>
+        </div>
+      </div>
     </div>
   </div>
 
   <div id="detail-d5" class="j-detail-panel">
-    <div class="j-detail-header"><div class="j-detail-title">Day 5 — Rest Day</div><button class="j-detail-close" onclick="closeDetail()">✕</button></div>
+    <div class="j-detail-header">
+      <div class="j-detail-stage-row">
+        <div class="j-detail-title">Day 5 — Rest Day</div>
+        <span class="j-detail-stage-badge" style="background:var(--grey-100);color:var(--grey-500);">Intentional Pause · Calm Before Close</span>
+      </div>
+      <button class="j-detail-close" onclick="closeDetail()">✕</button>
+    </div>
     <div class="j-detail-grid">
-      <div class="j-detail-field"><div class="j-detail-label">Timing</div><div class="j-detail-value">Day 5 — 1 day after E3</div></div>
-      <div class="j-detail-field"><div class="j-detail-label">Type</div><div class="j-detail-value">No email — intentional rest day</div></div>
-      <div class="j-detail-field j-detail-full"><div class="j-detail-label">Strategic Purpose</div><div class="j-detail-value">Last breather before the urgency one-two punch (E4 Day 6 + E5 Day 7 back-to-back). Creates contrast — the silence makes the urgency emails hit harder.</div></div>
+      <div class="j-detail-goal-box" style="background:linear-gradient(135deg,#F3F4F6,#FAFBFC);border-color:var(--grey-300);">
+        <div class="j-detail-goal-label" style="color:var(--grey-500);">📌 Purpose</div>
+        <div class="j-detail-goal-text">Last breather before the urgency one-two punch (E4 Day 6 + E5 Day 7 back-to-back). The silence makes the closing emails hit harder.</div>
+      </div>
+      <div class="j-detail-field"><div class="j-5w1h-label"><span class="j-5w1h-icon">⏰</span> WHEN</div><div class="j-detail-value">Day 5 — 1 day after E3 sent</div></div>
+      <div class="j-detail-field"><div class="j-5w1h-label"><span class="j-5w1h-icon">📭</span> Type</div><div class="j-detail-value">No email — intentional rest day</div></div>
+      <div class="j-detail-field j-detail-full"><div class="j-5w1h-label"><span class="j-5w1h-icon">🧠</span> Reader's State of Mind</div><div class="j-detail-value">By now reader has heard everything — money, proof, objections handled. Give them one quiet day before the closing push. The contrast makes E4 and E5 feel intentional, not spammy.</div></div>
+      <div class="j-tech-section">
+        <div class="j-tech-header">
+          <div class="j-tech-title">⚙️ HOW · Technical Setup</div>
+          <div class="j-tech-subtitle">— for Sichen & Nick</div>
+        </div>
+        <div class="j-tech-grid">
+          <div class="j-tech-field"><div class="j-tech-label">🔄 Journey Step</div><div class="j-tech-value plain">Wait / Timer step (no email activity)</div></div>
+          <div class="j-tech-field"><div class="j-tech-label">⏱ Duration</div><div class="j-tech-value plain">24 hours</div></div>
+          <div class="j-tech-field full"><div class="j-tech-label">🚪 Exit Check During Wait</div><div class="j-tech-value"><code>Is_IB</code> = <code>true</code>? → exit journey immediately (don't wait for E4)</div></div>
+        </div>
+      </div>
     </div>
   </div>
 
   <div id="detail-e4" class="j-detail-panel">
-    <div class="j-detail-header"><div class="j-detail-title">E4 — Urgency</div><button class="j-detail-close" onclick="closeDetail()">✕</button></div>
+    <div class="j-detail-header">
+      <div class="j-detail-stage-row">
+        <div class="j-detail-title">E4 — Urgency</div>
+        <span class="j-detail-stage-badge" style="background:#fef3c7;color:#92400e;">Stage 4 · Scarcity</span>
+      </div>
+      <button class="j-detail-close" onclick="closeDetail()">✕</button>
+    </div>
     <div class="j-detail-grid">
-      <div class="j-detail-field"><div class="j-detail-label">Sent To</div><div class="j-detail-value">Retail clients still not converted — creates urgency through opportunity cost framing, giving them a reason to act now</div></div>
-      <div class="j-detail-field"><div class="j-detail-label">Timing</div><div class="j-detail-value">Day 6 — sent 6 days after client enters journey</div></div>
-      <div class="j-detail-field"><div class="j-detail-label">Trigger</div><div class="j-detail-value">Client has not registered as IB after E3 (1-day rest gap)</div></div>
-      <div class="j-detail-field"><div class="j-detail-label">Subject Line</div><div class="j-detail-value highlight">%%First_Name%%, your spot is still open</div></div>
-      <div class="j-detail-field"><div class="j-detail-label">CTA</div><div class="j-detail-value highlight">Start Earning Today</div></div>
-      <div class="j-detail-field j-detail-full"><div class="j-detail-label">Content Strategy</div><div class="j-detail-value">Recap E1–E3 highlights (numbers, proof, tools). Frame inaction as opportunity cost — "every day you wait is a day your network trades without earning you commissions." Patient but persistent tone, no artificial deadlines.</div></div>
-      <div class="j-detail-field"><div class="j-detail-label">Psychology</div><div class="j-detail-value">Scarcity — loss aversion, not fake deadlines</div></div>
-      <div class="j-detail-field"><div class="j-detail-label">Next</div><div class="j-detail-value">E5 follows immediately (Day 7) — no rest day. Back-to-back closing punch.</div></div>
+      <div class="j-detail-goal-box" style="background:linear-gradient(135deg,#FFF7ED,#FFFBEB);border-color:rgba(232,131,58,0.3);">
+        <div class="j-detail-goal-label" style="color:#e8833a;">📌 Goal</div>
+        <div class="j-detail-goal-text">Create a reason to act now. They have all the info — they need a push, not more content.</div>
+      </div>
+      <div class="j-detail-field"><div class="j-5w1h-label"><span class="j-5w1h-icon">👥</span> WHO · Sent To</div><div class="j-detail-value">Retail clients still not converted — creates urgency through opportunity cost framing, giving them a reason to act now</div></div>
+      <div class="j-detail-field"><div class="j-5w1h-label"><span class="j-5w1h-icon">⏰</span> WHEN · Send Timing</div><div class="j-detail-value">Day 6 — sent 6 days after client entered journey (1-day rest gap after E3)</div></div>
+      <div class="j-detail-field"><div class="j-5w1h-label"><span class="j-5w1h-icon">❓</span> WHY · Objective</div><div class="j-detail-value">Create urgency through opportunity cost framing — loss aversion without fake deadlines</div></div>
+      <div class="j-detail-field"><div class="j-5w1h-label"><span class="j-5w1h-icon">🧠</span> Psychology</div><div class="j-detail-value">Scarcity — loss aversion, not fake deadlines</div></div>
+      <div class="j-detail-field"><div class="j-5w1h-label"><span class="j-5w1h-icon">📧</span> WHAT · Subject Line</div><div class="j-detail-value highlight">%%First_Name%%, your spot is still open</div></div>
+      <div class="j-detail-field"><div class="j-5w1h-label"><span class="j-5w1h-icon">📨</span> Preview Text</div><div class="j-detail-value">Every day you wait is a day you're not earning</div></div>
+      <div class="j-detail-field"><div class="j-5w1h-label"><span class="j-5w1h-icon">🎯</span> CTA</div><div class="j-detail-value highlight">Start Earning Today</div></div>
+      <div class="j-detail-field"><div class="j-5w1h-label"><span class="j-5w1h-icon">➡️</span> Next Step</div><div class="j-detail-value">E5 follows immediately (Day 7) — no rest day. Back-to-back closing punch.</div></div>
+      <div class="j-detail-field j-detail-full"><div class="j-5w1h-label"><span class="j-5w1h-icon">📝</span> Content Strategy</div><div class="j-detail-value">Recap E1–E3 highlights (numbers, proof, tools). Frame inaction as opportunity cost — "every day you wait is a day your network trades without earning you commissions." Patient but persistent tone, no artificial deadlines.</div></div>
+      <div class="j-tech-section">
+        <div class="j-tech-header">
+          <div class="j-tech-title">⚙️ HOW · Technical Setup</div>
+          <div class="j-tech-subtitle">— for Sichen & Nick</div>
+        </div>
+        <div class="j-tech-grid">
+          <div class="j-tech-field"><div class="j-tech-label">🔄 Trigger Source</div><div class="j-tech-value plain">Journey step — follows E3 + 1-day wait</div></div>
+          <div class="j-tech-field"><div class="j-tech-label">⏱ Wait Time</div><div class="j-tech-value plain">48 hours from E3 send (2 days)</div></div>
+          <div class="j-tech-field"><div class="j-tech-label">✓ Pre-Send Check</div><div class="j-tech-value"><code>Is_IB</code> = <code>false</code>? If <code>true</code>, exit journey</div></div>
+          <div class="j-tech-field"><div class="j-tech-label">📊 Data Source</div><div class="j-tech-value plain">MasterDataExtension (SFMC)</div></div>
+          <div class="j-tech-field full"><div class="j-tech-label">🗂 Data Field Monitored</div><div class="j-tech-value"><code>Is_IB</code> — checked continuously for exit trigger</div></div>
+        </div>
+      </div>
     </div>
   </div>
 
   <div id="detail-e5" class="j-detail-panel">
-    <div class="j-detail-header"><div class="j-detail-title">E5 — Final Close</div><button class="j-detail-close" onclick="closeDetail()">✕</button></div>
+    <div class="j-detail-header">
+      <div class="j-detail-stage-row">
+        <div class="j-detail-title">E5 — Final Close</div>
+        <span class="j-detail-stage-badge" style="background:#fee2e2;color:#991b1b;">Stage 5 · Decision · Final Email</span>
+      </div>
+      <button class="j-detail-close" onclick="closeDetail()">✕</button>
+    </div>
     <div class="j-detail-grid">
-      <div class="j-detail-field"><div class="j-detail-label">Sent To</div><div class="j-detail-value">Final email in this cycle to retail clients who haven't converted — short, respectful close. Sets expectation we'll check back next month.</div></div>
-      <div class="j-detail-field"><div class="j-detail-label">Timing</div><div class="j-detail-value">Day 7 — back-to-back with E4 (no rest day)</div></div>
-      <div class="j-detail-field"><div class="j-detail-label">Trigger</div><div class="j-detail-value">Not converted after E4 — final email in cycle</div></div>
-      <div class="j-detail-field"><div class="j-detail-label">Subject Line</div><div class="j-detail-value highlight">%%First_Name%%, final reminder for now</div></div>
-      <div class="j-detail-field"><div class="j-detail-label">CTA</div><div class="j-detail-value highlight">Apply Now</div></div>
-      <div class="j-detail-field j-detail-full"><div class="j-detail-label">Content Strategy</div><div class="j-detail-value">Intentionally short — 3–4 sentences max. Recap single strongest stat ($8–$11/lot, paid daily). Close with: "We'll give you some space and check back in with you next month." Sets honest expectation of re-blast without being pushy.</div></div>
-      <div class="j-detail-field"><div class="j-detail-label">Psychology</div><div class="j-detail-value">Decision — respectful close, transparent about next contact</div></div>
-      <div class="j-detail-field"><div class="j-detail-label">Post-Email</div><div class="j-detail-value">If not converted → 30-day cool-down → E1–E5 cycle restarts. Phase 2.0 will introduce segmented, personalised re-entry instead of same content repeat.</div></div>
+      <div class="j-detail-goal-box" style="background:linear-gradient(135deg,#FEF2F2,#FFFBEB);border-color:rgba(211,47,47,0.25);">
+        <div class="j-detail-goal-label" style="color:#d32f2f;">📌 Goal</div>
+        <div class="j-detail-goal-text">Respectful final ask. Protect long-term trust by being honest about future contact.</div>
+      </div>
+      <div class="j-detail-field"><div class="j-5w1h-label"><span class="j-5w1h-icon">👥</span> WHO · Sent To</div><div class="j-detail-value">Final email in this cycle to retail clients who haven't converted — short, respectful close. Sets expectation we'll check back next month.</div></div>
+      <div class="j-detail-field"><div class="j-5w1h-label"><span class="j-5w1h-icon">⏰</span> WHEN · Send Timing</div><div class="j-detail-value">Day 7 — back-to-back with E4 (no rest day — closing one-two punch)</div></div>
+      <div class="j-detail-field"><div class="j-5w1h-label"><span class="j-5w1h-icon">❓</span> WHY · Objective</div><div class="j-detail-value">Short, direct, respectful close. No more education. Ask for the decision. Set expectation of next contact.</div></div>
+      <div class="j-detail-field"><div class="j-5w1h-label"><span class="j-5w1h-icon">🧠</span> Psychology</div><div class="j-detail-value">Decision — respectful close, transparent about next contact</div></div>
+      <div class="j-detail-field"><div class="j-5w1h-label"><span class="j-5w1h-icon">📧</span> WHAT · Subject Line</div><div class="j-detail-value highlight">%%First_Name%%, final reminder for now</div></div>
+      <div class="j-detail-field"><div class="j-5w1h-label"><span class="j-5w1h-icon">📨</span> Preview Text</div><div class="j-detail-value">The door is open whenever you're ready</div></div>
+      <div class="j-detail-field"><div class="j-5w1h-label"><span class="j-5w1h-icon">🎯</span> CTA</div><div class="j-detail-value highlight">Apply Now</div></div>
+      <div class="j-detail-field"><div class="j-5w1h-label"><span class="j-5w1h-icon">🔄</span> Post-Email Logic</div><div class="j-detail-value">If not converted → 30-day cool-down → E1–E5 cycle restarts. Phase 2.0 will introduce segmented, personalised re-entry instead of same content repeat.</div></div>
+      <div class="j-detail-field j-detail-full"><div class="j-5w1h-label"><span class="j-5w1h-icon">📝</span> Content Strategy</div><div class="j-detail-value">Intentionally short — 3–4 sentences max. Recap single strongest stat ($8–$11/lot, paid daily). Close with: "We'll give you some space and check back in with you next month." Sets honest expectation of re-blast without being pushy.</div></div>
+      <div class="j-tech-section">
+        <div class="j-tech-header">
+          <div class="j-tech-title">⚙️ HOW · Technical Setup</div>
+          <div class="j-tech-subtitle">— for Sichen & Nick</div>
+        </div>
+        <div class="j-tech-grid">
+          <div class="j-tech-field"><div class="j-tech-label">🔄 Trigger Source</div><div class="j-tech-value plain">Journey step — follows E4 (no rest gap)</div></div>
+          <div class="j-tech-field"><div class="j-tech-label">⏱ Wait Time</div><div class="j-tech-value plain">24 hours from E4 send (back-to-back)</div></div>
+          <div class="j-tech-field"><div class="j-tech-label">✓ Pre-Send Check</div><div class="j-tech-value"><code>Is_IB</code> = <code>false</code>? If <code>true</code>, exit journey</div></div>
+          <div class="j-tech-field"><div class="j-tech-label">📊 Data Source</div><div class="j-tech-value plain">MasterDataExtension (SFMC)</div></div>
+          <div class="j-tech-field full"><div class="j-tech-label">🗂 Data Field Monitored</div><div class="j-tech-value"><code>Is_IB</code> — checked continuously for exit trigger</div></div>
+          <div class="j-tech-field full"><div class="j-tech-label">🔁 Post-Journey Re-Entry Logic</div><div class="j-tech-value plain">If <code>Is_IB</code> still <code>false</code> after E5 → 30-day cool-down (Wait step) → re-enters E1 automatically (monthly re-blast cycle)</div></div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -520,15 +883,47 @@ body { font-family:var(--font); color:var(--dark); background:var(--bg); line-he
   <div class="fc-body">
     <div class="fc-flow">
 
+      <!-- UPSTREAM FLOW — HOW CLIENTS GET TO THE JOURNEY -->
+      <div class="fc-upstream-label">🔼 Upstream — Pre-Journey Pipeline</div>
+
+      <!-- UPSTREAM 1: Portal Sign-up -->
+      <div class="fc-box fc-upstream">
+        <div class="fc-tooltip tip-below">The starting point of the pipeline. Any new retail client who opens a trading account through the TMGM portal and completes KYC verification. <strong>Not the journey entry yet</strong> — just the upstream origin.</div>
+        <div class="fc-box-title">🌐 Retail Client Signs Up</div>
+        <div class="fc-box-sub">Via TMGM Portal — opens trading account, completes KYC verification</div>
+      </div>
+      <div class="fc-vline"></div>
+
+      <!-- UPSTREAM 2: Data Extension -->
+      <div class="fc-box fc-upstream">
+        <div class="fc-tooltip tip-below">Client data is automatically synced from TMGM's trading systems into SFMC's <strong>MasterDataExtension</strong> in real-time. This is <strong>Nick Gao's</strong> domain — he owns the data extension setup and field mapping.</div>
+        <div class="fc-box-title">📊 Client Added to MasterDataExtension</div>
+        <div class="fc-box-sub">Real-time sync from TMGM systems → SFMC</div>
+        <div class="fc-upstream-owner">Owned by Nick Gao · Data Extension setup</div>
+      </div>
+      <div class="fc-vline"></div>
+
+      <!-- UPSTREAM 3: Filter Check -->
+      <div class="fc-box fc-upstream">
+        <div class="fc-tooltip tip-below">SFMC continuously checks every client against the Phase 1.0 filter criteria. The moment a client's data matches all conditions, they automatically enter the journey. <strong>Sichen Zhang</strong> owns the filter logic and journey setup.</div>
+        <div class="fc-box-title">⏳ Continuous Filter Check</div>
+        <div class="fc-box-sub">Does client match Phase 1.0 entry criteria? (automated, real-time)</div>
+        <div class="fc-upstream-owner">Owned by Sichen Zhang · Journey & filter setup</div>
+      </div>
+
+      <div class="fc-upstream-divider"></div>
+
       <!-- ENTRY -->
       <div class="fc-box fc-entry">
+        <div class="fc-tooltip tip-below"><strong>Day 0 of the 5-email journey starts here.</strong> Each client enters on their own personal timeline — whenever they match the filter. This is the handoff from upstream pipeline to the journey itself.</div>
         <div class="fc-box-title">📥 Retail Client Enters Journey</div>
-        <div class="fc-box-sub">All retail clients (excl. existing IBs, ASIC, unsubscribed)</div>
+        <div class="fc-box-sub">Automated trigger · SEA + MENA + EN markets · Hygiene exclusions only</div>
       </div>
       <div class="fc-vline"></div>
 
       <!-- E1 -->
-      <div class="fc-box fc-email">
+      <div class="fc-box fc-email fc-clickable" onclick="scrollToDetail('e1')">
+        <div class="fc-tooltip tip-below"><strong>Stage 1 · Awareness.</strong> First email, sent immediately on entry. Hooks with earning potential ($8–$11/lot, paid daily). Goal: plant the number in their head.<span class="fc-tip-hint">Click to see full details ↑</span></div>
         <div class="fc-box-title">E1 — The Money Hook</div>
         <div class="fc-box-sub">Day 0 · "$8–$11/lot, paid daily"</div>
       </div>
@@ -536,17 +931,18 @@ body { font-family:var(--font); color:var(--dark); background:var(--bg); line-he
 
       <!-- DECISION 1 -->
       <div class="fc-branch">
-        <div class="fc-decision"><div class="fc-box-title">Converted to IB?</div></div>
+        <div class="fc-decision"><div class="fc-tooltip tip-below">At every step, SFMC checks the <strong>Is_IB</strong> field. If the client has registered as an IB (<strong>Is_IB</strong> = <strong>true</strong>), they <strong>exit this journey</strong> and flow into the IB Welcome Email. If still <strong>false</strong>, they continue to the next step in the sequence.</div><div class="fc-box-title">Converted to IB?</div></div>
         <div class="fc-branch-t"><div class="fc-branch-stem"></div><div class="fc-branch-bar"></div></div>
         <div class="fc-branch-arms">
-          <div class="fc-branch-arm fc-branch-arm-no"><span class="fc-label no">NO</span><div class="fc-vline"></div><div class="fc-box fc-rest"><div class="fc-box-title">💤 Rest — Day 1</div></div><div class="fc-rest-arrow"><div class="fc-rest-line"></div>↓<div class="fc-rest-label">to E2</div></div></div>
-          <div class="fc-branch-arm fc-branch-arm-yes"><span class="fc-label yes">YES</span><div class="fc-vline"></div><div class="fc-exit-box"><div class="fc-box-title">✅ IB Welcome Email</div><div class="fc-box-sub" style="font-size:9px;color:var(--green);margin-top:1px;">Separate journey</div></div><div class="fc-ib-arrow"><div class="fc-ib-line"></div>↓<div class="fc-ib-label">IB onboarding</div></div></div>
+          <div class="fc-branch-arm fc-branch-arm-no"><span class="fc-label no">NO</span><div class="fc-vline"></div><div class="fc-box fc-rest fc-clickable" onclick="scrollToDetail('d1')"><div class="fc-tooltip tip-below">No email sent. 24-hour wait step to let E1's money hook sink in. During this wait, SFMC continuously checks if client has converted — if yes, they exit immediately.<span class="fc-tip-hint">Click to see full details ↑</span></div><div class="fc-box-title">💤 Rest — Day 1</div></div><div class="fc-rest-arrow"><div class="fc-rest-line"></div>↓<div class="fc-rest-label">to E2</div></div></div>
+          <div class="fc-branch-arm fc-branch-arm-yes"><span class="fc-label yes">YES</span><div class="fc-vline"></div><div class="fc-exit-box"><div class="fc-tooltip tip-below"><strong>Exit point — client has become an IB.</strong> They leave this journey and are picked up by the existing IB Onboarding journey (MKTOP-7576), which sends 3 welcome emails over 5 days. That's a <strong>separate journey</strong> owned by Sichen.</div><div class="fc-box-title">✅ IB Welcome Email</div><div class="fc-box-sub" style="font-size:9px;color:var(--green);margin-top:1px;">Separate journey</div></div><div class="fc-ib-arrow"><div class="fc-ib-line"></div>↓<div class="fc-ib-label">IB onboarding</div></div></div>
         </div>
       </div>
       <div class="fc-vline"></div>
 
       <!-- E2 -->
-      <div class="fc-box fc-email">
+      <div class="fc-box fc-email fc-clickable" onclick="scrollToDetail('e2')">
+        <div class="fc-tooltip tip-below"><strong>Stage 2 · Consideration.</strong> Sent 2 days after entry. Shows real earning scenarios (Trader A/B/C) and TMGM advantages. Goal: build belief — "this could actually work for me."<span class="fc-tip-hint">Click to see full details ↑</span></div>
         <div class="fc-box-title">E2 — Social Proof</div>
         <div class="fc-box-sub">Day 2 · Earning scenarios</div>
       </div>
@@ -554,17 +950,18 @@ body { font-family:var(--font); color:var(--dark); background:var(--bg); line-he
 
       <!-- DECISION 2 -->
       <div class="fc-branch">
-        <div class="fc-decision"><div class="fc-box-title">Converted to IB?</div></div>
+        <div class="fc-decision"><div class="fc-tooltip tip-below">At every step, SFMC checks the <strong>Is_IB</strong> field. If the client has registered as an IB (<strong>Is_IB</strong> = <strong>true</strong>), they <strong>exit this journey</strong> and flow into the IB Welcome Email. If still <strong>false</strong>, they continue to the next step in the sequence.</div><div class="fc-box-title">Converted to IB?</div></div>
         <div class="fc-branch-t"><div class="fc-branch-stem"></div><div class="fc-branch-bar"></div></div>
         <div class="fc-branch-arms">
-          <div class="fc-branch-arm fc-branch-arm-no"><span class="fc-label no">NO</span><div class="fc-vline"></div><div class="fc-box fc-rest"><div class="fc-box-title">💤 Rest — Day 3</div></div><div class="fc-rest-arrow"><div class="fc-rest-line"></div>↓<div class="fc-rest-label">to E3</div></div></div>
-          <div class="fc-branch-arm fc-branch-arm-yes"><span class="fc-label yes">YES</span><div class="fc-vline"></div><div class="fc-exit-box"><div class="fc-box-title">✅ IB Welcome Email</div><div class="fc-box-sub" style="font-size:9px;color:var(--green);margin-top:1px;">Separate journey</div></div><div class="fc-ib-arrow"><div class="fc-ib-line"></div>↓<div class="fc-ib-label">IB onboarding</div></div></div>
+          <div class="fc-branch-arm fc-branch-arm-no"><span class="fc-label no">NO</span><div class="fc-vline"></div><div class="fc-box fc-rest fc-clickable" onclick="scrollToDetail('d3')"><div class="fc-tooltip tip-below">No email sent. 24-hour wait step to let social proof from E2 build anticipation. Reader's doubts form naturally — so E3's objection handling lands perfectly.<span class="fc-tip-hint">Click to see full details ↑</span></div><div class="fc-box-title">💤 Rest — Day 3</div></div><div class="fc-rest-arrow"><div class="fc-rest-line"></div>↓<div class="fc-rest-label">to E3</div></div></div>
+          <div class="fc-branch-arm fc-branch-arm-yes"><span class="fc-label yes">YES</span><div class="fc-vline"></div><div class="fc-exit-box"><div class="fc-tooltip tip-below"><strong>Exit point — client has become an IB.</strong> They leave this journey and are picked up by the existing IB Onboarding journey (MKTOP-7576), which sends 3 welcome emails over 5 days. That's a <strong>separate journey</strong> owned by Sichen.</div><div class="fc-box-title">✅ IB Welcome Email</div><div class="fc-box-sub" style="font-size:9px;color:var(--green);margin-top:1px;">Separate journey</div></div><div class="fc-ib-arrow"><div class="fc-ib-line"></div>↓<div class="fc-ib-label">IB onboarding</div></div></div>
         </div>
       </div>
       <div class="fc-vline"></div>
 
       <!-- E3 -->
-      <div class="fc-box fc-email">
+      <div class="fc-box fc-email fc-clickable" onclick="scrollToDetail('e3')">
+        <div class="fc-tooltip tip-below"><strong>Stage 3 · Confidence.</strong> Sent 4 days after entry. Addresses top 3 barriers: time, network size, promotion skills. Goal: kill the "but…" before it kills the conversion.<span class="fc-tip-hint">Click to see full details ↑</span></div>
         <div class="fc-box-title">E3 — Objection Handling</div>
         <div class="fc-box-sub">Day 4 · Remove barriers</div>
       </div>
@@ -572,17 +969,18 @@ body { font-family:var(--font); color:var(--dark); background:var(--bg); line-he
 
       <!-- DECISION 3 -->
       <div class="fc-branch">
-        <div class="fc-decision"><div class="fc-box-title">Converted to IB?</div></div>
+        <div class="fc-decision"><div class="fc-tooltip tip-below">At every step, SFMC checks the <strong>Is_IB</strong> field. If the client has registered as an IB (<strong>Is_IB</strong> = <strong>true</strong>), they <strong>exit this journey</strong> and flow into the IB Welcome Email. If still <strong>false</strong>, they continue to the next step in the sequence.</div><div class="fc-box-title">Converted to IB?</div></div>
         <div class="fc-branch-t"><div class="fc-branch-stem"></div><div class="fc-branch-bar"></div></div>
         <div class="fc-branch-arms">
-          <div class="fc-branch-arm fc-branch-arm-no"><span class="fc-label no">NO</span><div class="fc-vline"></div><div class="fc-box fc-rest"><div class="fc-box-title">💤 Rest — Day 5</div></div><div class="fc-rest-arrow"><div class="fc-rest-line"></div>↓<div class="fc-rest-label">to E4</div></div></div>
-          <div class="fc-branch-arm fc-branch-arm-yes"><span class="fc-label yes">YES</span><div class="fc-vline"></div><div class="fc-exit-box"><div class="fc-box-title">✅ IB Welcome Email</div><div class="fc-box-sub" style="font-size:9px;color:var(--green);margin-top:1px;">Separate journey</div></div><div class="fc-ib-arrow"><div class="fc-ib-line"></div>↓<div class="fc-ib-label">IB onboarding</div></div></div>
+          <div class="fc-branch-arm fc-branch-arm-no"><span class="fc-label no">NO</span><div class="fc-vline"></div><div class="fc-box fc-rest fc-clickable" onclick="scrollToDetail('d5')"><div class="fc-tooltip tip-below">No email sent. Final 24-hour pause before the urgency one-two punch (E4 Day 6 + E5 Day 7 back-to-back). Silence makes the closing emails hit harder.<span class="fc-tip-hint">Click to see full details ↑</span></div><div class="fc-box-title">💤 Rest — Day 5</div></div><div class="fc-rest-arrow"><div class="fc-rest-line"></div>↓<div class="fc-rest-label">to E4</div></div></div>
+          <div class="fc-branch-arm fc-branch-arm-yes"><span class="fc-label yes">YES</span><div class="fc-vline"></div><div class="fc-exit-box"><div class="fc-tooltip tip-below"><strong>Exit point — client has become an IB.</strong> They leave this journey and are picked up by the existing IB Onboarding journey (MKTOP-7576), which sends 3 welcome emails over 5 days. That's a <strong>separate journey</strong> owned by Sichen.</div><div class="fc-box-title">✅ IB Welcome Email</div><div class="fc-box-sub" style="font-size:9px;color:var(--green);margin-top:1px;">Separate journey</div></div><div class="fc-ib-arrow"><div class="fc-ib-line"></div>↓<div class="fc-ib-label">IB onboarding</div></div></div>
         </div>
       </div>
       <div class="fc-vline"></div>
 
       <!-- E4 -->
-      <div class="fc-box fc-email" style="border-color:rgba(232,131,58,0.3);">
+      <div class="fc-box fc-email fc-clickable" style="border-color:rgba(232,131,58,0.3);" onclick="scrollToDetail('e4')">
+        <div class="fc-tooltip tip-below"><strong>Stage 4 · Scarcity.</strong> Sent 6 days after entry. Uses opportunity cost framing — "every day you wait is a day your network trades without earning you commissions." Goal: create a reason to act NOW.<span class="fc-tip-hint">Click to see full details ↑</span></div>
         <div class="fc-box-title" style="color:#e8833a;">E4 — Urgency</div>
         <div class="fc-box-sub">Day 6 · Scarcity push</div>
       </div>
@@ -590,22 +988,22 @@ body { font-family:var(--font); color:var(--dark); background:var(--bg); line-he
 
       <!-- DECISION 4 -->
       <div class="fc-branch">
-        <div class="fc-decision"><div class="fc-box-title">Converted to IB?</div></div>
+        <div class="fc-decision"><div class="fc-tooltip tip-below">At every step, SFMC checks the <strong>Is_IB</strong> field. If the client has registered as an IB (<strong>Is_IB</strong> = <strong>true</strong>), they <strong>exit this journey</strong> and flow into the IB Welcome Email. If still <strong>false</strong>, they continue to the next step in the sequence.</div><div class="fc-box-title">Converted to IB?</div></div>
         <div class="fc-branch-t"><div class="fc-branch-stem"></div><div class="fc-branch-bar"></div></div>
         <div class="fc-branch-arms">
-          <div class="fc-branch-arm fc-branch-arm-no"><span class="fc-label no">NO</span><div class="fc-vline"></div><div class="fc-box fc-email" style="padding:8px 16px;min-width:auto;border-color:rgba(211,47,47,0.3);"><div class="fc-box-title" style="color:#d32f2f;font-size:11px;">E5 — Final Close</div><div class="fc-box-sub">Day 7 · No rest</div></div></div>
-          <div class="fc-branch-arm fc-branch-arm-yes"><span class="fc-label yes">YES</span><div class="fc-vline"></div><div class="fc-exit-box"><div class="fc-box-title">✅ IB Welcome Email</div><div class="fc-box-sub" style="font-size:9px;color:var(--green);margin-top:1px;">Separate journey</div></div><div class="fc-ib-arrow"><div class="fc-ib-line"></div>↓<div class="fc-ib-label">IB onboarding</div></div></div>
+          <div class="fc-branch-arm fc-branch-arm-no"><span class="fc-label no">NO</span><div class="fc-vline"></div><div class="fc-box fc-email fc-clickable" style="padding:8px 16px;min-width:auto;border-color:rgba(211,47,47,0.3);" onclick="scrollToDetail('e5')"><div class="fc-tooltip tip-below"><strong>Stage 5 · Decision · Final.</strong> Back-to-back with E4 (no rest). Short, direct close — 3–4 sentences. Sets expectation of monthly check-in. Goal: respectful final ask, protect long-term trust.<span class="fc-tip-hint">Click to see full details ↑</span></div><div class="fc-box-title" style="color:#d32f2f;font-size:11px;">E5 — Final Close</div><div class="fc-box-sub">Day 7 · No rest</div></div></div>
+          <div class="fc-branch-arm fc-branch-arm-yes"><span class="fc-label yes">YES</span><div class="fc-vline"></div><div class="fc-exit-box"><div class="fc-tooltip tip-below"><strong>Exit point — client has become an IB.</strong> They leave this journey and are picked up by the existing IB Onboarding journey (MKTOP-7576), which sends 3 welcome emails over 5 days. That's a <strong>separate journey</strong> owned by Sichen.</div><div class="fc-box-title">✅ IB Welcome Email</div><div class="fc-box-sub" style="font-size:9px;color:var(--green);margin-top:1px;">Separate journey</div></div><div class="fc-ib-arrow"><div class="fc-ib-line"></div>↓<div class="fc-ib-label">IB onboarding</div></div></div>
         </div>
       </div>
       <div class="fc-vline"></div>
 
       <!-- DECISION 5 -->
       <div class="fc-branch">
-        <div class="fc-decision"><div class="fc-box-title">Converted to IB?</div></div>
+        <div class="fc-decision"><div class="fc-tooltip">At every step, SFMC checks the <strong>Is_IB</strong> field. If the client has registered as an IB (<strong>Is_IB</strong> = <strong>true</strong>), they <strong>exit this journey</strong> and flow into the IB Welcome Email. If still <strong>false</strong>, they continue to the next step in the sequence.</div><div class="fc-box-title">Converted to IB?</div></div>
         <div class="fc-branch-t"><div class="fc-branch-stem"></div><div class="fc-branch-bar"></div></div>
         <div class="fc-branch-arms">
-          <div class="fc-branch-arm fc-branch-arm-no"><span class="fc-label no">NO</span><div class="fc-vline"></div><div class="fc-box fc-end" style="padding:8px 16px;min-width:auto;background:var(--amber-light);border-color:rgba(245,158,11,0.25);"><div class="fc-box-title" style="font-size:11px;color:var(--amber);">30-Day Cool-down</div><div class="fc-box-sub">Then re-enter E1</div></div></div>
-          <div class="fc-branch-arm fc-branch-arm-yes"><span class="fc-label yes">YES</span><div class="fc-vline"></div><div class="fc-exit-box"><div class="fc-box-title">✅ IB Welcome Email</div><div class="fc-box-sub" style="font-size:9px;color:var(--green);margin-top:1px;">Separate journey</div></div><div class="fc-ib-arrow"><div class="fc-ib-line"></div>↓<div class="fc-ib-label">IB onboarding</div></div></div>
+          <div class="fc-branch-arm fc-branch-arm-no"><span class="fc-label no">NO</span><div class="fc-vline"></div><div class="fc-box fc-end" style="padding:8px 16px;min-width:auto;background:var(--amber-light);border-color:rgba(245,158,11,0.25);"><div class="fc-tooltip">If client completes all 5 emails without converting, they enter a <strong>30-day cool-down period</strong>. After 30 days, they're automatically re-entered into E1 and the cycle restarts. This is the <strong>monthly re-blast logic</strong> for Phase 1.0. Phase 2.0 will replace this with segmented, personalised re-entry.</div><div class="fc-box-title" style="font-size:11px;color:var(--amber);">30-Day Cool-down</div><div class="fc-box-sub">Then re-enter E1</div></div></div>
+          <div class="fc-branch-arm fc-branch-arm-yes"><span class="fc-label yes">YES</span><div class="fc-vline"></div><div class="fc-exit-box"><div class="fc-tooltip"><strong>Exit point — client has become an IB.</strong> They leave this journey and are picked up by the existing IB Onboarding journey (MKTOP-7576), which sends 3 welcome emails over 5 days. That's a <strong>separate journey</strong> owned by Sichen.</div><div class="fc-box-title">✅ IB Welcome Email</div><div class="fc-box-sub" style="font-size:9px;color:var(--green);margin-top:1px;">Separate journey</div></div><div class="fc-ib-arrow"><div class="fc-ib-line"></div>↓<div class="fc-ib-label">IB onboarding</div></div></div>
         </div>
       </div>
 
@@ -637,18 +1035,128 @@ body { font-family:var(--font); color:var(--dark); background:var(--bg); line-he
         <span class="tf-label-text">Entry Criteria</span>
         <div class="tf-line"></div>
       </div>
-      <div class="tf-grid" style="max-width:49%;">
-        <div class="tf-item" style="border-top:3px solid var(--blue);">
-          <div class="tf-item-top">
-            <div class="tf-num" style="background:var(--blue);">📥</div>
-            <div class="tf-name">Retail Client Enters Journey</div>
+      <div class="ec-card">
+        <div class="ec-header">
+          <div class="ec-header-left">
+            <div class="ec-header-icon">📥</div>
+            <div>
+              <div class="ec-header-title">Retail Client Enters Journey</div>
+              <div class="ec-header-sub">Automated trigger — filter-based, real-time entry</div>
+            </div>
           </div>
-          <div class="tf-props">
-            <div class="tf-prop"><span class="tf-prop-key" style="color:var(--blue);">Audience</span><span class="tf-prop-val">All retail clients (Phase 1.0 — mass blast, no segmentation)</span></div>
-            <div class="tf-prop"><span class="tf-prop-key" style="color:var(--blue);">Exclude</span><span class="tf-prop-val">Existing IBs, ASIC clients, unsubscribed users</span></div>
-            <div class="tf-prop"><span class="tf-prop-key" style="color:var(--blue);">Trigger</span><span class="tf-prop-val">Entry scenario / condition</span></div>
-            <div class="tf-tbd">⏳ TBD — Pending confirmation from Sichen Zhang on entry trigger and available filters in SFMC</div>
+          <div class="ec-status-badge">✅ Confirmed with Sichen &amp; Nick</div>
+        </div>
+
+        <div class="ec-body">
+
+          <!-- AUDIENCE -->
+          <div class="ec-row">
+            <div class="ec-row-label">👥 Audience</div>
+            <div class="ec-row-value">All retail clients who match the filter conditions below. <strong>Phase 1.0 — pure mass blast, no behavioural segmentation.</strong> Segmentation (by trading activity, FTD, account age, etc.) deferred to Phase 2.0.</div>
           </div>
+
+          <div class="ec-divider"></div>
+
+          <!-- ENTRY METHOD -->
+          <div class="ec-row">
+            <div class="ec-row-label">🔄 Entry Method</div>
+            <div class="ec-row-value"><strong>Automated trigger.</strong> SFMC continuously monitors the MasterDataExtension — the moment a client's data matches all filter conditions, they automatically enter the journey at their own personal Day 0. No manual batch pulls. No waiting for a monthly send. Each client gets their own timeline.</div>
+          </div>
+
+          <div class="ec-divider"></div>
+
+          <!-- DATA SOURCE -->
+          <div class="ec-row">
+            <div class="ec-row-label">📊 Data Source</div>
+            <div class="ec-row-value"><strong>MasterDataExtension</strong> (SFMC, migrating to HubSpot) — owned by <strong>Nick Gao</strong>. Journey &amp; filter setup owned by <strong>Sichen Zhang</strong>.</div>
+          </div>
+
+          <div class="ec-divider"></div>
+
+          <!-- FILTER CONDITIONS -->
+          <div class="ec-row">
+            <div class="ec-row-label">🎯 Filter Conditions</div>
+            <div class="ec-row-value">
+              <div style="margin-bottom:8px;">Client must match <strong>ALL</strong> of the following conditions:</div>
+              <div class="ec-filter-list">
+                <div class="ec-filter-row">
+                  <span class="ec-filter-syntax">ID_Verified = Verified</span>
+                  <span class="ec-filter-explain">Only target clients who have completed KYC verification (hygiene — no unfinished onboarding)</span>
+                </div>
+                <div class="ec-filter-row">
+                  <span class="ec-filter-syntax">Is_IB = false</span>
+                  <span class="ec-filter-explain">Exclude clients who are already IBs — they've already converted, no point targeting them again</span>
+                </div>
+                <div class="ec-filter-row">
+                  <span class="ec-filter-syntax">Member_Lead_Source ≠ contains "IB"</span>
+                  <span class="ec-filter-explain">Exclude clients who came in through an IB referral channel — avoid overlap with the existing IB ecosystem</span>
+                </div>
+                <div class="ec-filter-row">
+                  <span class="ec-filter-syntax">MailingCountry IN (target markets)</span>
+                  <span class="ec-filter-explain">Only target clients in our Phase 1.0 regional scope (see target markets below)</span>
+                </div>
+              </div>
+              <div style="margin-top:10px; font-size:11px; color:var(--grey-500); font-style:italic;">📝 Note: The current live filter has <code style="font-family:'SF Mono',Monaco,Consolas,monospace; font-size:11px; background:var(--grey-100); padding:1px 5px; border-radius:3px;">Registration_Time &gt; 1/1/2024</code>. For Phase 1.0 we <strong>propose removing this cutoff</strong> to include the full back catalogue of pre-2024 retail clients — maximising audience for clean baseline data.</div>
+            </div>
+          </div>
+
+          <div class="ec-divider"></div>
+
+          <!-- TARGET MARKETS -->
+          <div class="ec-row">
+            <div class="ec-row-label">🌏 Target Markets</div>
+            <div class="ec-row-value">
+              <div style="margin-bottom:4px;">Retail clients across <strong>SEA, MENA, and EN markets</strong> — matching our 6-language content plan (EN, ID, KO, VN, TH, AR):</div>
+              <div class="ec-region-grid">
+                <div class="ec-region-box sea">
+                  <div class="ec-region-label">🌏 SEA</div>
+                  <div class="ec-region-countries">Thailand · Vietnam · Indonesia · Malaysia · Singapore · Philippines · South Korea</div>
+                </div>
+                <div class="ec-region-box en">
+                  <div class="ec-region-label">🌐 EN Markets</div>
+                  <div class="ec-region-countries">Additional English-speaking markets where TMGM operates (excl. UK &amp; ASIC regions)</div>
+                </div>
+                <div class="ec-region-box mena">
+                  <div class="ec-region-label">🕌 MENA</div>
+                  <div class="ec-region-countries">Saudi Arabia · UAE · Egypt · Kuwait · Qatar · Bahrain · Oman · Jordan · Lebanon</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="ec-divider"></div>
+
+          <!-- HYGIENE EXCLUSIONS -->
+          <div class="ec-row">
+            <div class="ec-row-label">🚫 Hygiene Exclusions</div>
+            <div class="ec-row-value">
+              <div style="margin-bottom:6px;">Standard list hygiene — applied automatically by SFMC before send:</div>
+              <div class="ec-exclusions">
+                <span class="ec-exclusion-tag">Existing IBs</span>
+                <span class="ec-exclusion-tag">Mainland China</span>
+                <span class="ec-exclusion-tag">Hong Kong</span>
+                <span class="ec-exclusion-tag">UK</span>
+                <span class="ec-exclusion-tag">Unsubscribed users</span>
+                <span class="ec-exclusion-tag">Closed accounts</span>
+                <span class="ec-exclusion-tag">Hard-bounced emails</span>
+              </div>
+              <div style="margin-top:8px; font-size:11px; color:var(--grey-500); font-style:italic;">Note: These are <strong>hygiene-only</strong> — no behavioural segmentation (account age, FTD, trading volume) for Phase 1.0.</div>
+            </div>
+          </div>
+
+          <div class="ec-divider"></div>
+
+          <!-- ENTRY EVENT -->
+          <div class="ec-row">
+            <div class="ec-row-label">⏱ Entry Event</div>
+            <div class="ec-row-value"><strong>Real-time</strong> — client enters their own personal Day 0 the moment their data matches the filter. Works for both existing clients (back catalogue) and new sign-ups going forward.</div>
+          </div>
+
+        </div>
+
+        <div class="ec-footer">
+          <span>⚙️</span>
+          <div><strong>Technical Setup:</strong> Automated filter on MasterDataExtension (SFMC, migrating to HubSpot). Owned by Nick Gao (data extension) + Sichen Zhang (journey &amp; templates). Confirmed in joint meeting.</div>
         </div>
       </div>
     </div>
@@ -671,7 +1179,7 @@ body { font-family:var(--font); color:var(--dark); background:var(--bg); line-he
               <div class="tf2-title">The Money Hook</div>
               <div class="tf2-stage">Stage 1 · Awareness</div>
             </div>
-            <div class="tf2-tag" style="background:var(--green-light);color:var(--green);">Day 0</div>
+            <div class="tf2-tag" style="background:var(--green-light);color:var(--green);">Day 0</div><div class="tf2-tag" style="background:var(--purple-light);color:var(--purple);margin-left:4px;">🤖 Auto</div>
           </div>
           <div class="tf2-body">
             <div class="tf2-field">
@@ -702,7 +1210,7 @@ body { font-family:var(--font); color:var(--dark); background:var(--bg); line-he
               <div class="tf2-title">Social Proof</div>
               <div class="tf2-stage">Stage 2 · Consideration</div>
             </div>
-            <div class="tf2-tag" style="background:var(--green-light);color:var(--green);">Day 2</div>
+            <div class="tf2-tag" style="background:var(--green-light);color:var(--green);">Day 2</div><div class="tf2-tag" style="background:var(--purple-light);color:var(--purple);margin-left:4px;">🤖 Auto</div>
           </div>
           <div class="tf2-body">
             <div class="tf2-field">
@@ -733,7 +1241,7 @@ body { font-family:var(--font); color:var(--dark); background:var(--bg); line-he
               <div class="tf2-title">Objection Handling</div>
               <div class="tf2-stage">Stage 3 · Confidence</div>
             </div>
-            <div class="tf2-tag" style="background:var(--green-light);color:var(--green);">Day 4</div>
+            <div class="tf2-tag" style="background:var(--green-light);color:var(--green);">Day 4</div><div class="tf2-tag" style="background:var(--purple-light);color:var(--purple);margin-left:4px;">🤖 Auto</div>
           </div>
           <div class="tf2-body">
             <div class="tf2-field">
@@ -764,7 +1272,7 @@ body { font-family:var(--font); color:var(--dark); background:var(--bg); line-he
               <div class="tf2-title">Urgency</div>
               <div class="tf2-stage">Stage 4 · Scarcity</div>
             </div>
-            <div class="tf2-tag" style="background:#fef3c7;color:#92400e;">Day 6</div>
+            <div class="tf2-tag" style="background:#fef3c7;color:#92400e;">Day 6</div><div class="tf2-tag" style="background:var(--purple-light);color:var(--purple);margin-left:4px;">🤖 Auto</div>
           </div>
           <div class="tf2-body">
             <div class="tf2-field">
@@ -795,7 +1303,7 @@ body { font-family:var(--font); color:var(--dark); background:var(--bg); line-he
               <div class="tf2-title">Final Close</div>
               <div class="tf2-stage">Stage 5 · Decision · Final Email</div>
             </div>
-            <div class="tf2-tag" style="background:#fee2e2;color:#991b1b;">Day 7 · Final</div>
+            <div class="tf2-tag" style="background:#fee2e2;color:#991b1b;">Day 7 · Final</div><div class="tf2-tag" style="background:var(--purple-light);color:var(--purple);margin-left:4px;">🤖 Auto</div>
           </div>
           <div class="tf2-body" style="display:grid;grid-template-columns:1fr 1fr;gap:14px 24px;">
             <div class="tf2-field">
@@ -829,12 +1337,12 @@ body { font-family:var(--font); color:var(--dark); background:var(--bg); line-he
     <div class="tf-footer">
       <div class="tf-footer-title">📋 Key Properties for Platform Setup</div>
       <div class="tf-footer-list">
-        <div class="tf-footer-item">Entry criteria — TBD from Sichen (SFMC filters)</div>
-        <div class="tf-footer-item">Conversion check — has client registered as IB? (exit trigger)</div>
+        <div class="tf-footer-item">Entry criteria — ✅ Confirmed — Automated trigger via MasterDataExtension filter (ID_Verified, Is_IB=false, Lead_Source excludes IB, MailingCountry in target markets)</div>
+        <div class="tf-footer-item">Conversion check — has client registered as IB? (<code style="font-family:'SF Mono',Monaco,Consolas,monospace; font-size:10px; background:var(--grey-100); padding:1px 5px; border-radius:3px;">Is_IB</code> = exit trigger, checked continuously)</div>
         <div class="tf-footer-item">Timing — Day 0, +2, +4, +6, +7 (every-other-day + back-to-back close)</div>
-        <div class="tf-footer-item">Rest days — Day 1, 3, 5 (intentional, no emails)</div>
-        <div class="tf-footer-item">Exclusions — existing IBs, ASIC clients, unsubscribed</div>
-        <div class="tf-footer-item">Post-journey — 30-day cool-down, then E1–E5 cycle restarts (monthly re-blast for Phase 1.0)</div>
+        <div class="tf-footer-item">Rest days — Day 1, 3, 5 (intentional pauses, no emails)</div>
+        <div class="tf-footer-item">Hygiene exclusions — existing IBs, unsubscribed, closed accounts, hard bounces (no behavioural segmentation in 1.0)</div>
+        <div class="tf-footer-item">Post-journey — 30-day cool-down, then E1–E5 cycle restarts automatically (monthly re-blast for Phase 1.0)</div>
       </div>
     </div>
 
@@ -1232,6 +1740,223 @@ Either way, thank you for trading with TMGM.</div>
   </div>
 </div>
 
+
+<!-- OPEN ITEMS / NEXT STEPS — SQUARE CARD GRID -->
+<div class="oi-card">
+  <div class="oi-header" onclick="this.closest('.oi-card').classList.toggle('expanded')">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <div style="width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#F59E0B,#FCD34D);display:flex;align-items:center;justify-content:center;font-size:16px;">📋</div>
+      <div>
+        <h2 style="font-size:16px;font-weight:700;color:var(--dark);margin:0;">Open Items &amp; Next Steps</h2>
+        <div style="font-size:12px;color:var(--grey-500);margin-top:2px;">What's confirmed, what's pending, and what's blocking Phase 1.0 launch</div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <span class="expand-hint">Click to expand</span>
+      <div class="oi-toggle"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="transition:transform 0.3s"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+    </div>
+  </div>
+  <div class="oi-body">
+    <div class="oi-content">
+
+      <!-- SUMMARY STATS -->
+      <div class="oi-summary">
+        <div class="oi-stat done">
+          <div class="oi-stat-num">6</div>
+          <div class="oi-stat-label">✅ Confirmed</div>
+        </div>
+        <div class="oi-stat pending">
+          <div class="oi-stat-num">5</div>
+          <div class="oi-stat-label">⏳ Pending</div>
+        </div>
+        <div class="oi-stat blocked">
+          <div class="oi-stat-num">2</div>
+          <div class="oi-stat-label">🚫 Blocked</div>
+        </div>
+        <div class="oi-stat internal">
+          <div class="oi-stat-num">4</div>
+          <div class="oi-stat-label">👥 Owners</div>
+        </div>
+      </div>
+
+      <!-- CONFIRMED / LOCKED -->
+      <div class="oi-section">
+        <div class="oi-section-label">
+          <div class="oi-section-dot" style="background:var(--green);"></div>
+          <span class="oi-section-title">✅ Confirmed &amp; Locked</span>
+          <div class="oi-section-line"></div>
+        </div>
+        <div class="oi-grid">
+          <div class="oi-sq-card done">
+            <div class="oi-sq-header">
+              <span class="oi-sq-status">Done</span>
+              <span class="oi-item-owner oi-owner-lucas">Lucas</span>
+            </div>
+            <div class="oi-sq-body">
+              <div class="oi-sq-title">Journey Structure</div>
+              <div class="oi-sq-desc">5 emails over 7 days with 3 rest days. E1 Money Hook → E2 Social Proof → E3 Objection Handling → E4 Urgency → E5 Final Close. Approved by Ryan.</div>
+            </div>
+          </div>
+          <div class="oi-sq-card done">
+            <div class="oi-sq-header">
+              <span class="oi-sq-status">Done</span>
+              <span class="oi-item-owner oi-owner-sichen">Sichen</span>
+            </div>
+            <div class="oi-sq-body">
+              <div class="oi-sq-title">Entry Mechanism</div>
+              <div class="oi-sq-desc">Automated trigger via SFMC filter on MasterDataExtension. Real-time entry, no manual batch. Confirmed with Sichen &amp; Nick in joint meeting.</div>
+            </div>
+          </div>
+          <div class="oi-sq-card done">
+            <div class="oi-sq-header">
+              <span class="oi-sq-status">Done</span>
+              <span class="oi-item-owner oi-owner-nick">Nick</span>
+            </div>
+            <div class="oi-sq-body">
+              <div class="oi-sq-title">Filter Criteria</div>
+              <div class="oi-sq-desc">4 conditions — <code>ID_Verified</code>, <code>Is_IB=false</code>, <code>Lead_Source</code>, <code>MailingCountry</code>. Pure mass blast, hygiene-only.</div>
+            </div>
+          </div>
+          <div class="oi-sq-card done">
+            <div class="oi-sq-header">
+              <span class="oi-sq-status">Done</span>
+              <span class="oi-item-owner oi-owner-lucas">Lucas</span>
+            </div>
+            <div class="oi-sq-body">
+              <div class="oi-sq-title">E4 Direction Locked</div>
+              <div class="oi-sq-desc">Option B (Opportunity Cost Framing) chosen. Dropped Option A (enhanced rate) to avoid approval overhead and fake deadlines. Cleaner baseline data.</div>
+            </div>
+          </div>
+          <div class="oi-sq-card done">
+            <div class="oi-sq-header">
+              <span class="oi-sq-status">Done</span>
+              <span class="oi-item-owner oi-owner-lucas">Lucas</span>
+            </div>
+            <div class="oi-sq-body">
+              <div class="oi-sq-title">Post-Journey Logic</div>
+              <div class="oi-sq-desc">30-day cool-down, then E1–E5 cycle auto-restarts (monthly re-blast). Phase 2.0 will replace with segmented personalised re-entry.</div>
+            </div>
+          </div>
+          <div class="oi-sq-card done">
+            <div class="oi-sq-header">
+              <span class="oi-sq-status">Done</span>
+              <span class="oi-item-owner oi-owner-lucas">Lucas</span>
+            </div>
+            <div class="oi-sq-body">
+              <div class="oi-sq-title">EN Copy Finalised</div>
+              <div class="oi-sq-desc">All 5 emails drafted — subject lines, preview text, bodies, CTAs. Ready for compliance review and design briefing.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PENDING -->
+      <div class="oi-section">
+        <div class="oi-section-label">
+          <div class="oi-section-dot" style="background:var(--amber);"></div>
+          <span class="oi-section-title">⏳ Pending — In Progress or Waiting</span>
+          <div class="oi-section-line"></div>
+        </div>
+        <div class="oi-grid">
+          <div class="oi-sq-card pending">
+            <div class="oi-sq-header">
+              <span class="oi-sq-status">Pending</span>
+              <span class="oi-item-owner oi-owner-lucas">Lucas</span>
+            </div>
+            <div class="oi-sq-body">
+              <div class="oi-sq-title">Translations</div>
+              <div class="oi-sq-desc">5 non-English versions (ID, KO, VN, TH, AR) still pending. 5 languages × 5 emails = 25 translation placeholders to fill. Needs translation team brief.</div>
+            </div>
+          </div>
+          <div class="oi-sq-card pending">
+            <div class="oi-sq-header">
+              <span class="oi-sq-status">Pending</span>
+              <span class="oi-item-owner oi-owner-ryan">Ryan</span>
+            </div>
+            <div class="oi-sq-body">
+              <div class="oi-sq-title">CTA URLs</div>
+              <div class="oi-sq-desc">All CTAs currently use placeholder links. Need real IB application URL from Ryan / Product team before launch.</div>
+            </div>
+          </div>
+          <div class="oi-sq-card pending">
+            <div class="oi-sq-header">
+              <span class="oi-sq-status">Pending</span>
+              <span class="oi-item-owner oi-owner-design">Design</span>
+            </div>
+            <div class="oi-sq-body">
+              <div class="oi-sq-title">Design Brief</div>
+              <div class="oi-sq-desc">Email template visuals — banner images, icons, layout assets for all 5 emails. Brief design team once copy is final and compliance approved.</div>
+            </div>
+          </div>
+          <div class="oi-sq-card pending">
+            <div class="oi-sq-header">
+              <span class="oi-sq-status">Pending</span>
+              <span class="oi-item-owner oi-owner-compliance">Compliance</span>
+            </div>
+            <div class="oi-sq-body">
+              <div class="oi-sq-title">Compliance Review</div>
+              <div class="oi-sq-desc">All 5 emails + earning claims ($8–$11/lot, $600–$1,700/month). Regional compliance for SEA + MENA + EN markets. Risk disclaimers.</div>
+            </div>
+          </div>
+          <div class="oi-sq-card pending">
+            <div class="oi-sq-header">
+              <span class="oi-sq-status">Pending</span>
+              <span class="oi-item-owner oi-owner-sichen">Sichen</span>
+            </div>
+            <div class="oi-sq-body">
+              <div class="oi-sq-title">SFMC Build</div>
+              <div class="oi-sq-desc">Once content is final, Sichen builds the journey steps + email templates in SFMC. Nick refreshes MasterDataExtension filter. Testing before go-live.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BLOCKED -->
+      <div class="oi-section">
+        <div class="oi-section-label">
+          <div class="oi-section-dot" style="background:var(--red);"></div>
+          <span class="oi-section-title">🚫 Blocked — Needs Decision or Validation</span>
+          <div class="oi-section-line"></div>
+        </div>
+        <div class="oi-grid">
+          <div class="oi-sq-card blocked">
+            <div class="oi-sq-header">
+              <span class="oi-sq-status">Blocked</span>
+              <span class="oi-item-owner oi-owner-data">Data Team</span>
+            </div>
+            <div class="oi-sq-body">
+              <div class="oi-sq-title">E2 Earning Scenarios</div>
+              <div class="oi-sq-desc">Trader A/B/C numbers ($600–$1,700/month, 5–8 referrals, 15–20 lots/month) are placeholders. Data team must validate against real IB earnings before launch — Ryan's explicit instruction.</div>
+            </div>
+          </div>
+          <div class="oi-sq-card blocked">
+            <div class="oi-sq-header">
+              <span class="oi-sq-status">Blocked</span>
+              <span class="oi-item-owner oi-owner-ryan">Ryan</span>
+            </div>
+            <div class="oi-sq-body">
+              <div class="oi-sq-title">Registration Date Cutoff</div>
+              <div class="oi-sq-desc">Current live filter has <code>Registration_Time &gt; 1/1/2024</code>. Proposing to remove for Phase 1.0 to include pre-2024 back catalogue. Needs Ryan's confirmation.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- OWNERSHIP LEGEND -->
+      <div style="margin-top:24px; padding:14px 18px; background:linear-gradient(135deg,#F5F3FF,#FAFBFC); border:1px solid rgba(139,92,246,0.15); border-radius:10px;">
+        <div style="font-size:11px; font-weight:700; color:var(--purple); text-transform:uppercase; letter-spacing:0.5px; margin-bottom:8px;">👥 Ownership &amp; Responsibility</div>
+        <div style="display:flex; flex-wrap:wrap; gap:8px; font-size:11.5px;">
+          <span style="display:inline-flex; align-items:center; gap:6px;"><span class="oi-item-owner oi-owner-lucas">Lucas</span> Content &amp; Strategy (Marketing)</span>
+          <span style="display:inline-flex; align-items:center; gap:6px; margin-left:12px;"><span class="oi-item-owner oi-owner-ryan">Ryan</span> Approval &amp; Direction</span>
+          <span style="display:inline-flex; align-items:center; gap:6px; margin-left:12px;"><span class="oi-item-owner oi-owner-sichen">Sichen</span> Journey &amp; Templates (SFMC)</span>
+          <span style="display:inline-flex; align-items:center; gap:6px; margin-left:12px;"><span class="oi-item-owner oi-owner-nick">Nick</span> Data Extension (SFMC)</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
 </div><!-- end main -->
 
 <script>
@@ -1273,6 +1998,31 @@ function showDetail(id) {
 function closeDetail() {
   document.querySelectorAll('.j-detail-panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.j-node').forEach(n => n.classList.remove('active-detail'));
+}
+
+function scrollToDetail(id) {
+  // Scroll to top journey section and open the detail panel
+  const panel = document.getElementById('detail-' + id);
+  const allPanels = document.querySelectorAll('.j-detail-panel');
+  const allNodes = document.querySelectorAll('.j-node');
+
+  // Close all panels and reset nodes
+  allPanels.forEach(p => p.classList.remove('active'));
+  allNodes.forEach(n => n.classList.remove('active-detail'));
+
+  // Open target panel
+  panel.classList.add('active');
+
+  // Find matching node and highlight it
+  const nodes = document.querySelectorAll('.j-node');
+  nodes.forEach(n => {
+    if (n.getAttribute('onclick') && n.getAttribute('onclick').includes("'" + id + "'")) {
+      n.classList.add('active-detail');
+    }
+  });
+
+  // Smooth scroll to the journey section
+  document.querySelector('.journey').scrollIntoView({ behavior:'smooth', block:'start' });
 }
 </script>
 
