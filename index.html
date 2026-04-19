@@ -169,6 +169,15 @@ body { font-family:var(--font); color:var(--dark); background:var(--bg); line-he
 .fc-upstream .fc-box-sub { color:var(--grey-500); }
 .fc-upstream-owner { font-size:9px; color:var(--purple); font-weight:600; margin-top:3px; font-style:italic; }
 .fc-upstream-label { font-size:10px; font-weight:800; color:var(--blue); text-transform:uppercase; letter-spacing:1px; padding:4px 12px; background:var(--blue-light); border-radius:20px; margin-bottom:8px; display:inline-block; }
+
+/* UPSTREAM CHECKPOINT BOXES (KYC verified, FTD completed) — green */
+.fc-upstream.fc-checkpoint { background:linear-gradient(135deg,#ECFDF5,#FFFFFF); border:1.5px dashed rgba(16,185,129,0.45); }
+.fc-upstream.fc-checkpoint .fc-box-title { color:var(--green); }
+
+/* UPSTREAM BUFFER BOX (7-day wait) — amber */
+.fc-upstream.fc-buffer { background:linear-gradient(135deg,#FFFBEB,#FFFFFF); border:1.5px dashed rgba(245,158,11,0.45); }
+.fc-upstream.fc-buffer .fc-box-title { color:var(--amber); }
+
 .fc-upstream-divider { width:80%; max-width:400px; height:1px; background:linear-gradient(90deg,transparent,var(--grey-300),transparent); margin:14px auto 6px; position:relative; }
 .fc-upstream-divider::after { content:'↓ matches filter → enters journey'; position:absolute; top:-6px; left:50%; transform:translateX(-50%); background:var(--white); padding:0 10px; font-size:9px; color:var(--grey-500); font-style:italic; white-space:nowrap; }
 
@@ -312,6 +321,12 @@ body { font-family:var(--font); color:var(--dark); background:var(--bg); line-he
 .ec-exclusions { display:flex; flex-wrap:wrap; gap:6px; margin-top:4px; }
 .ec-exclusion-tag { font-size:11px; font-weight:600; padding:4px 10px; border-radius:20px; background:var(--red-light); color:var(--red); }
 
+.ec-critical-box { padding:14px 18px; background:linear-gradient(135deg,#FEF2F2,#FFFFFF); border:1.5px solid rgba(239,68,68,0.3); border-radius:10px; margin-bottom:6px; }
+.ec-critical-label { font-size:10px; font-weight:800; text-transform:uppercase; letter-spacing:0.8px; color:var(--red); margin-bottom:6px; display:flex; align-items:center; gap:6px; }
+.ec-critical-text { font-size:13px; color:var(--dark); line-height:1.6; }
+.ec-critical-text strong { color:var(--red); }
+.ec-critical-text code { font-family:'SF Mono', Monaco, Consolas, monospace; font-size:11px; background:rgba(239,68,68,0.08); padding:1px 6px; border-radius:3px; color:var(--red); }
+
 .ec-footer { padding:12px 20px; background:linear-gradient(135deg,#F5F3FF,#FAFBFC); border-top:1px solid var(--grey-100); display:flex; align-items:center; gap:10px; font-size:11px; color:var(--grey-600); }
 .ec-footer strong { color:var(--purple); }
 
@@ -383,6 +398,139 @@ body { font-family:var(--font); color:var(--dark); background:var(--bg); line-he
 /* BLANK LANG PLACEHOLDER */
 .lang-placeholder { padding:40px 28px; text-align:center; }
 .lang-placeholder-text { font-size:13px; color:var(--grey-400); font-style:italic; }
+
+/* CLIENT JOURNEY CONTEXT — "BEFORE OUR JOURNEY BEGINS" SECTION */
+.cjc-card { background:var(--white); border-radius:var(--radius-lg); border:1px solid var(--grey-200); box-shadow:var(--shadow-sm); margin-bottom:40px; overflow:hidden; }
+.cjc-header { padding:20px 28px; display:flex; align-items:center; justify-content:space-between; cursor:pointer; user-select:none; border-bottom:1px solid transparent; transition:border-color 0.2s; background:linear-gradient(135deg,#EFF6FF,#FFFFFF); }
+.cjc-card.expanded .cjc-header { border-bottom-color:var(--grey-100); }
+.cjc-card.expanded .cjc-toggle { background:#CC1042; color:white; }
+.cjc-card.expanded .cjc-toggle svg { transform:rotate(180deg); }
+.cjc-card.expanded .expand-hint { opacity:0; pointer-events:none; }
+.cjc-toggle { width:28px; height:28px; border-radius:6px; background:var(--grey-100); display:flex; align-items:center; justify-content:center; color:var(--grey-500); font-size:12px; transition:all 0.3s; flex-shrink:0; }
+.cjc-body { max-height:0; overflow:hidden; transition:max-height 0.5s ease; }
+.cjc-card.expanded .cjc-body { max-height:12000px; }
+.cjc-content { padding:28px; }
+
+/* Lifecycle overview bar */
+.cjc-lifecycle { display:grid; grid-template-columns:2fr auto 1.2fr auto 1fr; gap:10px; align-items:stretch; margin-bottom:24px; padding:16px; background:linear-gradient(135deg,#F9FAFB,#FFFFFF); border:1px solid var(--grey-200); border-radius:12px; }
+.cjc-lc-stage { padding:14px 16px; border-radius:10px; text-align:center; display:flex; flex-direction:column; justify-content:center; gap:4px; }
+.cjc-lc-stage.upstream { background:var(--grey-100); border:1px dashed var(--grey-300); }
+.cjc-lc-stage.ours { background:linear-gradient(135deg,#ECFDF5,#FFFFFF); border:2px solid var(--green); position:relative; }
+.cjc-lc-stage.ours::after { content:'⭐ We are here'; position:absolute; bottom:-22px; left:50%; transform:translateX(-50%); font-size:10px; font-weight:700; color:var(--green); white-space:nowrap; }
+.cjc-lc-stage.downstream { background:var(--blue-light); border:1px dashed rgba(59,130,246,0.35); }
+.cjc-lc-label { font-size:9px; font-weight:800; text-transform:uppercase; letter-spacing:0.5px; color:var(--grey-500); }
+.cjc-lc-stage.ours .cjc-lc-label { color:var(--green); }
+.cjc-lc-stage.downstream .cjc-lc-label { color:var(--blue); }
+.cjc-lc-title { font-size:13px; font-weight:700; color:var(--dark); line-height:1.3; }
+.cjc-lc-sub { font-size:10px; color:var(--grey-500); line-height:1.4; }
+.cjc-lc-arrow { display:flex; align-items:center; justify-content:center; color:var(--grey-400); font-size:18px; font-weight:700; }
+
+/* Summary stats */
+.cjc-summary { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:28px; margin-top:30px; }
+.cjc-stat { padding:18px 20px; border-radius:12px; background:linear-gradient(135deg,#EFF6FF,#FFFFFF); border:1.5px solid rgba(59,130,246,0.2); display:flex; align-items:center; gap:16px; }
+.cjc-stat-num { font-size:32px; font-weight:800; color:var(--blue); line-height:1; flex-shrink:0; }
+.cjc-stat-body { flex:1; }
+.cjc-stat-label { font-size:12px; font-weight:800; color:var(--dark); text-transform:uppercase; letter-spacing:0.5px; }
+.cjc-stat-desc { font-size:11px; color:var(--grey-500); line-height:1.5; margin-top:3px; }
+
+/* Journey sub-cards */
+.cjc-journeys { display:flex; flex-direction:column; gap:14px; }
+.cjc-jc { border-radius:12px; overflow:hidden; background:var(--white); border:1px solid var(--grey-200); transition:box-shadow 0.2s; }
+.cjc-jc:hover { box-shadow:0 4px 12px rgba(0,0,0,0.06); }
+.cjc-jc-header { padding:14px 18px; display:flex; align-items:center; justify-content:space-between; gap:12px; cursor:pointer; user-select:none; border-bottom:1px solid transparent; transition:border-color 0.2s; }
+.cjc-jc.expanded .cjc-jc-header { border-bottom-color:var(--grey-100); }
+.cjc-jc.expanded .cjc-jc-toggle { transform:rotate(180deg); }
+
+.cjc-jc.stage-1 .cjc-jc-header { background:linear-gradient(135deg,#F9FAFB,#FFFFFF); border-left:4px solid var(--grey-400); }
+.cjc-jc.stage-2 .cjc-jc-header { background:linear-gradient(135deg,#EFF6FF,#FFFFFF); border-left:4px solid var(--blue); }
+.cjc-jc.stage-3 .cjc-jc-header { background:linear-gradient(135deg,#F5F3FF,#FFFFFF); border-left:4px solid var(--purple); }
+.cjc-jc.stage-4 .cjc-jc-header { background:linear-gradient(135deg,#ECFDF5,#FFFFFF); border-left:4px solid var(--green); }
+
+.cjc-jc-left { display:flex; align-items:center; gap:12px; }
+.cjc-jc-num { width:30px; height:30px; border-radius:8px; color:white; font-size:12px; font-weight:800; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.cjc-jc.stage-1 .cjc-jc-num { background:var(--grey-500); }
+.cjc-jc.stage-2 .cjc-jc-num { background:var(--blue); }
+.cjc-jc.stage-3 .cjc-jc-num { background:var(--purple); }
+.cjc-jc.stage-4 .cjc-jc-num { background:var(--green); }
+.cjc-jc-title { font-size:13px; font-weight:700; color:var(--dark); }
+.cjc-jc-sub { font-size:11px; color:var(--grey-500); margin-top:2px; }
+.cjc-jc-right { display:flex; align-items:center; gap:10px; }
+.cjc-jc-count { font-size:11px; font-weight:700; padding:4px 10px; border-radius:20px; }
+.cjc-jc.stage-1 .cjc-jc-count { background:var(--grey-100); color:var(--grey-600); }
+.cjc-jc.stage-2 .cjc-jc-count { background:var(--blue-light); color:var(--blue-dark); }
+.cjc-jc.stage-3 .cjc-jc-count { background:var(--purple-light); color:var(--purple); }
+.cjc-jc.stage-4 .cjc-jc-count { background:var(--green-light); color:var(--green); }
+.cjc-jc-source { font-size:10px; color:var(--grey-400); font-family:'SF Mono', Monaco, Consolas, monospace; padding:3px 8px; background:var(--grey-50); border-radius:4px; }
+.cjc-jc-toggle { width:24px; height:24px; color:var(--grey-400); transition:transform 0.3s; font-size:11px; }
+
+.cjc-jc-body { max-height:0; overflow:hidden; transition:max-height 0.5s ease; }
+.cjc-jc.expanded .cjc-jc-body { max-height:3000px; }
+.cjc-jc-content { padding:18px; }
+
+.cjc-region-tabs { display:flex; gap:0; border-bottom:1px solid var(--grey-200); margin-bottom:14px; }
+.cjc-region-tab { padding:8px 16px; font-size:11.5px; font-weight:600; color:var(--grey-500); cursor:pointer; border-bottom:2px solid transparent; transition:all 0.2s; background:transparent; border-top:none; border-left:none; border-right:none; font-family:var(--font); }
+.cjc-region-tab.active { color:var(--green); border-bottom-color:var(--green); }
+.cjc-region-tab:hover { color:var(--dark); }
+.cjc-region-content { display:none; }
+.cjc-region-content.active { display:block; }
+
+.cjc-table { width:100%; border-collapse:separate; border-spacing:0; font-size:11.5px; }
+.cjc-table thead th { background:var(--grey-50); padding:10px 12px; text-align:left; font-weight:700; color:var(--grey-500); font-size:10px; text-transform:uppercase; letter-spacing:0.5px; border-bottom:1px solid var(--grey-200); }
+.cjc-table tbody td { padding:10px 12px; border-bottom:1px solid var(--grey-100); color:var(--grey-700); line-height:1.5; vertical-align:top; }
+.cjc-table tbody tr:last-child td { border-bottom:none; }
+.cjc-table .cjc-t-num { font-weight:700; color:var(--dark); width:36px; }
+.cjc-table .cjc-t-theme { font-weight:600; color:var(--dark); min-width:140px; }
+.cjc-table .cjc-t-subject { font-style:italic; color:var(--grey-700); }
+.cjc-table .cjc-t-cta { color:var(--blue-dark); font-weight:600; white-space:nowrap; font-size:10.5px; }
+.cjc-table .cjc-t-gap { color:var(--grey-400); font-family:'SF Mono', Monaco, Consolas, monospace; font-size:10px; white-space:nowrap; width:45px; }
+
+/* GAP COLUMN HEADER TOOLTIP */
+.cjc-table th.cjc-th-gap { position:relative; cursor:help; }
+.cjc-table th.cjc-th-gap::after { content:'ⓘ'; font-size:10px; color:var(--grey-400); margin-left:4px; font-family:var(--font); }
+.cjc-gap-tooltip {
+  position:absolute; bottom:calc(100% + 8px); right:0; transform:translateX(0);
+  background:var(--grey-900); color:var(--white); font-size:11px; font-weight:500;
+  line-height:1.5; padding:10px 14px; border-radius:8px; white-space:normal;
+  width:280px; text-align:left; opacity:0; visibility:hidden; text-transform:none; letter-spacing:normal;
+  transition:opacity 0.2s, visibility 0.2s; pointer-events:none; z-index:9999;
+  box-shadow:0 10px 15px rgba(0,0,0,0.15), 0 4px 6px rgba(0,0,0,0.08);
+}
+.cjc-gap-tooltip::after {
+  content:''; position:absolute; top:100%; right:12px;
+  border:6px solid transparent; border-top-color:var(--grey-900);
+}
+.cjc-table th.cjc-th-gap:hover .cjc-gap-tooltip { opacity:1; visibility:visible; }
+.cjc-gap-tooltip strong { color:#FCD34D; font-weight:700; }
+.cjc-gap-tooltip code { font-family:'SF Mono', Monaco, Consolas, monospace; background:rgba(255,255,255,0.1); padding:1px 5px; border-radius:3px; font-size:10px; color:#FCD34D; }
+
+.cjc-meta-row { display:flex; gap:14px; margin-bottom:14px; flex-wrap:wrap; padding:10px 12px; background:var(--grey-50); border-radius:8px; font-size:11px; color:var(--grey-600); }
+.cjc-meta-row strong { color:var(--dark); }
+.cjc-meta-row code { font-family:'SF Mono', Monaco, Consolas, monospace; background:var(--white); padding:2px 6px; border-radius:4px; color:var(--purple); font-size:10.5px; }
+
+/* Strategic implication callout */
+.cjc-implication { margin-top:28px; padding:18px 22px; background:linear-gradient(135deg,#FEF3C7,#FFFBEB); border:1.5px solid rgba(245,158,11,0.3); border-radius:12px; }
+.cjc-implication-label { font-size:10px; font-weight:800; text-transform:uppercase; letter-spacing:0.8px; color:var(--amber); margin-bottom:8px; display:flex; align-items:center; gap:6px; }
+.cjc-implication-text { font-size:13px; color:var(--dark); line-height:1.7; }
+.cjc-implication-text strong { color:#92400E; }
+
+/* Source documents footer */
+.cjc-sources { margin-top:20px; padding:16px 20px; background:linear-gradient(135deg,#F5F3FF,#FAFBFC); border:1px solid rgba(139,92,246,0.15); border-radius:10px; }
+.cjc-sources-label { font-size:10px; font-weight:800; text-transform:uppercase; letter-spacing:0.8px; color:var(--purple); margin-bottom:10px; }
+.cjc-sources-list { display:flex; flex-direction:column; gap:6px; font-size:11.5px; color:var(--grey-700); line-height:1.6; }
+.cjc-sources-list code { font-family:'SF Mono', Monaco, Consolas, monospace; background:rgba(139,92,246,0.08); padding:2px 6px; border-radius:4px; color:var(--purple); font-size:10.5px; }
+.cjc-sources-list a { color:var(--blue); text-decoration:none; }
+.cjc-sources-list a:hover { text-decoration:underline; }
+
+@media(max-width:1024px) {
+  .cjc-lifecycle { grid-template-columns:1fr; gap:6px; }
+  .cjc-lc-arrow { transform:rotate(90deg); }
+  .cjc-summary { grid-template-columns:1fr; }
+}
+@media(max-width:768px) {
+  .cjc-content { padding:18px; }
+  .cjc-table { font-size:10.5px; }
+  .cjc-table thead th, .cjc-table tbody td { padding:8px; }
+}
 
 /* OPEN ITEMS / NEXT STEPS CARD */
 .oi-card { background:var(--white); border-radius:var(--radius-lg); border:1px solid var(--grey-200); box-shadow:var(--shadow-sm); margin-bottom:40px; overflow:hidden; }
@@ -505,7 +653,7 @@ body { font-family:var(--font); color:var(--dark); background:var(--bg); line-he
           <span class="header-badge badge-ar">AR</span>
         </div>
       </div>
-      <div class="header-phase"><strong>Phase 1.0</strong> — Automated mass-blast journey (powered by SFMC, migrating to HubSpot).<br>🌏 <strong>Target:</strong> Retail clients across SEA, MENA, and EN markets (6 languages: EN, ID, KO, VN, TH, AR).<br>🚫 <strong>Hygiene exclusions only:</strong> existing IBs, unsubscribed users, closed accounts, hard bounces.<br>🎯 <strong>Objective:</strong> launch the revamped journey, collect baseline data, and establish conversion benchmarks for Phase 2.0 optimisation.</div>
+      <div class="header-phase"><strong>Phase 1.0</strong> — Automated mass-blast journey (powered by SFMC, migrating to HubSpot).<br>🌏 <strong>Target:</strong> Retail clients across SEA, MENA, and EN markets (6 languages: EN, ID, KO, VN, TH, AR).<br>✅ <strong>Entry sequence:</strong> KYC verified → FTD completed → 7-day buffer → enters Retail-to-IB journey.<br>⛔ <strong>Critical exclusion:</strong> Existing IB clients are excluded (<code style="font-family:'SF Mono',Monaco,Consolas,monospace;font-size:10px;background:rgba(239,68,68,0.08);padding:1px 5px;border-radius:3px;color:#dc2626;">Is_IB = false</code>) — a core business rule, not just hygiene.<br>🧹 <strong>Hygiene:</strong> unsubscribed users, closed accounts, hard-bounced emails.<br>🎯 <strong>Objective:</strong> launch the revamped journey, collect baseline data, and establish conversion benchmarks for Phase 2.0 optimisation.</div>
     </div>
   </div>
 </div>
@@ -592,7 +740,7 @@ body { font-family:var(--font); color:var(--dark); background:var(--bg); line-he
         <div class="j-detail-goal-label">📌 Goal</div>
         <div class="j-detail-goal-text">Plant the number in their head. Conversion isn't expected at E1 — curiosity is.</div>
       </div>
-      <div class="j-detail-field"><div class="j-5w1h-label"><span class="j-5w1h-icon">👥</span> WHO · Sent To</div><div class="j-detail-value">All retail clients entering the journey — hooks them with earning potential to spark interest in becoming an IB</div></div>
+      <div class="j-detail-field"><div class="j-5w1h-label"><span class="j-5w1h-icon">👥</span> WHO · Sent To</div><div class="j-detail-value">Retail clients who have <strong>completed KYC + made their First Time Deposit (FTD) at least 7 days ago</strong> — and match the full Phase 1.0 filter. Existing IBs are explicitly excluded (<code>Is_IB = false</code>).</div></div>
       <div class="j-detail-field"><div class="j-5w1h-label"><span class="j-5w1h-icon">⏰</span> WHEN · Send Timing</div><div class="j-detail-value">Day 0 — sent immediately when client matches the journey filter</div></div>
       <div class="j-detail-field"><div class="j-5w1h-label"><span class="j-5w1h-icon">❓</span> WHY · Objective</div><div class="j-detail-value">Hook the reader with earning potential — lead with money, not education</div></div>
       <div class="j-detail-field"><div class="j-5w1h-label"><span class="j-5w1h-icon">🧠</span> Psychology</div><div class="j-detail-value">Curiosity — hook with numbers before education</div></div>
@@ -611,7 +759,7 @@ body { font-family:var(--font); color:var(--dark); background:var(--bg); line-he
           <div class="j-tech-field"><div class="j-tech-label">🔄 Trigger Source</div><div class="j-tech-value plain">Automated filter — client matches Phase 1.0 entry criteria</div></div>
           <div class="j-tech-field"><div class="j-tech-label">⏱ Wait Time</div><div class="j-tech-value plain">None — sends immediately on filter match</div></div>
           <div class="j-tech-field"><div class="j-tech-label">✓ Pre-Send Check</div><div class="j-tech-value plain">N/A (first email in sequence)</div></div>
-          <div class="j-tech-field full"><div class="j-tech-label">🗂 Data Fields Checked</div><div class="j-tech-value"><code>Registration_Time</code> <code>ID_Verified</code> <code>Is_IB</code> <code>Member_Lead_Source</code> <code>MailingCountry</code></div></div>
+          <div class="j-tech-field full"><div class="j-tech-label">🗂 Data Fields Checked</div><div class="j-tech-value"><code>ID_Verified</code> <code>Is_IB</code> <code>Member_Lead_Source</code> <code>MailingCountry</code> <code>TA_First_Deposit_Time</code></div></div>
           <div class="j-tech-field full"><div class="j-tech-label">🚪 Exit Trigger (monitored throughout journey)</div><div class="j-tech-value"><code>Is_IB</code> changes from <code>false</code> → <code>true</code> (client registers as IB)</div></div>
         </div>
       </div>
@@ -903,11 +1051,36 @@ body { font-family:var(--font); color:var(--dark); background:var(--bg); line-he
       </div>
       <div class="fc-vline"></div>
 
-      <!-- UPSTREAM 3: Filter Check -->
+      <!-- UPSTREAM 3: KYC Verified (NEW) -->
+      <div class="fc-box fc-upstream fc-checkpoint">
+        <div class="fc-tooltip tip-below"><strong>Minimum prerequisite for this journey.</strong> Client must complete KYC verification before they can be considered. Tracked via <code>ID_Verified = Verified</code>. Per Ryan's direction, only fully verified clients are eligible.</div>
+        <div class="fc-box-title">✅ KYC Verified</div>
+        <div class="fc-box-sub">Client has completed KYC — <code style="font-family:'SF Mono',Monaco,Consolas,monospace;font-size:10px;">ID_Verified = Verified</code></div>
+      </div>
+      <div class="fc-vline"></div>
+
+      <!-- UPSTREAM 4: FTD Completed (NEW) -->
+      <div class="fc-box fc-upstream fc-checkpoint">
+        <div class="fc-tooltip tip-below"><strong>Second prerequisite — client has made their First Time Deposit.</strong> Tracked via <code>TA_First_Deposit_Time</code> (confirmed by Nick Gao). The existing KYC-FTD onboarding journey will automatically exit when FTD is completed (goal-based exit), avoiding overlap with our journey.</div>
+        <div class="fc-box-title">💰 FTD Completed</div>
+        <div class="fc-box-sub">Client has made First Time Deposit — <code style="font-family:'SF Mono',Monaco,Consolas,monospace;font-size:10px;">TA_First_Deposit_Time IS NOT NULL</code></div>
+        <div class="fc-upstream-owner">KYC-FTD journey exits on FTD goal · No overlap with our journey</div>
+      </div>
+      <div class="fc-vline"></div>
+
+      <!-- UPSTREAM 5: 7-Day Buffer (NEW) -->
+      <div class="fc-box fc-upstream fc-buffer">
+        <div class="fc-tooltip tip-below"><strong>7-day wait period after FTD.</strong> Ensures the KYC-FTD onboarding journey has fully finished (max 9 days) and the client has had time to actually trade before we pitch IB. Makes our "you're already trading" framing in E1 truthful.</div>
+        <div class="fc-box-title">🕐 7-Day Buffer Period</div>
+        <div class="fc-box-sub">Wait 7 days post-FTD — <code style="font-family:'SF Mono',Monaco,Consolas,monospace;font-size:10px;">TA_First_Deposit_Time ≤ (today - 7d)</code></div>
+      </div>
+      <div class="fc-vline"></div>
+
+      <!-- UPSTREAM 6: Filter Check -->
       <div class="fc-box fc-upstream">
-        <div class="fc-tooltip tip-below">SFMC continuously checks every client against the Phase 1.0 filter criteria. The moment a client's data matches all conditions, they automatically enter the journey. <strong>Sichen Zhang</strong> owns the filter logic and journey setup.</div>
+        <div class="fc-tooltip tip-below">SFMC continuously checks every client against the Phase 1.0 filter criteria. The moment a client's data matches all conditions (KYC verified + FTD completed + 7-day buffer passed + not an existing IB + in target markets), they automatically enter the journey. <strong>Sichen Zhang</strong> owns the filter logic and journey setup.</div>
         <div class="fc-box-title">⏳ Continuous Filter Check</div>
-        <div class="fc-box-sub">Does client match Phase 1.0 entry criteria? (automated, real-time)</div>
+        <div class="fc-box-sub">All 6 filter conditions matched? (automated, real-time)</div>
         <div class="fc-upstream-owner">Owned by Sichen Zhang · Journey & filter setup</div>
       </div>
 
@@ -915,9 +1088,9 @@ body { font-family:var(--font); color:var(--dark); background:var(--bg); line-he
 
       <!-- ENTRY -->
       <div class="fc-box fc-entry">
-        <div class="fc-tooltip tip-below"><strong>Day 0 of the 5-email journey starts here.</strong> Each client enters on their own personal timeline — whenever they match the filter. This is the handoff from upstream pipeline to the journey itself.</div>
+        <div class="fc-tooltip tip-below"><strong>Day 0 of the 5-email journey starts here.</strong> Each client enters on their own personal timeline — whenever they match the full filter (KYC + FTD + 7-day buffer + not existing IB). This is the handoff from upstream pipeline to the journey itself.</div>
         <div class="fc-box-title">📥 Retail Client Enters Journey</div>
-        <div class="fc-box-sub">Automated trigger · SEA + MENA + EN markets · Hygiene exclusions only</div>
+        <div class="fc-box-sub">Automated trigger · After KYC + FTD + 7-day buffer · SEA + MENA + EN markets</div>
       </div>
       <div class="fc-vline"></div>
 
@@ -1011,6 +1184,293 @@ body { font-family:var(--font); color:var(--dark); background:var(--bg); line-he
   </div>
 </div>
 
+<!-- CLIENT JOURNEY CONTEXT — BEFORE OUR JOURNEY BEGINS -->
+<div class="cjc-card">
+  <div class="cjc-header" onclick="this.closest('.cjc-card').classList.toggle('expanded')">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <div style="width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#3B82F6,#60A5FA);display:flex;align-items:center;justify-content:center;font-size:16px;">📊</div>
+      <div>
+        <h2 style="font-size:16px;font-weight:700;color:var(--dark);margin:0;">Client Journey Context — Before Our Journey Begins</h2>
+        <div style="font-size:12px;color:var(--grey-500);margin-top:2px;">What clients experience in the full TMGM onboarding pipeline before reaching Retail-to-IB</div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <span class="expand-hint">Click to expand</span>
+      <div class="cjc-toggle"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="transition:transform 0.3s"><polyline points="6 9 12 15 18 9"></polyline></svg></div>
+    </div>
+  </div>
+  <div class="cjc-body">
+    <div class="cjc-content">
+
+      <!-- LIFECYCLE OVERVIEW -->
+      <div class="cjc-lifecycle">
+        <div class="cjc-lc-stage upstream">
+          <div class="cjc-lc-label">🔼 Upstream</div>
+          <div class="cjc-lc-title">4 Onboarding Journeys</div>
+          <div class="cjc-lc-sub">Demo-Live · Live-Pending<br>Pending-KYC · KYC-FTD<br><strong>21–23 emails</strong></div>
+        </div>
+        <div class="cjc-lc-arrow">→</div>
+        <div class="cjc-lc-stage ours">
+          <div class="cjc-lc-label">⭐ Our Journey</div>
+          <div class="cjc-lc-title">Retail-to-IB EDM</div>
+          <div class="cjc-lc-sub">Phase 1.0<br><strong>5 emails · 7 days</strong></div>
+        </div>
+        <div class="cjc-lc-arrow">→</div>
+        <div class="cjc-lc-stage downstream">
+          <div class="cjc-lc-label">🔽 If Converted</div>
+          <div class="cjc-lc-title">IB Onboarding</div>
+          <div class="cjc-lc-sub">MKTOP-7576<br><strong>3 emails · 5 days</strong></div>
+        </div>
+      </div>
+
+      <!-- SUMMARY STATS -->
+      <div class="cjc-summary">
+        <div class="cjc-stat">
+          <div class="cjc-stat-num">21-23</div>
+          <div class="cjc-stat-body">
+            <div class="cjc-stat-label">📧 Emails Before Our E1</div>
+            <div class="cjc-stat-desc">Theoretical maximum — client has already received this many TMGM emails before our Retail-to-IB journey begins. Range depends on KYC-FTD regional variant.</div>
+          </div>
+        </div>
+        <div class="cjc-stat">
+          <div class="cjc-stat-num">4</div>
+          <div class="cjc-stat-body">
+            <div class="cjc-stat-label">🗂️ Upstream Journeys</div>
+            <div class="cjc-stat-desc">Demo-Live (6) · Live-Pending (6) · Pending-KYC (6) · KYC-FTD (3-5 by region). Each journey has its own trigger, timing, and content strategy.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- JOURNEY SUB-CARDS -->
+      <div class="cjc-journeys">
+
+        <!-- JOURNEY 1: DEMO → LIVE -->
+        <div class="cjc-jc stage-1">
+          <div class="cjc-jc-header" onclick="this.closest('.cjc-jc').classList.toggle('expanded')">
+            <div class="cjc-jc-left">
+              <div class="cjc-jc-num">1</div>
+              <div>
+                <div class="cjc-jc-title">Demo → Live</div>
+                <div class="cjc-jc-sub">Convert demo users to live accounts — trading tools, community, rewards</div>
+              </div>
+            </div>
+            <div class="cjc-jc-right">
+              <span class="cjc-jc-count">6 emails · ~5 days</span>
+              <span class="cjc-jc-source">demo-live</span>
+              <div class="cjc-jc-toggle">▼</div>
+            </div>
+          </div>
+          <div class="cjc-jc-body">
+            <div class="cjc-jc-content">
+              <div class="cjc-meta-row">
+                <span><strong>Trigger:</strong> Client opens demo account</span>
+                <span><strong>Exit:</strong> Opens live account</span>
+                <span><strong>Source:</strong> Sheet <code>demo-live</code>, column <code>Sequence</code> (MY ENG variant)</span>
+              </div>
+              <table class="cjc-table">
+                <thead>
+                  <tr><th>#</th><th>Theme</th><th>Subject Line</th><th>CTA</th><th class="cjc-th-gap">Gap<div class="cjc-gap-tooltip"><strong>Wait time between emails</strong><br><br>Shows how many hours SFMC waits after the previous email before sending the next one. <code>28h</code> = sent 28 hours after previous email.<br><br>The dash <code>—</code> on Email 1 means no wait (first email, triggered by journey entry).<br><br><strong>Source:</strong> <code>waiting Period</code> column in Sichen's Onboarding_Journey.xlsx</div></th></tr>
+                </thead>
+                <tbody>
+                  <tr><td class="cjc-t-num">1</td><td class="cjc-t-theme">Welcome &amp; Demo Activation</td><td class="cjc-t-subject">"Your TMGM demo account is now open!"</td><td class="cjc-t-cta">Login to MT5</td><td class="cjc-t-gap">—</td></tr>
+                  <tr><td class="cjc-t-num">2</td><td class="cjc-t-theme">Advanced Trading Tools</td><td class="cjc-t-subject">"Trade smarter, better &amp; faster"</td><td class="cjc-t-cta">Register &amp; Verify ID</td><td class="cjc-t-gap">28h</td></tr>
+                  <tr><td class="cjc-t-num">3</td><td class="cjc-t-theme">Trading Ecosystem &amp; Social Appeal</td><td class="cjc-t-subject">"Join the TMGM trader community"</td><td class="cjc-t-cta">Access Trader Central</td><td class="cjc-t-gap">27h</td></tr>
+                  <tr><td class="cjc-t-num">4</td><td class="cjc-t-theme">Connectivity &amp; Convenience</td><td class="cjc-t-subject">"24/7 connected to the market"</td><td class="cjc-t-cta">Download App / Login Mobile</td><td class="cjc-t-gap">22h</td></tr>
+                  <tr><td class="cjc-t-num">5</td><td class="cjc-t-theme">Incentives &amp; Loyalty Rewards</td><td class="cjc-t-subject">"Quick, get your rewards from us"</td><td class="cjc-t-cta">Fund Account (Deposit)</td><td class="cjc-t-gap">29h</td></tr>
+                  <tr><td class="cjc-t-num">6</td><td class="cjc-t-theme">Brand Security &amp; Support</td><td class="cjc-t-subject">"Providing 24/7 top-notch service"</td><td class="cjc-t-cta">Contact Support / Go Live</td><td class="cjc-t-gap">21h</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- JOURNEY 2: LIVE → PENDING -->
+        <div class="cjc-jc stage-2">
+          <div class="cjc-jc-header" onclick="this.closest('.cjc-jc').classList.toggle('expanded')">
+            <div class="cjc-jc-left">
+              <div class="cjc-jc-num">2</div>
+              <div>
+                <div class="cjc-jc-title">Live → Pending</div>
+                <div class="cjc-jc-sub">Push clients to complete KYC verification — security, platform features, rewards</div>
+              </div>
+            </div>
+            <div class="cjc-jc-right">
+              <span class="cjc-jc-count">6 emails · ~5 days</span>
+              <span class="cjc-jc-source">live2pending</span>
+              <div class="cjc-jc-toggle">▼</div>
+            </div>
+          </div>
+          <div class="cjc-jc-body">
+            <div class="cjc-jc-content">
+              <div class="cjc-meta-row">
+                <span><strong>Trigger:</strong> Client opens live account (KYC not yet submitted)</span>
+                <span><strong>Exit:</strong> KYC documents submitted</span>
+                <span><strong>Source:</strong> Sheet <code>live2pending</code>, column <code>Step</code> (MY ENG variant, excludes 3 RAF sub-campaign emails)</span>
+              </div>
+              <table class="cjc-table">
+                <thead>
+                  <tr><th>#</th><th>Theme</th><th>Subject Line</th><th>CTA</th><th class="cjc-th-gap">Gap<div class="cjc-gap-tooltip"><strong>Wait time between emails</strong><br><br>Shows how many hours SFMC waits after the previous email before sending the next one. <code>28h</code> = sent 28 hours after previous email.<br><br>The dash <code>—</code> on Email 1 means no wait (first email, triggered by journey entry).<br><br><strong>Source:</strong> <code>waiting Period</code> column in Sichen's Onboarding_Journey.xlsx</div></th></tr>
+                </thead>
+                <tbody>
+                  <tr><td class="cjc-t-num">1</td><td class="cjc-t-theme">Account Verification Guide</td><td class="cjc-t-subject">"Elevate your trading game"</td><td class="cjc-t-cta">Complete KYC / Get Verified</td><td class="cjc-t-gap">—</td></tr>
+                  <tr><td class="cjc-t-num">2</td><td class="cjc-t-theme">Security &amp; Privacy Assurance</td><td class="cjc-t-subject">"Your identity is always protected"</td><td class="cjc-t-cta">Build Brand Trust</td><td class="cjc-t-gap">28h</td></tr>
+                  <tr><td class="cjc-t-num">3</td><td class="cjc-t-theme">Platform Professional Features</td><td class="cjc-t-subject">"5 advantages of using TMGM"</td><td class="cjc-t-cta">Login to Trading Platform</td><td class="cjc-t-gap">27h</td></tr>
+                  <tr><td class="cjc-t-num">4</td><td class="cjc-t-theme">Exclusive Access to High-end Tools</td><td class="cjc-t-subject">"Access your trades on any device"</td><td class="cjc-t-cta">Try Decision-Support Tools</td><td class="cjc-t-gap">22h</td></tr>
+                  <tr><td class="cjc-t-num">5</td><td class="cjc-t-theme">Loyalty Rewards Program</td><td class="cjc-t-subject">"Collect your free cashback today"</td><td class="cjc-t-cta">Activate First Trade/Deposit</td><td class="cjc-t-gap">29h</td></tr>
+                  <tr><td class="cjc-t-num">6</td><td class="cjc-t-theme">Global Service Commitment</td><td class="cjc-t-subject">"24 hours &amp; 7 days at your service"</td><td class="cjc-t-cta">Establish Long-term Contact</td><td class="cjc-t-gap">21h</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- JOURNEY 3: PENDING → KYC -->
+        <div class="cjc-jc stage-3">
+          <div class="cjc-jc-header" onclick="this.closest('.cjc-jc').classList.toggle('expanded')">
+            <div class="cjc-jc-left">
+              <div class="cjc-jc-num">3</div>
+              <div>
+                <div class="cjc-jc-title">Pending → KYC</div>
+                <div class="cjc-jc-sub">Keep clients engaged during KYC review — tools, analysis, trading inspiration</div>
+              </div>
+            </div>
+            <div class="cjc-jc-right">
+              <span class="cjc-jc-count">6 emails · ~5 days</span>
+              <span class="cjc-jc-source">pending 2 KYC</span>
+              <div class="cjc-jc-toggle">▼</div>
+            </div>
+          </div>
+          <div class="cjc-jc-body">
+            <div class="cjc-jc-content">
+              <div class="cjc-meta-row">
+                <span><strong>Trigger:</strong> KYC documents submitted (awaiting review)</span>
+                <span><strong>Exit:</strong> KYC verified</span>
+                <span><strong>Source:</strong> Sheet <code>pending 2 KYC</code>, column <code>Step</code> (MY ENG variant)</span>
+              </div>
+              <table class="cjc-table">
+                <thead>
+                  <tr><th>#</th><th>Theme</th><th>Subject Line</th><th>CTA</th><th class="cjc-th-gap">Gap<div class="cjc-gap-tooltip"><strong>Wait time between emails</strong><br><br>Shows how many hours SFMC waits after the previous email before sending the next one. <code>28h</code> = sent 28 hours after previous email.<br><br>The dash <code>—</code> on Email 1 means no wait (first email, triggered by journey entry).<br><br><strong>Source:</strong> <code>waiting Period</code> column in Sichen's Onboarding_Journey.xlsx</div></th></tr>
+                </thead>
+                <tbody>
+                  <tr><td class="cjc-t-num">1</td><td class="cjc-t-theme">Onboarding Confirmation</td><td class="cjc-t-subject">"Thanks for uploading the documents!"</td><td class="cjc-t-cta">Login to MT5 Platform</td><td class="cjc-t-gap">—</td></tr>
+                  <tr><td class="cjc-t-num">2</td><td class="cjc-t-theme">Trading Tool Empowerment</td><td class="cjc-t-subject">"Elevate your trading with new tools"</td><td class="cjc-t-cta">Open Live Account</td><td class="cjc-t-gap">28h</td></tr>
+                  <tr><td class="cjc-t-num">3</td><td class="cjc-t-theme">Knowledge &amp; Data Services</td><td class="cjc-t-subject">"Improve your trades with our tools!"</td><td class="cjc-t-cta">Learn More Details</td><td class="cjc-t-gap">27h</td></tr>
+                  <tr><td class="cjc-t-num">4</td><td class="cjc-t-theme">Trading Inspiration</td><td class="cjc-t-subject">"Top 3 FX pairs we're watching"</td><td class="cjc-t-cta">Login to MT5 to Trade</td><td class="cjc-t-gap">22h</td></tr>
+                  <tr><td class="cjc-t-num">5</td><td class="cjc-t-theme">Daily Technical Analysis</td><td class="cjc-t-subject">"Free technical analysis daily"</td><td class="cjc-t-cta">Subscribe / Learn More</td><td class="cjc-t-gap">29h</td></tr>
+                  <tr><td class="cjc-t-num">6</td><td class="cjc-t-theme">Customer Support System</td><td class="cjc-t-subject">"Let us answer your questions"</td><td class="cjc-t-cta">Contact Us</td><td class="cjc-t-gap">21h</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- JOURNEY 4: KYC → FTD (3 regional tabs) -->
+        <div class="cjc-jc stage-4">
+          <div class="cjc-jc-header" onclick="this.closest('.cjc-jc').classList.toggle('expanded')">
+            <div class="cjc-jc-left">
+              <div class="cjc-jc-num">4</div>
+              <div>
+                <div class="cjc-jc-title">KYC → FTD <span style="font-size:10px;font-weight:600;color:var(--amber);margin-left:4px;">⚠ Directly precedes our journey</span></div>
+                <div class="cjc-jc-sub">Push clients to make First Time Deposit — verification success, deposit guide, bonuses, leverage, rewards</div>
+              </div>
+            </div>
+            <div class="cjc-jc-right">
+              <span class="cjc-jc-count">3–5 emails · varies by region</span>
+              <span class="cjc-jc-source">KYC-FTD</span>
+              <div class="cjc-jc-toggle">▼</div>
+            </div>
+          </div>
+          <div class="cjc-jc-body">
+            <div class="cjc-jc-content">
+              <div class="cjc-meta-row">
+                <span><strong>Trigger:</strong> KYC verified</span>
+                <span><strong>Exit:</strong> FTD completed (goal-based exit — confirmed by Sichen)</span>
+                <span><strong>Source:</strong> Sheet <code>KYC-FTD</code>, 3 regional sections: <code>MY-ENG</code>, <code>AU-ENG</code>, <code>ROW-ENG</code></span>
+              </div>
+
+              <!-- REGIONAL TABS -->
+              <div class="cjc-region-tabs">
+                <button class="cjc-region-tab active" onclick="switchCjcRegion(this,'kycftd','my')">🇲🇾 MY-ENG (5 emails)</button>
+                <button class="cjc-region-tab" onclick="switchCjcRegion(this,'kycftd','au')">🇦🇺 AU-ENG (3 emails)</button>
+                <button class="cjc-region-tab" onclick="switchCjcRegion(this,'kycftd','row')">🌏 ROW-ENG (4 emails)</button>
+              </div>
+
+              <!-- MY-ENG -->
+              <div id="kycftd-my" class="cjc-region-content active">
+                <table class="cjc-table">
+                  <thead>
+                    <tr><th>#</th><th>Theme</th><th>Subject Line</th><th>CTA</th><th class="cjc-th-gap">Gap<div class="cjc-gap-tooltip"><strong>Wait time between emails</strong><br><br>Shows how many hours SFMC waits after the previous email before sending the next one. <code>28h</code> = sent 28 hours after previous email.<br><br>The dash <code>—</code> on Email 1 means no wait (first email, triggered by journey entry).<br><br><strong>Source:</strong> <code>waiting Period</code> column in Sichen's Onboarding_Journey.xlsx</div></th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td class="cjc-t-num">1</td><td class="cjc-t-theme">Account Verification Success</td><td class="cjc-t-subject">"Your account has been verified!"</td><td class="cjc-t-cta">ACCOUNT LOGIN</td><td class="cjc-t-gap">—</td></tr>
+                    <tr><td class="cjc-t-num">2</td><td class="cjc-t-theme">First Deposit &amp; Asset Endorsement</td><td class="cjc-t-subject">"Fund your account and get 30% bonus"</td><td class="cjc-t-cta">DEPOSIT NOW</td><td class="cjc-t-gap">1d</td></tr>
+                    <tr><td class="cjc-t-num">3</td><td class="cjc-t-theme">BTC/USD Rebate Incentive</td><td class="cjc-t-subject">"Welcome to TMGM! Trade the World Now!"</td><td class="cjc-t-cta">CLAIM NOW</td><td class="cjc-t-gap">1d</td></tr>
+                    <tr><td class="cjc-t-num">4</td><td class="cjc-t-theme">High-Leverage &amp; Markets</td><td class="cjc-t-subject">"You're just one step away from the real deal!"</td><td class="cjc-t-cta">START TRADING</td><td class="cjc-t-gap">2d</td></tr>
+                    <tr><td class="cjc-t-num">5</td><td class="cjc-t-theme">TMGM Rewards / Loyalty</td><td class="cjc-t-subject">"Exclusive benefits for you!"</td><td class="cjc-t-cta">DEPOSIT NOW</td><td class="cjc-t-gap">3d</td></tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- AU-ENG -->
+              <div id="kycftd-au" class="cjc-region-content">
+                <table class="cjc-table">
+                  <thead>
+                    <tr><th>#</th><th>Theme</th><th>Subject Line</th><th>CTA</th><th class="cjc-th-gap">Gap<div class="cjc-gap-tooltip"><strong>Wait time between emails</strong><br><br>Shows how many hours SFMC waits after the previous email before sending the next one. <code>28h</code> = sent 28 hours after previous email.<br><br>The dash <code>—</code> on Email 1 means no wait (first email, triggered by journey entry).<br><br><strong>Source:</strong> <code>waiting Period</code> column in Sichen's Onboarding_Journey.xlsx</div></th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td class="cjc-t-num">1</td><td class="cjc-t-theme">Account Verified</td><td class="cjc-t-subject">"Your account has been verified!"</td><td class="cjc-t-cta">ACCOUNT LOGIN</td><td class="cjc-t-gap">—</td></tr>
+                    <tr><td class="cjc-t-num">2</td><td class="cjc-t-theme">Deposit Guide</td><td class="cjc-t-subject">"How to make a deposit?"</td><td class="cjc-t-cta">MAKE A DEPOSIT</td><td class="cjc-t-gap">1d</td></tr>
+                    <tr><td class="cjc-t-num">3</td><td class="cjc-t-theme">Security &amp; Fund Safety</td><td class="cjc-t-subject">"Your next opportunity is just one click away"</td><td class="cjc-t-cta">FUND MY ACCOUNT</td><td class="cjc-t-gap">3d</td></tr>
+                  </tbody>
+                </table>
+                <div style="margin-top:10px;font-size:11px;color:var(--grey-500);font-style:italic;">Note: AU uses shorter, more conservative messaging due to ASIC regulations — no bonus offers, no leverage hype.</div>
+              </div>
+
+              <!-- ROW-ENG -->
+              <div id="kycftd-row" class="cjc-region-content">
+                <table class="cjc-table">
+                  <thead>
+                    <tr><th>#</th><th>Theme</th><th>Subject Line</th><th>CTA</th><th class="cjc-th-gap">Gap<div class="cjc-gap-tooltip"><strong>Wait time between emails</strong><br><br>Shows how many hours SFMC waits after the previous email before sending the next one. <code>28h</code> = sent 28 hours after previous email.<br><br>The dash <code>—</code> on Email 1 means no wait (first email, triggered by journey entry).<br><br><strong>Source:</strong> <code>waiting Period</code> column in Sichen's Onboarding_Journey.xlsx</div></th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td class="cjc-t-num">1</td><td class="cjc-t-theme">Verification Success</td><td class="cjc-t-subject">"Your TMGM Trading Account is Verified and Ready!"</td><td class="cjc-t-cta">ACCOUNT LOGIN</td><td class="cjc-t-gap">—</td></tr>
+                    <tr><td class="cjc-t-num">2</td><td class="cjc-t-theme">Deposit Tutorial</td><td class="cjc-t-subject">"4 Simple Steps to Your First Trade"</td><td class="cjc-t-cta">MAKE A DEPOSIT</td><td class="cjc-t-gap">1d</td></tr>
+                    <tr><td class="cjc-t-num">3</td><td class="cjc-t-theme">Brand Trust &amp; Security</td><td class="cjc-t-subject">"Your Funds are Safe and Secure with TMGM"</td><td class="cjc-t-cta">FUND MY ACCOUNT</td><td class="cjc-t-gap">3d</td></tr>
+                    <tr><td class="cjc-t-num">4</td><td class="cjc-t-theme">Rewards Program</td><td class="cjc-t-subject">"Trade More, Earn More with TMGM Rewards"</td><td class="cjc-t-cta">START NOW</td><td class="cjc-t-gap">5d</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- STRATEGIC IMPLICATION CALLOUT -->
+      <div class="cjc-implication">
+        <div class="cjc-implication-label">🧠 Why this context matters for our Retail-to-IB journey</div>
+        <div class="cjc-implication-text">
+          By the time our E1 lands, a client has already received <strong>21–23 emails</strong> from TMGM across 4 onboarding journeys. They've been told about trading tools, security, rewards, deposit bonuses, and leverage.<br><br>
+          Our E1 subject <em>"What would an extra $500/month look like?"</em> must cut through this fatigue by doing something <strong>none of the upstream emails do</strong>: position earnings from <strong>referrals</strong>, not from trading more.<br><br>
+          This is also why our <strong>7-day buffer after FTD</strong> matters — it gives the client space from the KYC-FTD journey's aggressive deposit/bonus push before we arrive with a different value proposition.
+        </div>
+      </div>
+
+      <!-- SOURCE DOCUMENTS -->
+      <div class="cjc-sources">
+        <div class="cjc-sources-label">📎 Source of Truth — Audit Trail</div>
+        <div class="cjc-sources-list">
+          <div>📊 <strong>Primary source:</strong> <code>Onboarding_Journey.xlsx</code> — full email content for all 9 TMGM journeys, shared by <strong>Sichen Zhang</strong> via Slack</div>
+          <div>🔗 <strong>SharePoint master list:</strong> <a href="https://bidholdinggroup-my.sharepoint.com/:x:/g/personal/leila_lin_tmgm_com/IQCbqY980_A1Sb4zKAPzkJnqAaZseJQ7nsEmYJhxx4QGeis?e=MvkMkc" target="_blank" rel="noopener noreferrer">Open Onboarding_Journey.xlsx on SharePoint ↗</a></div>
+          <div>⚙️ <strong>SFMC Journey Hub:</strong> Access via Salesforce Marketing Cloud for actual email template designs</div>
+          <div>💬 <strong>Verified with:</strong> Sichen Zhang (journey/template owner) &amp; Nick Gao (data extension owner)</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
 <!-- TRIGGER FLOW & PROPERTIES -->
 <div class="tf-card">
   <div class="tf-header" onclick="this.closest('.tf-card').classList.toggle('expanded')">
@@ -1041,7 +1501,7 @@ body { font-family:var(--font); color:var(--dark); background:var(--bg); line-he
             <div class="ec-header-icon">📥</div>
             <div>
               <div class="ec-header-title">Retail Client Enters Journey</div>
-              <div class="ec-header-sub">Automated trigger — filter-based, real-time entry</div>
+              <div class="ec-header-sub">Automated trigger — after KYC + FTD + 7-day buffer</div>
             </div>
           </div>
           <div class="ec-status-badge">✅ Confirmed with Sichen &amp; Nick</div>
@@ -1052,7 +1512,7 @@ body { font-family:var(--font); color:var(--dark); background:var(--bg); line-he
           <!-- AUDIENCE -->
           <div class="ec-row">
             <div class="ec-row-label">👥 Audience</div>
-            <div class="ec-row-value">All retail clients who match the filter conditions below. <strong>Phase 1.0 — pure mass blast, no behavioural segmentation.</strong> Segmentation (by trading activity, FTD, account age, etc.) deferred to Phase 2.0.</div>
+            <div class="ec-row-value">All retail clients who have <strong>completed KYC + made their First Time Deposit (FTD) at least 7 days ago</strong> and match the filter conditions below. <strong>Phase 1.0 — pure mass blast, no behavioural segmentation.</strong> Segmentation (by trading activity, deposit size, account age, etc.) deferred to Phase 2.0.</div>
           </div>
 
           <div class="ec-divider"></div>
@@ -1085,7 +1545,7 @@ body { font-family:var(--font); color:var(--dark); background:var(--bg); line-he
                 </div>
                 <div class="ec-filter-row">
                   <span class="ec-filter-syntax">Is_IB = false</span>
-                  <span class="ec-filter-explain">Exclude clients who are already IBs — they've already converted, no point targeting them again</span>
+                  <span class="ec-filter-explain">Exclude clients who are already IBs — they've already converted, no point targeting them again (see ⛔ Critical Exclusion below)</span>
                 </div>
                 <div class="ec-filter-row">
                   <span class="ec-filter-syntax">Member_Lead_Source ≠ contains "IB"</span>
@@ -1095,8 +1555,16 @@ body { font-family:var(--font); color:var(--dark); background:var(--bg); line-he
                   <span class="ec-filter-syntax">MailingCountry IN (target markets)</span>
                   <span class="ec-filter-explain">Only target clients in our Phase 1.0 regional scope (see target markets below)</span>
                 </div>
+                <div class="ec-filter-row" style="border-left-color:var(--green);">
+                  <span class="ec-filter-syntax" style="color:var(--green);background:rgba(16,185,129,0.08);">TA_First_Deposit_Time IS NOT NULL</span>
+                  <span class="ec-filter-explain">Client has made their First Time Deposit (FTD). Field confirmed by Nick Gao. Entry sequence: KYC → FTD → then Retail-to-IB journey</span>
+                </div>
+                <div class="ec-filter-row" style="border-left-color:var(--green);">
+                  <span class="ec-filter-syntax" style="color:var(--green);background:rgba(16,185,129,0.08);">TA_First_Deposit_Time ≤ (today - 7 days)</span>
+                  <span class="ec-filter-explain">7-day buffer after FTD — ensures the KYC-FTD onboarding journey has finished (max 9 days) and the client has had time to actually trade before we pitch IB</span>
+                </div>
               </div>
-              <div style="margin-top:10px; font-size:11px; color:var(--grey-500); font-style:italic;">📝 Note: The current live filter has <code style="font-family:'SF Mono',Monaco,Consolas,monospace; font-size:11px; background:var(--grey-100); padding:1px 5px; border-radius:3px;">Registration_Time &gt; 1/1/2024</code>. For Phase 1.0 we <strong>propose removing this cutoff</strong> to include the full back catalogue of pre-2024 retail clients — maximising audience for clean baseline data.</div>
+              <div style="margin-top:10px; font-size:11px; color:var(--grey-500); font-style:italic;">📝 Note: The previous <code style="font-family:'SF Mono',Monaco,Consolas,monospace; font-size:11px; background:var(--grey-100); padding:1px 5px; border-radius:3px;">Registration_Time &gt; 1/1/2024</code> cutoff is now <strong>superseded</strong> by the FTD + 7-day buffer approach — clients are filtered by deposit activity, not registration date.</div>
             </div>
           </div>
 
@@ -1126,13 +1594,25 @@ body { font-family:var(--font); color:var(--dark); background:var(--bg); line-he
 
           <div class="ec-divider"></div>
 
+          <!-- CRITICAL EXCLUSION — EXISTING IBs -->
+          <div class="ec-row">
+            <div class="ec-row-label">⛔ Critical Exclusion</div>
+            <div class="ec-row-value">
+              <div class="ec-critical-box">
+                <div class="ec-critical-label">⛔ Existing IB Clients Are Excluded</div>
+                <div class="ec-critical-text">A client who is <strong>already an Introducing Broker</strong> must never receive emails asking them to become one. This is a <strong>core business rule</strong>, not just standard hygiene.<br><br>Filter: <code>Is_IB = false</code> — checked at entry AND continuously monitored throughout the journey. The moment a client converts to IB, they exit immediately.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="ec-divider"></div>
+
           <!-- HYGIENE EXCLUSIONS -->
           <div class="ec-row">
-            <div class="ec-row-label">🚫 Hygiene Exclusions</div>
+            <div class="ec-row-label">🧹 Hygiene Exclusions</div>
             <div class="ec-row-value">
               <div style="margin-bottom:6px;">Standard list hygiene — applied automatically by SFMC before send:</div>
               <div class="ec-exclusions">
-                <span class="ec-exclusion-tag">Existing IBs</span>
                 <span class="ec-exclusion-tag">Mainland China</span>
                 <span class="ec-exclusion-tag">Hong Kong</span>
                 <span class="ec-exclusion-tag">UK</span>
@@ -1140,7 +1620,7 @@ body { font-family:var(--font); color:var(--dark); background:var(--bg); line-he
                 <span class="ec-exclusion-tag">Closed accounts</span>
                 <span class="ec-exclusion-tag">Hard-bounced emails</span>
               </div>
-              <div style="margin-top:8px; font-size:11px; color:var(--grey-500); font-style:italic;">Note: These are <strong>hygiene-only</strong> — no behavioural segmentation (account age, FTD, trading volume) for Phase 1.0.</div>
+              <div style="margin-top:8px; font-size:11px; color:var(--grey-500); font-style:italic;">Note: Existing IBs are excluded via the ⛔ Critical Exclusion above, not listed here — it's a business rule, not standard hygiene.</div>
             </div>
           </div>
 
@@ -1149,14 +1629,14 @@ body { font-family:var(--font); color:var(--dark); background:var(--bg); line-he
           <!-- ENTRY EVENT -->
           <div class="ec-row">
             <div class="ec-row-label">⏱ Entry Event</div>
-            <div class="ec-row-value"><strong>Real-time</strong> — client enters their own personal Day 0 the moment their data matches the filter. Works for both existing clients (back catalogue) and new sign-ups going forward.</div>
+            <div class="ec-row-value"><strong>Automated, real-time.</strong> Client enters their own personal Day 0 the moment their data matches all filter conditions. Entry sequence: KYC verified → FTD completed → 7-day buffer → enters Retail-to-IB journey. Works for both existing clients (back catalogue) and new clients going forward.</div>
           </div>
 
         </div>
 
         <div class="ec-footer">
           <span>⚙️</span>
-          <div><strong>Technical Setup:</strong> Automated filter on MasterDataExtension (SFMC, migrating to HubSpot). Owned by Nick Gao (data extension) + Sichen Zhang (journey &amp; templates). Confirmed in joint meeting.</div>
+          <div><strong>Technical Setup:</strong> Automated filter on MasterDataExtension (SFMC, migrating to HubSpot). Key fields: <code style="font-family:'SF Mono',Monaco,Consolas,monospace;font-size:10px;background:rgba(139,92,246,0.1);padding:1px 5px;border-radius:3px;color:var(--purple);">ID_Verified</code>, <code style="font-family:'SF Mono',Monaco,Consolas,monospace;font-size:10px;background:rgba(139,92,246,0.1);padding:1px 5px;border-radius:3px;color:var(--purple);">Is_IB</code>, <code style="font-family:'SF Mono',Monaco,Consolas,monospace;font-size:10px;background:rgba(139,92,246,0.1);padding:1px 5px;border-radius:3px;color:var(--purple);">Member_Lead_Source</code>, <code style="font-family:'SF Mono',Monaco,Consolas,monospace;font-size:10px;background:rgba(139,92,246,0.1);padding:1px 5px;border-radius:3px;color:var(--purple);">MailingCountry</code>, <code style="font-family:'SF Mono',Monaco,Consolas,monospace;font-size:10px;background:rgba(139,92,246,0.1);padding:1px 5px;border-radius:3px;color:var(--purple);">TA_First_Deposit_Time</code>. Owned by Nick Gao (data extension) + Sichen Zhang (journey &amp; templates).</div>
         </div>
       </div>
     </div>
@@ -1337,11 +1817,12 @@ body { font-family:var(--font); color:var(--dark); background:var(--bg); line-he
     <div class="tf-footer">
       <div class="tf-footer-title">📋 Key Properties for Platform Setup</div>
       <div class="tf-footer-list">
-        <div class="tf-footer-item">Entry criteria — ✅ Confirmed — Automated trigger via MasterDataExtension filter (ID_Verified, Is_IB=false, Lead_Source excludes IB, MailingCountry in target markets)</div>
+        <div class="tf-footer-item">Entry criteria — ✅ Confirmed — Automated trigger via MasterDataExtension filter (<code style="font-family:'SF Mono',Monaco,Consolas,monospace;font-size:10px;background:var(--grey-100);padding:1px 5px;border-radius:3px;">ID_Verified</code>, <code style="font-family:'SF Mono',Monaco,Consolas,monospace;font-size:10px;background:var(--grey-100);padding:1px 5px;border-radius:3px;">Is_IB=false</code>, <code style="font-family:'SF Mono',Monaco,Consolas,monospace;font-size:10px;background:var(--grey-100);padding:1px 5px;border-radius:3px;">Lead_Source</code> excludes IB, <code style="font-family:'SF Mono',Monaco,Consolas,monospace;font-size:10px;background:var(--grey-100);padding:1px 5px;border-radius:3px;">MailingCountry</code> in target markets, <code style="font-family:'SF Mono',Monaco,Consolas,monospace;font-size:10px;background:var(--grey-100);padding:1px 5px;border-radius:3px;">TA_First_Deposit_Time</code> ≥ 7 days ago)</div>
         <div class="tf-footer-item">Conversion check — has client registered as IB? (<code style="font-family:'SF Mono',Monaco,Consolas,monospace; font-size:10px; background:var(--grey-100); padding:1px 5px; border-radius:3px;">Is_IB</code> = exit trigger, checked continuously)</div>
         <div class="tf-footer-item">Timing — Day 0, +2, +4, +6, +7 (every-other-day + back-to-back close)</div>
         <div class="tf-footer-item">Rest days — Day 1, 3, 5 (intentional pauses, no emails)</div>
-        <div class="tf-footer-item">Hygiene exclusions — existing IBs, unsubscribed, closed accounts, hard bounces (no behavioural segmentation in 1.0)</div>
+        <div class="tf-footer-item">⛔ Critical exclusion — existing IB clients excluded (<code style="font-family:'SF Mono',Monaco,Consolas,monospace;font-size:10px;background:var(--grey-100);padding:1px 5px;border-radius:3px;">Is_IB = false</code>) — business rule, not hygiene</div>
+        <div class="tf-footer-item">🧹 Hygiene — unsubscribed users, closed accounts, hard-bounced emails</div>
         <div class="tf-footer-item">Post-journey — 30-day cool-down, then E1–E5 cycle restarts automatically (monthly re-blast for Phase 1.0)</div>
       </div>
     </div>
@@ -1762,7 +2243,7 @@ Either way, thank you for trading with TMGM.</div>
       <!-- SUMMARY STATS -->
       <div class="oi-summary">
         <div class="oi-stat done">
-          <div class="oi-stat-num">6</div>
+          <div class="oi-stat-num">9</div>
           <div class="oi-stat-label">✅ Confirmed</div>
         </div>
         <div class="oi-stat pending">
@@ -1770,7 +2251,7 @@ Either way, thank you for trading with TMGM.</div>
           <div class="oi-stat-label">⏳ Pending</div>
         </div>
         <div class="oi-stat blocked">
-          <div class="oi-stat-num">2</div>
+          <div class="oi-stat-num">1</div>
           <div class="oi-stat-label">🚫 Blocked</div>
         </div>
         <div class="oi-stat internal">
@@ -1804,7 +2285,7 @@ Either way, thank you for trading with TMGM.</div>
             </div>
             <div class="oi-sq-body">
               <div class="oi-sq-title">Entry Mechanism</div>
-              <div class="oi-sq-desc">Automated trigger via SFMC filter on MasterDataExtension. Real-time entry, no manual batch. Confirmed with Sichen &amp; Nick in joint meeting.</div>
+              <div class="oi-sq-desc">Automated trigger via SFMC filter on MasterDataExtension. Entry sequence: KYC verified → FTD completed → 7-day buffer → Retail-to-IB journey. Per Ryan's direction. Confirmed with Sichen &amp; Nick.</div>
             </div>
           </div>
           <div class="oi-sq-card done">
@@ -1814,7 +2295,7 @@ Either way, thank you for trading with TMGM.</div>
             </div>
             <div class="oi-sq-body">
               <div class="oi-sq-title">Filter Criteria</div>
-              <div class="oi-sq-desc">4 conditions — <code>ID_Verified</code>, <code>Is_IB=false</code>, <code>Lead_Source</code>, <code>MailingCountry</code>. Pure mass blast, hygiene-only.</div>
+              <div class="oi-sq-desc">6 conditions — <code>ID_Verified</code>, <code>Is_IB=false</code>, <code>Lead_Source</code>, <code>MailingCountry</code>, <code>TA_First_Deposit_Time IS NOT NULL</code>, 7-day buffer post-FTD. Pure mass blast, hygiene-only.</div>
             </div>
           </div>
           <div class="oi-sq-card done">
@@ -1845,6 +2326,36 @@ Either way, thank you for trading with TMGM.</div>
             <div class="oi-sq-body">
               <div class="oi-sq-title">EN Copy Finalised</div>
               <div class="oi-sq-desc">All 5 emails drafted — subject lines, preview text, bodies, CTAs. Ready for compliance review and design briefing.</div>
+            </div>
+          </div>
+          <div class="oi-sq-card done">
+            <div class="oi-sq-header">
+              <span class="oi-sq-status">Done</span>
+              <span class="oi-item-owner oi-owner-nick">Nick</span>
+            </div>
+            <div class="oi-sq-body">
+              <div class="oi-sq-title">FTD Field Confirmed</div>
+              <div class="oi-sq-desc">Field name <code>TA_First_Deposit_Time</code> confirmed by Nick Gao. Used to filter clients who have completed FTD before entering the journey — per Ryan's entry sequence instruction.</div>
+            </div>
+          </div>
+          <div class="oi-sq-card done">
+            <div class="oi-sq-header">
+              <span class="oi-sq-status">Done</span>
+              <span class="oi-item-owner oi-owner-lucas">Lucas</span>
+            </div>
+            <div class="oi-sq-body">
+              <div class="oi-sq-title">7-Day Buffer Period Locked</div>
+              <div class="oi-sq-desc">Wait 7 days after FTD before entering Retail-to-IB journey. Ensures KYC-FTD onboarding finishes (max 9 days) + client has time to actually trade before IB pitch. Makes "you're already trading" framing in E1 truthful.</div>
+            </div>
+          </div>
+          <div class="oi-sq-card done">
+            <div class="oi-sq-header">
+              <span class="oi-sq-status">Done</span>
+              <span class="oi-item-owner oi-owner-sichen">Sichen</span>
+            </div>
+            <div class="oi-sq-body">
+              <div class="oi-sq-title">KYC-FTD Journey Exit</div>
+              <div class="oi-sq-desc">Nick confirmed we can set a goal in the KYC-FTD journey to exit clients on FTD completion. This prevents email overlap when clients enter our Retail-to-IB journey.</div>
             </div>
           </div>
         </div>
@@ -1927,16 +2438,6 @@ Either way, thank you for trading with TMGM.</div>
             <div class="oi-sq-body">
               <div class="oi-sq-title">E2 Earning Scenarios</div>
               <div class="oi-sq-desc">Trader A/B/C numbers ($600–$1,700/month, 5–8 referrals, 15–20 lots/month) are placeholders. Data team must validate against real IB earnings before launch — Ryan's explicit instruction.</div>
-            </div>
-          </div>
-          <div class="oi-sq-card blocked">
-            <div class="oi-sq-header">
-              <span class="oi-sq-status">Blocked</span>
-              <span class="oi-item-owner oi-owner-ryan">Ryan</span>
-            </div>
-            <div class="oi-sq-body">
-              <div class="oi-sq-title">Registration Date Cutoff</div>
-              <div class="oi-sq-desc">Current live filter has <code>Registration_Time &gt; 1/1/2024</code>. Proposing to remove for Phase 1.0 to include pre-2024 back catalogue. Needs Ryan's confirmation.</div>
             </div>
           </div>
         </div>
@@ -2023,6 +2524,14 @@ function scrollToDetail(id) {
 
   // Smooth scroll to the journey section
   document.querySelector('.journey').scrollIntoView({ behavior:'smooth', block:'start' });
+}
+
+function switchCjcRegion(btn, journeyId, region) {
+  const container = btn.closest('.cjc-jc-content');
+  container.querySelectorAll('.cjc-region-tab').forEach(t => t.classList.remove('active'));
+  container.querySelectorAll('.cjc-region-content').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(journeyId + '-' + region).classList.add('active');
 }
 </script>
 
